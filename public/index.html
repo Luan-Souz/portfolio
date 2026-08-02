@@ -315,11 +315,11 @@ section{padding:clamp(56px,10vw,112px) 0;scroll-margin-top:68px;}
 .edu-activity-text{font-family:var(--sans);font-size:15px;color:#444;line-height:1.7;font-weight:400;}
 
 /* ── SKILLS ── */
-#skills{background:var(--off);min-height:calc(100vh - 68px);display:flex;align-items:center;padding:88px 0 40px;}
-#skills .wrap{width:100%;max-height:calc(100vh - 196px);display:flex;flex-direction:column;}
+#skills{background:var(--off);min-height:calc(100vh - 68px);display:block;padding:88px 0 40px;}
+#skills .wrap{width:100%;max-height:none;display:block;}
 #skills .sec-dash,#skills .sec-h{flex-shrink:0;}
-.skills-scroll{flex:1;min-height:0;overflow:hidden;padding:4px 4px 4px 0;display:flex;align-items:center;justify-content:center;}
-.skills-fit{width:100%;transform-origin:center center;}
+.skills-scroll{overflow:visible;padding:4px 4px 4px 0;}
+.skills-fit{width:100%;}
 .skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
 .skills-grid .skill-group.lang-group{grid-column:1 / -1;}
 @media(max-width:1100px){.skills-grid{grid-template-columns:1fr 1fr;}.skills-grid .skill-group.lang-group{grid-column:1 / -1;}}
@@ -334,7 +334,7 @@ section{padding:clamp(56px,10vw,112px) 0;scroll-margin-top:68px;}
 .sg-title{font-family:var(--data);font-style:italic;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--taupe);margin-bottom:12px;}
 .sg-title::after{content:'';display:block;width:32px;height:2px;border-radius:2px;background:var(--acc,var(--blue));margin-top:8px;}
 .sk-tags{display:flex;flex-wrap:wrap;gap:8px;}
-.sk-tag{font-family:var(--sans);font-size:13px;font-weight:400;line-height:1;color:var(--acc-text,var(--black));background:var(--acc-bg,var(--off));border:1px solid transparent;border-radius:999px;padding:7px 14px;transition:background .18s ease,color .18s ease,transform .18s ease;cursor:default;}
+.sk-tag{font-family:var(--sans);font-size:14px;font-weight:400;line-height:1;color:var(--acc-text,var(--black));background:var(--acc-bg,var(--off));border:1px solid transparent;border-radius:999px;padding:8px 15px;transition:background .18s ease,color .18s ease,transform .18s ease;cursor:default;}
 .sk-tag:hover{background:var(--acc,var(--blue));color:#fff;transform:translateY(-1px);}
 /* per-card accent colors (2 palette anchors + a harmonizing green & purple) */
 .skill-group{transition:transform .25s ease,box-shadow .25s ease;}
@@ -1981,30 +1981,5 @@ document.addEventListener('keydown',e=>{
   </div>
 </div>
 
-<script>
-// ── SKILLS FIT-TO-SCREEN ──
-// Scale the skills content down just enough to fit its section on one screen
-// (no inner scrollbar). Only shrinks, never enlarges. Disabled on mobile.
-(function(){
-  var section=document.getElementById('skills');
-  var scroll=section&&section.querySelector('.skills-scroll');
-  var fit=document.getElementById('skills-fit');
-  if(!section||!scroll||!fit)return;
-  function apply(){
-    fit.style.transform='none';
-    if(window.innerWidth<=900)return;              // mobile: natural flow
-    var availH=scroll.clientHeight, availW=scroll.clientWidth;
-    var natH=fit.scrollHeight, natW=fit.scrollWidth;
-    if(!natH||!availH)return;
-    var s=Math.min(1, availH/natH, availW/natW);
-    fit.style.transform='scale('+s.toFixed(4)+')';
-  }
-  window.addEventListener('resize',apply,{passive:true});
-  window.addEventListener('load',apply);
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(apply);
-  setTimeout(apply,200);
-  apply();
-})();
-</script>
 </body>
 </html>
