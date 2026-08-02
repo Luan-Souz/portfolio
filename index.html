@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Luan Ferreira de Souza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Josefin+Sans:wght@300;400;600&family=Libre+Baskerville:ital,wght@0,400;1,400;1,700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --blue:#3943b7; --blue-dim:rgba(57,67,183,0.09); --blue-mid:rgba(57,67,183,0.18);
+  --amber:#e08e45; --amber-dim:rgba(224,142,69,0.12);
+  --taupe:#706563; --taupe-light:rgba(112,101,99,0.18); --taupe-xlight:rgba(112,101,99,0.08);
+  --black:#000000; --white:#ffffff; --off:#f9f8f6;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'Josefin Sans',sans-serif;
+  --data:'Libre Baskerville',Georgia,serif;
+  --radius:6px; --radius-lg:12px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--black);font-family:var(--sans);-webkit-font-smoothing:antialiased;font-size:18px;font-weight:400;}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--white);}
+::-webkit-scrollbar-thumb{background:var(--taupe-light);border-radius:2px;}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1440px;margin:0 auto;padding:0 clamp(20px,5vw,72px);}
+section{padding:clamp(56px,10vw,112px) 0;scroll-margin-top:68px;}
+.sec-label{font-family:var(--data);font-style:italic;font-size:13px;letter-spacing:2px;color:var(--taupe);margin-bottom:12px;text-transform:uppercase;}
+.sec-h{font-family:var(--serif);font-size:clamp(32px,4vw + 16px,56px);font-weight:600;color:var(--black);letter-spacing:-.8px;line-height:1.1;}
+
+/* ── BUTTONS ── */
+.btn{display:inline-block;font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;padding:14px 34px;border-radius:var(--radius);transition:all .2s;cursor:pointer;}
+.btn-solid{background:var(--black);color:var(--white);border:1.5px solid var(--black);}
+.btn-solid:hover{background:var(--blue);border-color:var(--blue);}
+.btn-outline{background:transparent;color:var(--black);border:1.5px solid var(--black);}
+.btn-outline:hover{background:var(--black);color:var(--white);}
+.btn-blue{background:var(--blue);color:var(--white);border:1.5px solid var(--blue);}
+.btn-blue:hover{background:var(--black);border-color:var(--black);}
+.btn-outline-white{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.35);}
+.btn-outline-white:hover{background:rgba(255,255,255,.08);}
+
+/* ── NAV ── */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,5vw,72px);transition:all .3s;}
+#nav.scrolled{background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--taupe-light);}
+.nav-logo{font-family:var(--serif);font-size:clamp(22px,3vw + 12px,35px);font-weight:600;color:var(--black);letter-spacing:-.2px;white-space:nowrap;}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-lk{font-family:var(--sans);font-size:18px;font-weight:400;letter-spacing:.5px;color:var(--taupe);transition:color .2s;position:relative;}
+.nav-lk::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--blue);transition:width .25s;}
+.nav-lk:hover,.nav-lk.active{color:var(--black);}
+.nav-lk:hover::after,.nav-lk.active::after{width:100%;}
+.nav-cta{font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--blue);border:1.5px solid var(--blue);padding:7px 18px;border-radius:var(--radius);transition:all .2s;}
+.nav-cta:hover{background:var(--blue);color:var(--white);}
+.nav-burger{display:none;flex-direction:column;justify-content:center;gap:5px;width:32px;height:32px;background:none;border:none;cursor:pointer;padding:0;flex-shrink:0;}
+.nav-burger span{display:block;width:100%;height:2px;background:var(--black);border-radius:1px;}
+
+@media(max-width:900px){
+  .nav-burger{display:flex;}
+  .nav-links{position:fixed;top:68px;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--white);border-bottom:1px solid var(--taupe-light);padding:8px clamp(20px,5vw,72px) 20px;transform:translateY(-8px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;}
+  .nav-links.open{opacity:1;pointer-events:all;transform:none;}
+  .nav-lk{padding:14px 0;border-bottom:1px solid var(--taupe-light);}
+  .nav-cta{margin-top:16px;text-align:center;}
+}
+
+/* ── HERO ── */
+#hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;background:var(--white);overflow-x:hidden;}
+#hero .wrap{max-width:none;}
+.hero-inner{display:flex;gap:64px;align-items:center;}
+.hero-left{flex:1;min-width:0;}
+.hero-name-line{display:flex;align-items:center;gap:14px;margin-bottom:36px;}
+.hero-name{font-family:var(--sans);font-size:18px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--taupe);}
+.hero-name-rule{flex:1;height:1px;background:var(--taupe-light);}
+.hero-available{display:inline-flex;align-items:center;gap:7px;font-family:var(--data);font-style:italic;font-size:16px;color:var(--taupe);letter-spacing:.5px;}
+.hero-dot{width:6px;height:6px;border-radius:50%;background:#1a8a4a;flex-shrink:0;}
+.manifesto{margin-bottom:20px;}
+.hero-subtitle{margin-bottom:36px;}
+.manifesto-line{font-family:var(--serif);font-size:76px;line-height:1.12;font-weight:600;color:var(--black);letter-spacing:-1.5px;display:block;white-space:nowrap;}
+.manifesto-line.hl{color:var(--blue);}
+.manifesto-line.italic-line{font-style:italic;}
+.sec-dash{width:80px;height:2px;background:var(--amber);margin-bottom:14px;}
+.hero-btns{display:flex;gap:12px;margin-bottom:36px;flex-wrap:wrap;}
+.hero-socials{display:flex;gap:20px;padding-top:28px;border-top:1px solid var(--taupe-light);flex-wrap:wrap;row-gap:10px;}
+
+@media(max-width:900px){
+  .manifesto-line{font-size:clamp(26px,6.5vw,60px);white-space:normal;letter-spacing:-1px;}
+  .hero-name-line{flex-wrap:wrap;row-gap:8px;}
+  .hero-name-rule{display:none;}
+  .hero-subtitle p{font-size:clamp(15px,3vw,25px) !important;}
+}
+.hero-soc{font-family:var(--data);font-style:italic;font-size:18px;color:var(--taupe);transition:color .2s;display:flex;align-items:center;gap:5px;}
+.hero-soc:hover{color:var(--amber);}
+.hero-right{width:360px;flex-shrink:0;}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.stat-card{background:var(--white);border:1px solid var(--taupe-light);border-radius:var(--radius-lg);padding:18px 16px;}
+.stat-val{font-family:var(--serif);font-size:38px;font-weight:700;color:var(--black);line-height:1;margin-bottom:5px;}
+.stat-lbl{font-family:var(--data);font-style:italic;font-size:10px;color:var(--taupe);letter-spacing:.5px;}
+.mini-chart{background:var(--black);border-radius:var(--radius-lg);padding:18px 20px;}
+.mc-label{font-family:var(--data);font-style:italic;font-size:14px;color:#555;margin-bottom:12px;letter-spacing:1px;text-transform:uppercase;}
+.mc-row{margin-bottom:9px;}
+.mc-header{display:flex;justify-content:space-between;margin-bottom:4px;}
+.mc-name{font-family:var(--data);font-style:italic;font-size:10px;color:#888;}
+.mc-pct{font-family:var(--data);font-style:italic;font-size:10px;color:var(--amber);}
+.mc-track{height:2px;background:#222;border-radius:1px;}
+.mc-fill{height:100%;border-radius:1px;background:var(--blue);}
+
+/* ── ABOUT ── */
+#about{background:var(--off);min-height:calc(100vh - 68px);display:flex;align-items:center;padding:clamp(48px,8vh,88px) 0 clamp(24px,4vh,40px);}
+#about .wrap{width:100%;display:flex;flex-direction:column;}
+#about .sec-dash,#about .sec-h{flex-shrink:0;}
+.about-inner{display:flex;gap:48px;align-items:stretch;}
+.about-left{flex:1;min-width:0;}
+.about-text{font-family:var(--sans);font-size:clamp(15px,1.8vh + 8px,19px);line-height:1.55;color:#555;margin-bottom:clamp(8px,1.4vh,16px);font-weight:400;text-align:justify;}
+.about-details{display:flex;flex-direction:column;gap:12px;padding-top:14px;border-top:1px solid var(--taupe-light);}
+.about-detail{display:flex;flex-direction:column;gap:3px;}
+.about-detail-label{font-family:var(--data);font-style:italic;font-size:12px;color:var(--taupe);letter-spacing:1px;text-transform:uppercase;}
+.about-detail-val{font-family:var(--sans);font-size:16px;font-weight:600;color:var(--black);}
+.about-right{width:320px;flex-shrink:0;padding-left:48px;border-left:1px solid var(--taupe-light);display:flex;flex-direction:column;justify-content:space-between;gap:12px;}
+
+@media(max-width:900px){
+  #about{min-height:auto;display:block;padding:56px 0;}
+  .about-inner{flex-direction:column;align-items:stretch;gap:32px;}
+  .about-text{font-size:17px;line-height:1.85;text-align:left;}
+  .about-right{width:100%;max-width:420px;margin:0 auto;padding-left:0;padding-top:32px;border-left:none;border-top:1px solid var(--taupe-light);}
+}
+.about-photo-wrap{position:relative;overflow:hidden;border-radius:var(--radius-lg);}
+.photo-carousel{position:relative;width:100%;aspect-ratio:6/7;}
+.photo-slide{position:absolute;inset:0;opacity:0;transition:opacity .5s ease;pointer-events:none;}
+.photo-slide.active{opacity:1;pointer-events:auto;}
+.photo-nav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.85);border:1px solid var(--taupe-light);color:var(--black);font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;z-index:2;}
+.photo-nav:hover{background:var(--white);}
+.photo-nav-prev{left:12px;}
+.photo-nav-next{right:12px;}
+.photo-dots{position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:center;gap:8px;z-index:2;}
+.photo-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.55);border:1px solid rgba(0,0,0,.15);cursor:pointer;transition:background .2s;}
+.photo-dot.active{background:var(--blue);border-color:var(--blue);}
+.photo-placeholder{width:100%;height:100%;background:var(--taupe-xlight);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;}
+.photo-placeholder svg{width:40px;height:40px;opacity:.3;}
+.photo-placeholder-text{font-family:var(--data);font-style:italic;font-size:11px;color:var(--taupe);letter-spacing:.5px;text-align:center;}
+
+/* ── WORK ── */
+#work{background:var(--white);min-height:calc(100vh - 68px);display:flex;align-items:center;padding:88px 0 40px;}
+#work .wrap{width:100%;max-height:calc(100vh - 196px);display:flex;flex-direction:column;}
+.work-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;flex-wrap:wrap;gap:16px;flex-shrink:0;}
+.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;min-height:0;overflow-y:auto;padding:4px 4px 4px 0;}
+@media(max-width:760px){.work-grid{grid-template-columns:1fr;}}
+@media(max-width:900px){
+  #work{min-height:auto;display:block;padding:56px 0;}
+  #work .wrap{max-height:none;display:block;}
+  .work-grid{overflow-y:visible;}
+}
+.work-card{background:var(--white);border:1px solid var(--taupe-light);border-radius:var(--radius-lg);overflow:hidden;transition:box-shadow .2s,transform .2s;cursor:pointer;}
+.work-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.07);transform:translateY(-2px);}
+.work-card-header{padding:18px 22px 14px;border-bottom:1px solid var(--taupe-light);background-image:linear-gradient(to right,rgba(112,101,99,.06) 1px,transparent 1px),linear-gradient(to bottom,rgba(112,101,99,.06) 1px,transparent 1px);background-size:24px 24px;}
+.work-type{font-family:var(--data);font-style:italic;font-size:10px;color:var(--taupe);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:6px;}
+.work-title{font-family:var(--serif);font-size:28px;font-weight:600;color:var(--black);}
+.work-metrics{display:flex;border-bottom:1px solid var(--taupe-light);}
+.work-metric{flex:1;padding:9px 14px;border-right:1px solid var(--taupe-light);}
+.work-metric:last-child{border-right:none;}
+.wm-label{font-family:var(--data);font-style:italic;font-size:9px;color:var(--taupe);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;}
+.wm-val{font-family:var(--data);font-style:italic;font-size:12px;font-weight:700;color:var(--blue);}
+.work-body{padding:16px 22px;}
+.work-desc{font-family:var(--sans);font-size:16px;color:#444;line-height:1.6;margin-bottom:12px;font-weight:350;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;overflow:hidden;}
+.work-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.wtag{font-family:var(--data);font-style:italic;font-size:11px;color:var(--blue);background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:3px;padding:3px 9px;}
+.work-footer{text-align:center;margin-top:20px;flex-shrink:0;}
+.see-all-btn{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--taupe);border:1px solid var(--taupe-light);padding:10px 24px;border-radius:var(--radius);background:transparent;transition:all .2s;cursor:pointer;display:inline-block;}
+.see-all-btn:hover{border-color:var(--blue);color:var(--blue);}
+
+/* ── ALL PROJECTS OVERLAY ── */
+#all-projects-overlay{position:fixed;inset:0;z-index:2000;background:var(--white);overflow-y:auto;opacity:0;pointer-events:none;transition:opacity .3s;}
+#all-projects-overlay.open{opacity:1;pointer-events:all;}
+.overlay-header{position:sticky;top:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--taupe-light);padding:20px clamp(20px,5vw,72px);display:flex;justify-content:space-between;align-items:center;z-index:10;}
+.overlay-title{font-family:var(--serif);font-size:clamp(22px,3vw + 10px,32px);font-weight:600;color:var(--black);}
+.overlay-close{width:44px;height:44px;border-radius:50%;border:1px solid var(--taupe-light);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:var(--sans);font-size:20px;color:var(--taupe);flex-shrink:0;}
+.overlay-close:hover{background:var(--black);color:var(--white);border-color:var(--black);}
+.overlay-body{padding:48px clamp(20px,5vw,72px);}
+.overlay-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+@media(max-width:1000px){.overlay-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:640px){.overlay-grid{grid-template-columns:1fr;}}
+.overlay-card{background:var(--off);border:1px solid var(--taupe-light);border-radius:var(--radius-lg);padding:28px;transition:box-shadow .2s;}
+.overlay-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.06);}
+.oc-type{font-family:var(--data);font-style:italic;font-size:12px;color:var(--taupe);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.oc-title{font-family:var(--serif);font-size:24px;font-weight:600;color:var(--black);margin-bottom:12px;}
+.oc-desc{font-family:var(--sans);font-size:16px;color:#555;line-height:1.75;font-weight:400;}
+
+/* ── EXPERIENCE (MILESTONE MAP – TWO-TRACK) ── */
+#experience{background:var(--white);min-height:calc(100vh - 68px);display:flex;align-items:center;padding:88px 0 40px;}
+#experience .wrap{width:100%;max-height:calc(100vh - 196px);display:flex;flex-direction:column;}
+#experience .sec-dash,#experience .sec-h{flex-shrink:0;}
+.mm-map{position:relative;background:var(--off);border:1px solid var(--taupe-light);border-radius:var(--radius-lg);padding:2rem 1.75rem 1.75rem;overflow:hidden;flex-shrink:0;}
+.mm-map-grid-bg{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--taupe-xlight) 1px,transparent 1px),linear-gradient(90deg,var(--taupe-xlight) 1px,transparent 1px);background-size:40px 40px;}
+.mm-map-border{position:absolute;inset:8px;border:1px solid var(--blue-dim);border-radius:8px;pointer-events:none;}
+.mm-stage{position:relative;z-index:2;}
+/* label chips */
+.mm-label-box{position:absolute;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.mm-lbl{background:var(--white);border:1px solid var(--taupe-light);border-radius:var(--radius);padding:6px 8px;text-align:center;transition:all .2s;width:100%;box-sizing:border-box;}
+.mm-label-box:hover .mm-lbl,.mm-label-box.active .mm-lbl{background:var(--blue);border-color:var(--blue);}
+.mm-ph{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--black);line-height:1.25;transition:color .2s;}
+.mm-yr{font-family:var(--data);font-style:italic;font-size:12px;color:var(--taupe);margin-top:4px;transition:color .2s;white-space:nowrap;}
+.mm-label-box:hover .mm-ph,.mm-label-box.active .mm-ph,.mm-label-box:hover .mm-yr,.mm-label-box.active .mm-yr{color:var(--white);}
+/* tick lines */
+.mm-tick-line{position:absolute;width:1px;background:var(--taupe-light);pointer-events:none;transition:background .2s;}
+.mm-tick-line.active{background:var(--blue);}
+/* roads */
+.mm-road-el{position:absolute;height:12px;border-radius:6px;}
+.mm-road-el-bg{position:absolute;inset:0;background:var(--taupe-light);border-radius:6px;}
+.mm-road-el-fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--blue);border-radius:6px;transition:width .55s cubic-bezier(.4,0,.2,1);}
+.mm-road-el-dash{position:absolute;inset:0;border-radius:6px;overflow:hidden;pointer-events:none;}
+.mm-road-el-dash::after{content:'';position:absolute;top:50%;left:0;right:0;height:1.5px;transform:translateY(-50%);background:repeating-linear-gradient(90deg,rgba(255,255,255,.6) 0,rgba(255,255,255,.6) 10px,transparent 10px,transparent 18px);}
+/* fork/merge vertical connectors */
+.mm-vconn{position:absolute;width:2px;background:var(--taupe-light);border-radius:1px;pointer-events:none;}
+/* pins */
+.mm-pin{position:absolute;cursor:pointer;display:flex;flex-direction:column;align-items:center;transition:transform .22s cubic-bezier(.4,0,.2,1);}
+.mm-pin:hover{transform:translateY(-4px);}
+.mm-pin.active{transform:translateY(-6px);}
+.mm-pin-head{width:22px;height:22px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--white);border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;transition:background .22s;box-shadow:0 2px 6px var(--blue-dim);}
+.mm-pin.active .mm-pin-head{background:var(--blue);}
+.mm-pin-inner{width:6px;height:6px;border-radius:50%;background:var(--blue);transform:rotate(45deg);transition:background .22s;}
+.mm-pin.active .mm-pin-inner{background:var(--white);}
+.mm-pin-tail{width:2px;height:10px;background:var(--blue);border-radius:0 0 2px 2px;opacity:.5;}
+/* detail card */
+.mm-detail{margin-top:1.5rem;background:var(--white);border:1px solid var(--taupe-light);border-radius:var(--radius-lg);display:none;overflow-y:auto;flex:1;min-height:0;}
+.mm-detail.on{display:grid;grid-template-columns:5px 1fr;align-content:start;}
+.mm-detail-accent{background:var(--blue);}
+.mm-detail-body{padding:1.75rem 2rem;}
+.mm-detail-year{font-family:var(--data);font-style:italic;font-size:12px;color:var(--blue);font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:5px;}
+.mm-detail-role{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--black);margin-bottom:4px;line-height:1.2;}
+.mm-detail-phase{font-family:var(--sans);font-size:15px;font-weight:600;color:var(--blue);letter-spacing:.3px;margin-bottom:12px;}
+.mm-detail-desc{font-family:var(--sans);font-size:16px;color:#555;line-height:1.85;}
+.mm-detail-desc ul{list-style:none;margin:0;padding:0;}
+.mm-detail-desc li{position:relative;padding-left:22px;margin-bottom:9px;line-height:1.6;}
+.mm-detail-desc li:last-child{margin-bottom:0;}
+.mm-detail-desc li::before{content:"";position:absolute;left:2px;top:9px;width:6px;height:6px;background:var(--blue);border-radius:1px;transform:rotate(45deg);}
+.mm-detail-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;}
+.mm-detail-tag{font-family:var(--data);font-style:italic;font-size:11px;color:var(--taupe);background:var(--taupe-xlight);border:1px solid var(--taupe-light);border-radius:100px;padding:2px 10px;}
+/* footer nav */
+.mm-footer{display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem;gap:1rem;flex-shrink:0;}
+.mm-progress{flex:1;height:2px;background:var(--taupe-xlight);border-radius:2px;overflow:hidden;}
+.mm-progress-fill{height:100%;background:var(--blue);border-radius:2px;width:0%;transition:width .5s ease;}
+.mm-nav-btn{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--taupe);background:var(--white);border:1px solid var(--taupe-light);border-radius:var(--radius);padding:8px 20px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.mm-nav-btn:hover{background:var(--blue);color:var(--white);border-color:var(--blue);}
+.mm-nav-btn.off{opacity:.3;pointer-events:none;}
+.mm-nav-count{font-family:var(--data);font-style:italic;font-size:13px;color:var(--taupe);white-space:nowrap;}
+.mm-nav-count b{color:var(--blue);font-size:15px;font-style:normal;}
+
+@media(max-width:900px){
+  #experience{min-height:auto;display:block;padding:56px 0;}
+  #experience .wrap{max-height:none;display:block;}
+  .mm-detail{overflow-y:visible;flex:none;}
+}
+
+/* ── EDUCATION ── */
+#education{background:var(--white);min-height:calc(100vh - 68px);display:flex;align-items:center;padding:88px 0 40px;}
+#education .wrap{width:100%;max-height:calc(100vh - 196px);display:flex;flex-direction:column;}
+#education .sec-dash,#education .sec-h{flex-shrink:0;}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;min-height:0;overflow-y:auto;padding:4px 4px 4px 0;}
+@media(max-width:760px){.edu-grid{grid-template-columns:1fr;}}
+@media(max-width:900px){
+  #education{min-height:auto;display:block;padding:56px 0;}
+  #education .wrap{max-height:none;display:block;}
+  .edu-grid{overflow-y:visible;}
+}
+.edu-card{background:var(--white);border:1px solid var(--taupe-light);border-radius:var(--radius-lg);padding:26px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.edu-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.edu-card:hover::before,.edu-card:hover{box-shadow:0 6px 24px rgba(57,67,183,.1);}
+.edu-card:hover::before{transform:scaleX(1);}
+.edu-school{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--black);margin-bottom:5px;}
+.edu-dept{font-family:var(--data);font-style:italic;font-size:14px;color:var(--taupe);margin-bottom:12px;}
+.edu-degree{font-family:var(--sans);font-size:18px;font-weight:600;color:var(--blue);margin-bottom:16px;letter-spacing:.2px;}
+.edu-meta-row{display:flex;justify-content:space-between;align-items:center;}
+.edu-period{font-family:var(--data);font-style:italic;font-size:14px;color:var(--taupe);}
+.edu-open-hint{font-family:var(--data);font-style:italic;font-size:13px;color:var(--blue);opacity:.7;display:flex;align-items:center;gap:4px;}
+
+/* ── EDU MODAL ── */
+.edu-modal-overlay{position:fixed;inset:0;z-index:4000;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;}
+.edu-modal-overlay.open{opacity:1;pointer-events:all;}
+.edu-modal{background:var(--white);border-radius:var(--radius-lg);width:min(860px,90vw);max-height:82vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.2);transform:translateY(20px);transition:transform .25s;}
+.edu-modal-overlay.open .edu-modal{transform:none;}
+.edu-modal-head{padding:30px 36px;border-bottom:1px solid var(--taupe-light);display:flex;justify-content:space-between;align-items:flex-start;flex-shrink:0;}
+.edu-modal-school{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--black);margin-bottom:5px;}
+.edu-modal-degree{font-family:var(--sans);font-size:16px;font-weight:600;color:var(--blue);}
+.edu-modal-close{width:36px;height:36px;border-radius:50%;border:1px solid var(--taupe-light);background:transparent;cursor:pointer;font-size:18px;color:var(--taupe);display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;margin-left:16px;}
+.edu-modal-close:hover{background:var(--black);color:var(--white);border-color:var(--black);}
+.edu-tabs{display:flex;gap:0;border-bottom:1px solid var(--taupe-light);padding:0 36px;flex-shrink:0;}
+.edu-tab{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--taupe);padding:16px 22px;border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;margin-bottom:-1px;}
+.edu-tab.active{color:var(--blue);border-bottom-color:var(--blue);}
+.edu-tab:hover:not(.active){color:var(--black);}
+.edu-modal-body{padding:30px 36px;overflow-y:auto;flex:1;}
+.edu-panel{display:none;}
+.edu-panel.active{display:block;}
+.edu-section-title{font-family:var(--data);font-style:italic;font-size:13px;color:var(--taupe);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;}
+.edu-course-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px;}
+@media(max-width:600px){.edu-course-list{grid-template-columns:1fr;}}
+.edu-course-item{font-family:var(--sans);font-size:15px;color:var(--black);background:var(--off);border:1px solid var(--taupe-light);border-radius:var(--radius);padding:10px 14px;font-weight:400;}
+.edu-project-item{border:1px solid var(--taupe-light);border-radius:var(--radius-lg);padding:18px 20px;margin-bottom:12px;}
+.edu-project-item[data-project-index]{cursor:pointer;transition:border-color .2s,box-shadow .2s;}
+.edu-project-item[data-project-index]:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(57,67,183,.12);}
+.edu-project-link-hint{font-family:var(--data);font-style:italic;font-size:12px;color:var(--blue);margin-top:8px;opacity:.75;}
+.edu-project-item[data-project-index]:hover .edu-project-link-hint{opacity:1;}
+.edu-project-name{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.edu-project-desc{font-family:var(--sans);font-size:15px;color:#555;line-height:1.7;font-weight:400;}
+.edu-activity-item{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;}
+.edu-activity-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:6px;}
+.edu-activity-text{font-family:var(--sans);font-size:15px;color:#444;line-height:1.7;font-weight:400;}
+
+/* ── SKILLS ── */
+#skills{background:var(--off);min-height:calc(100vh - 68px);display:flex;align-items:center;padding:88px 0 40px;}
+#skills .wrap{width:100%;max-height:calc(100vh - 196px);display:flex;flex-direction:column;}
+#skills .sec-dash,#skills .sec-h{flex-shrink:0;}
+.skills-scroll{flex:1;min-height:0;overflow-y:auto;padding:4px 4px 4px 0;}
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
+.skills-grid .skill-group.lang-group{grid-column:1 / -1;}
+@media(max-width:1100px){.skills-grid{grid-template-columns:1fr 1fr;}.skills-grid .skill-group.lang-group{grid-column:1 / -1;}}
+@media(max-width:600px){.skills-grid{grid-template-columns:1fr;}}
+@media(max-width:900px){
+  #skills{min-height:auto;display:block;padding:56px 0;}
+  #skills .wrap{max-height:none;display:block;}
+  .skills-scroll{overflow-y:visible;}
+}
+.skill-group{background:var(--white);border:1px solid var(--taupe-light);border-radius:var(--radius-lg);padding:22px 24px;}
+.sg-title{font-family:var(--data);font-style:italic;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--taupe);margin-bottom:14px;}
+.sk-tags{display:flex;flex-direction:column;gap:8px;}
+.lang-group .sk-tags{flex-direction:row;flex-wrap:wrap;}
+.sk-tag{font-family:var(--sans);font-size:14px;font-weight:400;color:var(--black);background:transparent;border:none;border-radius:0;padding:2px 0;transition:color .15s;}
+.sk-tag:hover{color:var(--blue);}
+.lang-group .sk-tags{gap:8px 20px;}
+.certs-section{border-top:1px solid var(--taupe-light);padding-top:28px;}
+.certs-title{font-family:var(--data);font-style:italic;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--taupe);margin-bottom:18px;}
+.certs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+@media(max-width:900px){.certs-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.certs-grid{grid-template-columns:1fr;}}
+.cert-card{background:var(--white);border:1px solid var(--taupe-light);border-radius:var(--radius-lg);padding:20px 22px;display:flex;flex-direction:column;gap:6px;}
+.cert-name{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--black);}
+.cert-issuer{font-family:var(--data);font-style:italic;font-size:14px;color:var(--blue);}
+.cert-date{font-family:var(--data);font-style:italic;font-size:13px;color:var(--taupe);}
+
+/* ── CONTACT ── */
+#contact{background:var(--black);min-height:calc(100vh - 68px);display:flex;align-items:center;padding:88px 0;}
+#contact .wrap{width:100%;max-height:calc(100vh - 244px);}
+.contact-inner{display:flex;gap:72px;align-items:center;max-height:100%;overflow-y:auto;}
+.contact-left{flex:1;}
+.contact-label{font-family:var(--data);font-style:italic;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--taupe);margin-bottom:14px;}
+.contact-h{font-family:var(--serif);font-size:clamp(34px,6vw,68px);font-weight:700;color:var(--white);letter-spacing:-1.5px;line-height:1.1;margin-bottom:18px;}
+.contact-desc{font-family:var(--sans);font-size:17px;color:#aaa;line-height:1.75;max-width:480px;margin-bottom:36px;font-weight:400;}
+.contact-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.contact-right{width:400px;flex-shrink:0;}
+
+@media(max-width:900px){
+  #contact{min-height:auto;display:block;}
+  #contact .wrap{max-height:none;}
+  .contact-inner{flex-direction:column;align-items:stretch;gap:40px;max-height:none;overflow-y:visible;}
+  .contact-right{width:100%;max-width:480px;}
+}
+.contact-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-lg);padding:36px;}
+.contact-card-label{font-family:var(--data);font-style:italic;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#777;margin-bottom:26px;}
+.contact-link{display:block;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid rgba(255,255,255,.06);transition:opacity .2s;}
+.contact-link:last-of-type{padding-bottom:0;margin-bottom:0;border-bottom:none;}
+.contact-link:hover{opacity:.7;}
+.cl-label{font-family:var(--data);font-style:italic;font-size:11px;color:#666;letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:5px;}
+.cl-val{font-family:var(--sans);font-size:17px;color:#ccc;display:block;font-weight:400;}
+.contact-resume{margin-top:26px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06);}
+.contact-resume a{font-family:var(--sans);font-size:14px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:6px;}
+.contact-resume a:hover{color:var(--white);}
+
+/* ── FOOTER ── */
+footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);padding:24px clamp(20px,5vw,72px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-left{display:flex;align-items:center;gap:20px;}
+.footer-copy{font-family:var(--data);font-style:italic;font-size:15px;color:#b0aaa8;}
+.footer-icons{display:flex;gap:14px;align-items:center;justify-content:center;}
+.footer-icon{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.1);display:inline-flex;align-items:center;justify-content:center;transition:all .2s;line-height:1;flex-shrink:0;padding:0;}
+.footer-icon:hover{border-color:var(--blue);background:var(--blue);}
+.footer-icon svg{width:14px;height:14px;fill:none;stroke:#777;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s;display:block;margin:0;}
+.footer-icon:hover svg{stroke:var(--white);}
+.back-to-top{display:flex;align-items:center;gap:7px;font-family:var(--data);font-style:italic;font-size:14px;color:#b0aaa8;cursor:pointer;background:transparent;border:none;transition:color .2s;}
+.back-to-top:hover{color:var(--blue);}
+.back-to-top svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* ── PROJECT DETAIL OVERLAY ── */
+#project-detail{position:fixed;inset:0;z-index:4000;background:var(--white);overflow-y:auto;opacity:0;pointer-events:none;transform:translateY(16px);transition:opacity .3s ease,transform .3s ease;}
+#project-detail.open{opacity:1;pointer-events:all;transform:none;}
+.pd-topbar{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--taupe-light);padding:0 56px;height:68px;display:flex;align-items:center;justify-content:space-between;}
+.pd-back{display:flex;align-items:center;gap:8px;font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.5px;color:var(--taupe);background:transparent;border:none;cursor:pointer;transition:color .2s;padding:0;}
+.pd-back:hover{color:var(--blue);}
+.pd-back svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.pd-topbar-title{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--black);}
+.pd-github{display:flex;align-items:center;gap:8px;font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.5px;color:var(--white);background:var(--black);border:1px solid var(--black);border-radius:var(--radius);padding:8px 15px;text-decoration:none;transition:background .2s,border-color .2s;white-space:nowrap;}
+.pd-github:hover{background:var(--blue);border-color:var(--blue);}
+.pd-github svg{width:16px;height:16px;fill:currentColor;}
+.pd-actions{display:flex;align-items:center;gap:10px;}
+.pd-paper svg{width:17px;height:17px;}
+.pd-hero{padding:72px 56px 56px;border-bottom:1px solid var(--taupe-light);background-image:linear-gradient(to right,rgba(112,101,99,.05) 1px,transparent 1px),linear-gradient(to bottom,rgba(112,101,99,.05) 1px,transparent 1px);background-size:28px 28px;}
+.pd-hero-inner{max-width:1280px;margin:0 auto;}
+.pd-type{font-family:var(--data);font-style:italic;font-size:11px;color:var(--taupe);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;}
+.pd-title{font-family:var(--serif);font-size:72px;font-weight:700;color:var(--black);letter-spacing:-1.5px;line-height:1.1;margin-bottom:28px;}
+.pd-metrics-row{display:flex;gap:0;border:1px solid var(--taupe-light);border-radius:var(--radius-lg);overflow:hidden;display:inline-flex;margin-bottom:24px;}
+.pd-metric{padding:12px 24px;border-right:1px solid var(--taupe-light);}
+.pd-metric:last-child{border-right:none;}
+.pd-metric-label{font-family:var(--data);font-style:italic;font-size:9px;color:var(--taupe);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.pd-metric-val{font-family:var(--data);font-style:italic;font-size:14px;font-weight:700;color:var(--blue);}
+.pd-hero-tags{display:flex;gap:7px;flex-wrap:wrap;}
+.pd-hero-tag{font-family:var(--data);font-style:italic;font-size:11px;color:var(--blue);background:var(--blue-dim);border:1px solid var(--blue-mid);border-radius:3px;padding:3px 10px;}
+.pd-body{max-width:1280px;margin:0 auto;padding:64px 56px 96px;}
+.pd-section{margin-bottom:52px;}
+.pd-section-dash{width:24px;height:2px;background:var(--amber);margin-bottom:12px;}
+.pd-section-title{font-family:var(--serif);font-size:26px;font-weight:600;color:var(--black);margin-bottom:18px;}
+.pd-placeholder{font-family:var(--sans);font-size:15px;color:#aaa;line-height:1.8;font-weight:400;font-style:italic;border:1px dashed var(--taupe-light);border-radius:var(--radius);padding:20px 24px;background:var(--off);}
+.pd-placeholder::before{content:"✏️  ";font-style:normal;}
+.pd-tools-grid{display:flex;flex-wrap:wrap;gap:8px;}
+.pd-tool-tag{font-family:var(--sans);font-size:13px;font-weight:400;color:var(--black);background:var(--off);border:1px solid var(--taupe-light);border-radius:3px;padding:5px 12px;}
+
+/* ── Project prose ── */
+.pd-prose{font-family:var(--sans);font-size:18.5px;color:#2a2a2a;line-height:1.9;font-weight:400;}
+.pd-prose p{margin-bottom:16px;}
+.pd-prose p:last-child{margin-bottom:0;}
+.pd-prose strong{font-weight:600;color:var(--black);}
+.pd-prose em{font-style:italic;color:var(--blue);font-family:var(--data);font-size:17px;}
+.pd-prose ul{list-style:none;margin:16px 0;padding:0;}
+.pd-prose li{position:relative;padding-left:24px;margin-bottom:11px;line-height:1.7;}
+.pd-prose li::before{content:"";position:absolute;left:0;top:12px;width:7px;height:7px;background:var(--amber);border-radius:1px;transform:rotate(45deg);}
+.pd-prose li strong{color:var(--blue);}
+.pd-eq{font-family:'Times New Roman',Times,Georgia,serif;font-style:italic;font-size:19px;color:var(--black);text-align:center;background:var(--off);border:1px solid var(--taupe-light);border-left:3px solid var(--blue);border-radius:var(--radius);padding:15px 18px;margin:16px 0;line-height:2.15;overflow-x:auto;white-space:nowrap;letter-spacing:.2px;}
+.pd-eq sub{font-size:.7em;} .pd-eq sup{font-size:.7em;}
+
+/* ── Interactive viz ── */
+.pd-viz-intro{font-family:var(--sans);font-size:18.5px;color:#2a2a2a;line-height:1.85;margin-bottom:26px;}
+.pd-viz{display:flex;flex-direction:column;gap:26px;}
+.pd-viz-card{border:1px solid var(--taupe-light);border-radius:var(--radius-lg);background:var(--white);overflow:hidden;}
+.pd-viz-head{padding:20px 26px 0;}
+.pd-viz-title{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--black);margin-bottom:6px;}
+.pd-viz-note{font-family:var(--sans);font-size:15px;color:var(--taupe);line-height:1.65;}
+.pd-viz-body{padding:18px 26px 26px;}
+.pd-viz svg{display:block;width:100%;height:auto;overflow:visible;}
+.pd-viz text{font-family:var(--data);}
+
+/* segmented control */
+.pd-seg{display:inline-flex;border:1px solid var(--taupe-light);border-radius:var(--radius);overflow:hidden;margin-bottom:18px;flex-wrap:wrap;}
+.pd-seg button{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:.3px;color:var(--taupe);background:var(--white);border:none;border-right:1px solid var(--taupe-light);padding:8px 16px;cursor:pointer;transition:background .2s,color .2s;}
+.pd-seg button:last-child{border-right:none;}
+.pd-seg button:hover{background:var(--off);}
+.pd-seg button.active{background:var(--blue);color:#fff;}
+
+/* slider */
+.pd-slider-row{display:flex;align-items:center;gap:18px;margin-bottom:20px;flex-wrap:wrap;}
+.pd-slider-row label{font-family:var(--data);font-style:italic;font-size:13px;color:var(--taupe);min-width:120px;}
+.pd-slider-row input[type=range]{flex:1;min-width:180px;accent-color:var(--blue);height:4px;}
+.pd-slider-val{font-family:var(--data);font-weight:700;font-size:15px;color:var(--blue);min-width:64px;text-align:right;}
+
+/* stat readout pills */
+.pd-readout{display:flex;flex-wrap:wrap;gap:14px;margin-top:4px;}
+.pd-readout-item{background:var(--off);border:1px solid var(--taupe-light);border-radius:var(--radius);padding:10px 16px;flex:1;min-width:120px;}
+.pd-readout-l{font-family:var(--data);font-style:italic;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--taupe);margin-bottom:4px;}
+.pd-readout-v{font-family:var(--data);font-weight:700;font-size:18px;color:var(--blue);}
+.pd-readout-v.neg{color:var(--amber);}
+
+/* legend */
+.pd-legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:14px;}
+.pd-legend-item{display:flex;align-items:center;gap:7px;font-family:var(--sans);font-size:13px;color:var(--taupe);}
+.pd-legend-sw{width:13px;height:13px;border-radius:3px;}
+
+/* scatter detail panel */
+.pd-scatter-wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:start;}
+@media(max-width:760px){.pd-scatter-wrap{grid-template-columns:1fr;}}
+.pd-sc-panel{border:1px solid var(--taupe-light);border-radius:var(--radius);padding:18px 20px;background:var(--off);}
+.pd-sc-panel-name{font-family:var(--serif);font-size:18px;font-weight:600;color:var(--black);margin-bottom:3px;}
+.pd-sc-panel-tag{font-family:var(--data);font-style:italic;font-size:12px;color:var(--taupe);margin-bottom:14px;}
+.pd-alloc-row{display:flex;align-items:center;gap:10px;margin-bottom:9px;}
+.pd-alloc-name{font-family:var(--sans);font-size:12px;font-weight:600;color:var(--black);width:52px;flex-shrink:0;}
+.pd-alloc-bar-bg{flex:1;height:8px;background:var(--taupe-xlight);border-radius:4px;overflow:hidden;}
+.pd-alloc-bar{height:100%;background:var(--blue);border-radius:4px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+.pd-alloc-pct{font-family:var(--data);font-size:12px;font-weight:700;color:var(--blue);width:46px;text-align:right;flex-shrink:0;}
+.pd-sc-stats{display:flex;gap:18px;margin-top:14px;padding-top:14px;border-top:1px solid var(--taupe-light);}
+.pd-sc-stat-l{font-family:var(--data);font-style:italic;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--taupe);}
+.pd-sc-stat-v{font-family:var(--data);font-weight:700;font-size:16px;color:var(--black);}
+
+/* anfis network */
+.pd-net-layers{display:flex;flex-direction:column;gap:0;}
+.pd-net-layer{display:flex;align-items:center;gap:18px;padding:14px 16px;border:1px solid var(--taupe-light);border-radius:var(--radius);margin-bottom:10px;cursor:pointer;transition:background .2s,border-color .2s;background:var(--white);}
+.pd-net-layer:hover{background:var(--off);}
+.pd-net-layer.active{border-color:var(--blue);background:var(--blue-dim);}
+.pd-net-num{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--blue);width:34px;flex-shrink:0;text-align:center;}
+.pd-net-info{flex:1;}
+.pd-net-name{font-family:var(--sans);font-size:15px;font-weight:600;color:var(--black);margin-bottom:2px;}
+.pd-net-role{font-family:var(--data);font-style:italic;font-size:12px;color:var(--taupe);}
+.pd-net-desc{font-family:var(--sans);font-size:14px;color:#2a2a2a;line-height:1.7;max-height:0;overflow:hidden;transition:max-height .35s ease,margin .35s ease;}
+.pd-net-layer.active .pd-net-desc{max-height:160px;margin-top:8px;}
+
+/* fcm controls */
+.pd-fcm-controls{display:flex;align-items:center;gap:18px;margin-bottom:16px;flex-wrap:wrap;}
+.pd-btn{font-family:var(--sans);font-size:13px;font-weight:600;color:#fff;background:var(--blue);border:none;border-radius:var(--radius);padding:8px 18px;cursor:pointer;transition:opacity .2s;}
+.pd-btn:hover{opacity:.85;}
+.pd-btn.ghost{background:transparent;color:var(--blue);border:1px solid var(--blue-mid);}
+
+/* frontier lab sliders */
+.pd-fl-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px 24px;margin:18px 0 4px;}
+@media(max-width:640px){.pd-fl-grid{grid-template-columns:1fr;}}
+.pd-fl-row{display:flex;align-items:center;gap:10px;}
+.pd-fl-name{font-family:var(--data);font-style:italic;font-size:12px;color:var(--taupe);width:42px;flex-shrink:0;}
+.pd-fl-row input[type=range]{flex:1;accent-color:var(--blue);height:4px;min-width:60px;}
+.pd-fl-val{font-family:var(--data);font-weight:700;font-size:12px;color:var(--blue);width:52px;text-align:right;flex-shrink:0;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Luan Ferreira de Souza</a>
+  <button class="nav-burger" onclick="toggleMobileNav()" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="nav-links">
+    <a href="#about" class="nav-lk" data-s="about">About</a>
+    <a href="#work" class="nav-lk" data-s="work">Projects</a>
+    <a href="#experience" class="nav-lk" data-s="experience">Experience</a>
+    <a href="#education" class="nav-lk" data-s="education">Education</a>
+    <a href="#skills" class="nav-lk" data-s="skills">Skills</a>
+    <a href="#contact" class="nav-lk" data-s="contact">Contact</a>
+    <a href="#contact" class="nav-cta">Let's Talk</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="wrap">
+    <div class="hero-inner" style="display:block;">
+      <div class="hero-left">
+        <div class="hero-name-line">
+          <span class="hero-name">Luan Ferreira de Souza</span>
+          <span class="hero-name-rule"></span>
+          <span class="hero-available"><span class="hero-dot"></span>Available Full-Time · Jan 2027</span>
+        </div>
+        <div class="manifesto">
+          <span class="manifesto-line reveal">Uncertainty is the market's constant.</span>
+          <span class="manifesto-line hl italic-line reveal d1">Every allocation starts with a question.</span>
+          <span class="manifesto-line reveal d2">Models don't have to be noisy.</span>
+        </div>
+        <div class="hero-subtitle reveal d3">
+          <p style="font-family:var(--sans);font-size:25px;font-weight:400;color:#706563;margin-bottom:7px;">Where engineering, machine learning, and financial markets meet</p>
+          <!-- <p style="font-family:var(--data);font-style:italic;font-size:20px;color:#706563;margin-bottom:7px;">Quantitative Finance · Fuzzy-based machine learning · Algo Trading · Portfolio Optimization</p> -->
+        </div>
+        <div class="hero-btns">
+          <a href="mailto:ferreiradesouza.l@northeastern.edu" class="btn btn-solid">Get in Touch</a>
+          <a href="#work" class="btn btn-outline">View My Work</a>
+        </div>
+        <div class="hero-socials">
+          <a href="https://linkedin.com/in/luanfsouza" target="_blank" class="hero-soc">↗ LinkedIn</a>
+          <a href="https://github.com/Luan-Souz" target="_blank" class="hero-soc">↗ GitHub</a>
+          <a href="https://drive.google.com/file/d/1bZQqqtGWBPj_sKEUk4av8JSaP-oTBt4z/view?usp=sharing" target="_blank" rel="noopener" class="hero-soc">↗ Resume</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-dash reveal"></div>
+    <h2 class="sec-h reveal" style="margin-bottom:18px">About</h2>
+    <div class="about-inner">
+      <div class="about-left">
+        <p class="about-text reveal">I'm a quantitative finance professional with a background in Control and Automation Engineering and a specialization in fuzzy-logic-based machine learning and data science.</p>
+        <p class="about-text reveal">I grew up in Manaus, Amazonas, the capital of the Brazilian Amazon. That environment shaped how I think: complex systems, limited information, and decisions that still have to be made.</p>
+        <p class="about-text reveal">My undergraduate thesis at the State University of Amazonas introduced an interpretable evolving fuzzy model for time series prediction in financial markets, presented at the Future Alpha 2026 Data-Driven Markets Summit in New York City.</p>
+        <p class="about-text reveal">I'm completing my M.S. in Quantitative Finance at Northeastern University's D'Amore-McKim School of Business, graduating December 2026, and currently serving as Sector Manager at the 360 Huntington Fund (~$2M AUM). I'm actively targeting roles in portfolio management, quantitative research, trading, and risk analysis. Available full-time January 2027.</p>
+        <p class="about-text reveal">Outside of work, I make Neapolitan pizzas from scratch, mixing the dough to pulling it out of the oven, mostly as an excuse to get good people around a table. I'm also just a huge dog person, my two dogs Nala and Nina are basically the center of my world. Beach volleyball rounds out the rest of my free time.</p>
+      </div>
+      <div class="about-right reveal">
+        <div class="about-photo-wrap">
+          <div class="photo-carousel" id="photoCarousel">
+            <div class="photo-slide active">
+              <img src="Luan_Prof_pic.jpg" alt="Luan Ferreira de Souza" style="width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.3);transform-origin:20% 80%;"/>
+            </div>
+            <div class="photo-slide">
+              <img src="Luan_Professional.jpeg" alt="Professional headshot" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="photoFallback(this,'Professional Photo','Luan_Professional.jpeg')"/>
+            </div>
+            <div class="photo-slide">
+              <img src="Luan_Pizza.jpeg" alt="Making pizza" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" onerror="photoFallback(this,'Making Pizza','Luan_Pizza.jpeg')"/>
+            </div>
+            <div class="photo-slide">
+              <img src="Luan_Dogs.jpeg" alt="Nala and Nina" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="photoFallback(this,'Nala &amp; Nina','Luan_Dogs.jpeg')"/>
+            </div>
+            <div class="photo-slide">
+              <img src="Luan_Volleyball.jpeg" alt="Playing beach volleyball" style="width:100%;height:100%;object-fit:cover;display:block;" onerror="photoFallback(this,'Beach Volleyball','Luan_Volleyball.jpeg')"/>
+            </div>
+          </div>
+          <button class="photo-nav photo-nav-prev" onclick="photoCarouselNav(-1)" aria-label="Previous photo">‹</button>
+          <button class="photo-nav photo-nav-next" onclick="photoCarouselNav(1)" aria-label="Next photo">›</button>
+          <div class="photo-dots">
+            <span class="photo-dot active" onclick="photoCarouselGoTo(0)"></span>
+            <span class="photo-dot" onclick="photoCarouselGoTo(1)"></span>
+            <span class="photo-dot" onclick="photoCarouselGoTo(2)"></span>
+            <span class="photo-dot" onclick="photoCarouselGoTo(3)"></span>
+            <span class="photo-dot" onclick="photoCarouselGoTo(4)"></span>
+          </div>
+        </div>
+        <div class="about-details reveal">
+          <div class="about-detail"><span class="about-detail-label">Location</span><span class="about-detail-val">Boston, MA</span></div>
+          <div class="about-detail"><span class="about-detail-label">Origin</span><span class="about-detail-val">Amazonas, Brazil</span></div>
+          <div class="about-detail"><span class="about-detail-label">Languages</span><span class="about-detail-val">Portuguese · English</span></div>
+          <div class="about-detail"><span class="about-detail-label">Graduating</span><span class="about-detail-val">December 2026</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="wrap">
+    <div class="work-header">
+      <div>
+        <div class="sec-dash reveal"></div>
+        <h2 class="sec-h reveal">Projects</h2>
+      </div>
+      <button class="see-all-btn reveal" onclick="openAllProjects()">See all projects ↗</button>
+    </div>
+    <div class="work-grid" id="work-grid"></div>
+    <div class="work-footer reveal">
+      <button class="see-all-btn" onclick="openAllProjects()">View all projects →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ALL PROJECTS OVERLAY -->
+<div id="all-projects-overlay">
+  <div class="overlay-header">
+    <span class="overlay-title">All Projects <span id="overlay-count" style="font-family:var(--data);font-style:italic;font-size:14px;color:var(--taupe);font-weight:400">(9)</span></span>
+    <button class="overlay-close" onclick="closeAllProjects()">✕</button>
+  </div>
+  <div class="overlay-body">
+    <div class="overlay-grid" id="overlay-grid"></div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-dash reveal"></div>
+    <h2 class="sec-h reveal" style="margin-bottom:48px">Professional Background</h2>
+    <div class="mm-map">
+      <div class="mm-map-grid-bg"></div>
+      <div class="mm-map-border"></div>
+      <div class="mm-stage" id="mm-stage"></div>
+    </div>
+    <div class="mm-detail" id="mm-detail">
+      <div class="mm-detail-accent"></div>
+      <div class="mm-detail-body">
+        <div class="mm-detail-year" id="mm-year"></div>
+        <div class="mm-detail-role" id="mm-role"></div>
+        <div class="mm-detail-phase" id="mm-phase"></div>
+        <div class="mm-detail-desc" id="mm-desc"></div>
+        <div class="mm-detail-tags" id="mm-tags"></div>
+      </div>
+    </div>
+    <div class="mm-footer">
+      <button class="mm-nav-btn off" id="mm-prev">← Prev</button>
+      <div class="mm-progress"><div class="mm-progress-fill" id="mm-prog"></div></div>
+      <div class="mm-nav-count"><b id="mm-cur">—</b> / <span id="mm-total"></span></div>
+      <button class="mm-nav-btn" id="mm-next">Next →</button>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="wrap">
+    <div class="sec-dash reveal"></div>
+    <h2 class="sec-h reveal" style="margin-bottom:40px">Academic Background</h2>
+    <div class="edu-grid">
+      <div class="edu-card reveal" onclick="openEduModal('neu')">
+        <div class="edu-school" style="display:flex;align-items:center;gap:10px;">Northeastern University<span style="display:inline-flex;align-items:center;gap:6px;font-family:var(--data);font-style:italic;font-size:13px;color:var(--amber);background:var(--amber-dim);border:1px solid var(--amber);border-radius:100px;padding:3px 12px;font-weight:400;white-space:nowrap;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>In Progress</span></div>
+        <div class="edu-dept">D'Amore-McKim School of Business</div>
+        <div class="edu-degree">Master of Science in Quantitative Finance</div>
+        <div class="edu-meta-row">
+          <span class="edu-period">Sep. 2025 – Dec. 2026 · Boston, MA, US</span>
+          <span class="edu-open-hint">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            View details
+          </span>
+        </div>
+      </div>
+      <div class="edu-card reveal d1" onclick="openEduModal('uea')">
+        <div class="edu-school" style="display:flex;align-items:center;gap:10px;">State University of Amazonas<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--taupe)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <div class="edu-dept">Higher School of Technology (EST)</div>
+        <div class="edu-degree">Bachelor of Science in Control and Automation Engineering</div>
+        <div class="edu-meta-row">
+          <span class="edu-period">Feb. 2017 – Jul. 2024 · Manaus, AM, Brazil</span>
+          <span class="edu-open-hint">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            View details
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDU MODALS -->
+<div class="edu-modal-overlay" id="edu-modal-neu" onclick="closeEduModal('neu',event)">
+  <div class="edu-modal">
+    <div class="edu-modal-head">
+      <div><div class="edu-modal-school">Northeastern University</div><div class="edu-modal-degree">M.S. Quantitative Finance · D'Amore-McKim School of Business · 2025–2026</div></div>
+      <button class="edu-modal-close" onclick="closeEduModal('neu',null,true)">✕</button>
+    </div>
+    <div class="edu-tabs">
+      <div class="edu-tab active" data-modal="neu" data-panel="courses" onclick="switchTab(this)">Coursework</div>
+      <div class="edu-tab" data-modal="neu" data-panel="projects" onclick="switchTab(this)">Projects</div>
+      <div class="edu-tab" data-modal="neu" data-panel="activities" onclick="switchTab(this)">Activities</div>
+    </div>
+    <div class="edu-modal-body">
+      <div class="edu-panel active" id="neu-courses">
+        <div class="edu-section-title">Finance</div>
+        <div class="edu-course-list">
+          <div class="edu-course-item">Corporate Finance</div>
+          <div class="edu-course-item">Investment Analysis</div>
+          <div class="edu-course-item">Financial Mathematics &amp; Markets</div>
+          <div class="edu-course-item">Fund Management for Analysts</div>
+          <div class="edu-course-item">Derivatives: Options Pricing &amp; Greeks</div>
+          <div class="edu-course-item">Derivatives: Futures &amp; Structured Strategies</div>
+          <div class="edu-course-item">Derivatives: Risk Analysis &amp; Hedging</div>
+          <div class="edu-course-item">Empirical Methods: Fama-French Factor Models</div>
+          <div class="edu-course-item">Empirical Methods: Time Series &amp; Regression Strategies</div>
+          <div class="edu-course-item">Empirical Methods: PCA-Based Factor Research</div>
+          <div class="edu-course-item">Portfolio Management: Mean-Variance Optimization</div>
+          <div class="edu-course-item">Portfolio Management: Risk Parity &amp; Max-Sharpe</div>
+          <div class="edu-course-item">Portfolio Management: Black-Litterman Model</div>
+          <div class="edu-course-item">Portfolio Management: Efficient Frontier Analysis</div>
+          <div class="edu-course-item">Portfolio Management: Bond Portfolio &amp; Duration</div>
+        </div>
+      </div>
+      <div class="edu-panel" id="neu-projects">
+        <div class="edu-section-title">Academic Projects</div>
+        <div id="neu-project-list"></div>
+      </div>
+      <div class="edu-panel" id="neu-activities">
+        <div class="edu-section-title">Activities & Involvement</div>
+        <div class="edu-activity-item"><div class="edu-activity-dot"></div><div class="edu-activity-text">360 Huntington Fund — Sector Manager (promoted from Equity Research Analyst)</div></div>
+        <div class="edu-activity-item"><div class="edu-activity-dot"></div><div class="edu-activity-text">CETR (Community Engagement Teaching &amp; Research)</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="edu-modal-overlay" id="edu-modal-uea" onclick="closeEduModal('uea',event)">
+  <div class="edu-modal">
+    <div class="edu-modal-head">
+      <div><div class="edu-modal-school">State University of Amazonas</div><div class="edu-modal-degree">Bachelor of Science · UEA · 2017–2024</div></div>
+      <button class="edu-modal-close" onclick="closeEduModal('uea',null,true)">✕</button>
+    </div>
+    <div class="edu-tabs">
+      <div class="edu-tab active" data-modal="uea" data-panel="courses" onclick="switchTab(this)">Coursework</div>
+      <div class="edu-tab" data-modal="uea" data-panel="projects" onclick="switchTab(this)">Projects</div>
+      <div class="edu-tab" data-modal="uea" data-panel="activities" onclick="switchTab(this)">Activities</div>
+    </div>
+    <div class="edu-modal-body">
+      <div class="edu-panel active" id="uea-courses">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+          <div>
+            <div class="edu-section-title">Math &amp; Quant Methods</div>
+            <div class="edu-course-list" style="grid-template-columns:1fr;">
+              <div class="edu-course-item">Calculus I: Single-Variable Limits &amp; Differentiation</div>
+              <div class="edu-course-item">Calculus II: Integration &amp; Infinite Series</div>
+              <div class="edu-course-item">Calculus III: Multivariable Calculus</div>
+              <div class="edu-course-item">Calculus IV: Vector Analysis &amp; Advanced Integration</div>
+              <div class="edu-course-item">Numerical Calculus</div>
+              <div class="edu-course-item">Probability and Statistics</div>
+              <div class="edu-course-item">Dynamic Systems</div>
+              <div class="edu-course-item">Signals and Systems Analysis</div>
+              <div class="edu-course-item">Modeling and Simulation of Discrete Systems</div>
+              <div class="edu-course-item">Stochastic Processes</div>
+            </div>
+          </div>
+          <div>
+            <div class="edu-section-title">Control Systems &amp; Machine Learning</div>
+            <div class="edu-course-list" style="grid-template-columns:1fr;">
+              <div class="edu-course-item">Control Systems I: Classical and Continuous Time Analysis</div>
+              <div class="edu-course-item">Control Systems II: Frequency Domain and Digital Control</div>
+              <div class="edu-course-item">Control Systems III: Non-linear, Adaptive, and Robust Control</div>
+              <div class="edu-course-item">Fuzzy Control Systems</div>
+              <div class="edu-course-item">Identification of Control Systems: Autoregressive Models</div>
+              <div class="edu-course-item">Supervised Learning <em>(Random Forest, Decision Trees, Neural Networks, SVM)</em></div>
+              <div class="edu-course-item">Unsupervised Learning <em>(K-Means/C-Means Clustering, PCA)</em></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="edu-panel" id="uea-projects">
+        <div class="edu-section-title">Academic Projects</div>
+        <div id="uea-project-list"></div>
+      </div>
+      <div class="edu-panel" id="uea-activities">
+        <div class="edu-section-title">Activities & Involvement</div>
+        <div class="edu-activity-item"><div class="edu-activity-dot"></div><div class="edu-activity-text">Member of the Scientific Initiation (SI) research program</div></div>
+        <div class="edu-activity-item"><div class="edu-activity-dot"></div><div class="edu-activity-text">Member of the applied robotics study group</div></div>
+        <div class="edu-activity-item"><div class="edu-activity-dot"></div><div class="edu-activity-text">Played on the volleyball team in the university's internal games</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-dash reveal"></div>
+    <h2 class="sec-h reveal" style="margin-bottom:40px">Capabilities & Tools</h2>
+    <div class="skills-scroll">
+      <div class="skills-grid">
+        <div class="skill-group reveal"><div class="sg-title">Quantitative Finance</div><div class="sk-tags"><span class="sk-tag">Portfolio Optimization</span><span class="sk-tag">Black-Litterman</span><span class="sk-tag">Risk Parity & Max-Sharpe</span><span class="sk-tag">Efficient Frontier Analysis</span><span class="sk-tag">Factor Models (CAPM / Fama-French)</span><span class="sk-tag">Options Pricing & Greeks</span><span class="sk-tag">Derivatives & Hedging</span><span class="sk-tag">Stochastic Volatility (GARCH / Heston)</span><span class="sk-tag">Monte Carlo Simulation</span><span class="sk-tag">Yield Curve Modeling (Nelson-Siegel)</span><span class="sk-tag">Fixed Income & Duration</span><span class="sk-tag">Equity Research & DCF Valuation</span></div></div>
+        <div class="skill-group reveal d1"><div class="sg-title">ML / Data Science</div><div class="sk-tags"><span class="sk-tag">Machine Learning</span><span class="sk-tag">Neural Networks</span><span class="sk-tag">Deep Learning (LSTM / RNN)</span><span class="sk-tag">Fuzzy Logic Systems</span><span class="sk-tag">ANFIS / Takagi-Sugeno</span><span class="sk-tag">Supervised Learning (SVM, Random Forest)</span><span class="sk-tag">Unsupervised Learning (K-Means, PCA)</span><span class="sk-tag">Time-Series Forecasting</span><span class="sk-tag">Regression Analysis</span><span class="sk-tag">System Identification</span><span class="sk-tag">Feature Engineering</span></div></div>
+        <div class="skill-group reveal"><div class="sg-title">Procurement/Operations</div><div class="sk-tags"><span class="sk-tag">Supplier Management</span><span class="sk-tag">Vendor Negotiation</span><span class="sk-tag">Contract Renegotiation</span><span class="sk-tag">Cost Savings</span><span class="sk-tag">Budget Control & Reporting</span><span class="sk-tag">SAP</span><span class="sk-tag">Coupa</span><span class="sk-tag">Power Automate (RPA)</span><span class="sk-tag">Process Automation</span><span class="sk-tag">Supplier Onboarding & Compliance</span></div></div>
+        <div class="skill-group reveal"><div class="sg-title">Technical Tools</div><div class="sk-tags"><span class="sk-tag">Python</span><span class="sk-tag">R</span><span class="sk-tag">Excel / VBA</span><span class="sk-tag">Bloomberg Terminal</span><span class="sk-tag">NumPy</span><span class="sk-tag">Pandas</span><span class="sk-tag">Scikit-learn</span><span class="sk-tag">LaTeX</span><span class="sk-tag">SQL</span></div></div>
+        <div class="skill-group lang-group reveal"><div class="sg-title">Languages</div><div class="sk-tags"><span class="sk-tag">Portuguese (Native)</span><span class="sk-tag">English (Fluent)</span></div></div>
+      </div>
+      <div class="certs-section reveal">
+        <div class="certs-title">Certifications</div>
+        <div class="certs-grid">
+          <div class="cert-card"><div class="cert-name">Bloomberg Market Concepts</div><div class="cert-issuer">Bloomberg</div><div class="cert-date">Dec 2025</div></div>
+          <div class="cert-card"><div class="cert-name">Microsoft Excel</div><div class="cert-issuer">Wall Street Prep</div><div class="cert-date">Nov 2025</div></div>
+          <div class="cert-card"><div class="cert-name">IELTS Academic — Band 8</div><div class="cert-issuer">IELTS Official</div><div class="cert-date">Sep 2024</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-inner">
+      <div class="contact-left">
+        <div class="sec-dash reveal" style="background:var(--amber);opacity:.6;"></div>
+        <p class="contact-label reveal">Let's Connect</p>
+        <h2 class="contact-h reveal">Open to new<br>opportunities</h2>
+        <p class="contact-desc reveal">Graduating December 2026. Actively seeking roles in investment management, portfolio analytics, equity research, and quantitative finance.</p>
+        <div class="contact-btns reveal">
+          <a href="mailto:ferreiradesouza.l@northeastern.edu" class="btn btn-blue">Send an Email</a>
+          <a href="https://linkedin.com/in/luanfsouza" target="_blank" class="btn btn-outline-white">Connect on LinkedIn</a>
+        </div>
+      </div>
+      <div class="contact-right">
+        <div class="contact-card reveal">
+          <div class="contact-card-label">Find Me At</div>
+          <a href="mailto:ferreiradesouza.l@northeastern.edu" class="contact-link"><span class="cl-label">Email</span><span class="cl-val">ferreiradesouza.l@northeastern.edu</span></a>
+          <a href="https://linkedin.com/in/luanfsouza" target="_blank" class="contact-link"><span class="cl-label">LinkedIn</span><span class="cl-val">linkedin.com/in/luanfsouza</span></a>
+          <a href="https://github.com/Luan-Souz" target="_blank" class="contact-link"><span class="cl-label">GitHub</span><span class="cl-val">github.com/Luan-Souz</span></a>
+          <div class="contact-resume"><a href="https://drive.google.com/file/d/1bZQqqtGWBPj_sKEUk4av8JSaP-oTBt4z/view?usp=sharing" target="_blank" rel="noopener">↓ Download Resume</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-copy">© 2026 Luan Ferreira de Souza</span>
+  <div class="footer-icons">
+    <a href="https://linkedin.com/in/luanfsouza" target="_blank" class="footer-icon" title="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a href="mailto:ferreiradesouza.l@northeastern.edu" class="footer-icon" title="Email">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+    <a href="https://github.com/Luan-Souz" target="_blank" class="footer-icon" title="GitHub">
+      <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+    </a>
+  </div>
+  <button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+    Back to top
+  </button>
+</footer>
+
+<script>
+// ── NAV ──
+const nav = document.getElementById('nav');
+const navLinks = document.querySelectorAll('.nav-lk');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>50);
+  const y=window.scrollY+80;
+  let cur='';
+  ['about','work','experience','education','skills','contact'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&el.offsetTop<=y)cur=id;
+  });
+  navLinks.forEach(l=>l.classList.toggle('active',l.dataset.s===cur));
+},{passive:true});
+
+function toggleMobileNav(){document.getElementById('nav-links').classList.toggle('open');}
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nav-links').classList.remove('open')));
+
+// ── REVEAL ──
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ── ABOUT PHOTO CAROUSEL ──
+function photoFallback(img,label,filename){
+  var ph=document.createElement('div');
+  ph.className='photo-placeholder';
+  ph.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg><div class="photo-placeholder-text">'+label+'<br>('+filename+')</div>';
+  img.replaceWith(ph);
+}
+(function(){
+  var carousel=document.getElementById('photoCarousel');
+  if(!carousel)return;
+  var wrap=carousel.closest('.about-photo-wrap');
+  var slides=carousel.querySelectorAll('.photo-slide');
+  var dots=wrap.querySelectorAll('.photo-dot');
+  var idx=0,timer;
+  function show(i){
+    idx=(i+slides.length)%slides.length;
+    slides.forEach(function(s,j){s.classList.toggle('active',j===idx);});
+    dots.forEach(function(d,j){d.classList.toggle('active',j===idx);});
+  }
+  function nav(dir){show(idx+dir);}
+  function goTo(i){show(i);}
+  function startAuto(){timer=setInterval(function(){nav(1);},5000);}
+  function stopAuto(){clearInterval(timer);}
+  window.photoCarouselNav=function(dir){nav(dir);stopAuto();startAuto();};
+  window.photoCarouselGoTo=function(i){goTo(i);stopAuto();startAuto();};
+  startAuto();
+})();
+
+// ── PROFESSIONAL BACKGROUND (MILESTONE MAP) ──
+// Each entry: { year, phase (company), role, desc, tags, real }
+// Set real:false for placeholder slots; they render muted and non-interactive.
+// ── PROFESSIONAL BACKGROUND ──
+// milestones[index] — all 10 real experiences
+const milestones=[
+  {year:'Mar. 2018 – Feb. 2019',phase:'Red Bull',role:'Student Brand Manager · Manaus, Brazil',bullets:['Grew Red Bull consumption to 80% of the university campus through targeted brand activations','Increased brand visibility through collaborations with campus events and conferences','Conducted market trend analyses and served as public relations representative for the brand on campus'],tags:['Brand Strategy','Market Analysis','Public Relations']},
+  {year:'Nov. 2019 – Feb. 2020',phase:'Walt Disney World',role:'International College Program · Orlando, US',bullets:['Delivered customer service in a high-volume, fast-paced environment across multiple concurrent roles',"Handled orders and transactions in 2 languages while maintaining Disney's Four Keys standards: Safety, Courtesy, Show, and Efficiency"],tags:['Customer Service','Operations','International Experience']},
+  {year:'Aug. 2021 – Dec. 2021',phase:'Amazonas State University',role:'Physics Lab Teaching Assistant · Manaus, Brazil',bullets:['Assisted in running laboratory sessions for 2 cohorts of 40 students each (80 total), guiding students through experimental procedures and hands-on lab work','Held office hours providing individualized support in data analysis, statistical interpretation, and scientific report writing','Reinforced core concepts in experimental physics by helping students connect lab results to theoretical frameworks and draw well-supported conclusions'],tags:['Teaching','Physics','Data Analysis','Scientific Writing']},
+  {year:'June 2022 – June 2023',phase:'Dock',role:'Procurement Intern · (Remote) São Paulo, Brazil',bullets:['Managed invoice oversight with annual budget control reporting through data cross-validation','Collected and processed operational data in SAP and Coupa','Proposed process improvements and data automation initiatives'],tags:['Procurement','SAP','Coupa','Process Automation']},
+  {year:'Sep. 2022 – Aug. 2023',phase:'Amazonas State University',role:'R&D Researcher, Scientific Initiation Program · Manaus, Brazil',bullets:["Developed an LSTM-based energy consumption forecasting system for residential microgrids (UCFs) under faculty supervision through the university's Scientific Initiation program",'Collected and engineered a time series dataset of energy consumption (kWh), current, and power parameters; derived 4 additional features including 1-week and 3-week moving averages to capture short and medium-term trends','Architected and tuned an LSTM neural network in Python to address vanishing gradient limitations of standard RNNs on long time series; optimized across epochs, hidden layer neurons, and lookback window','Achieved a best configuration of 35 neurons per hidden layer, 7-day lookback, and 55 epochs; model attained an RMSE of 0.078 with no overfitting or underfitting, accurately tracking the real consumption series across non-extreme periods','Project scope included designing a simulation environment for consumption profiling, alternative energy injection modeling, and an automated supervisory control system for energy efficiency optimization'],tags:['Deep Learning','LSTM','Time-Series Forecasting','Python','Energy Systems']},
+  {year:'June 2023 – Jul. 2024',phase:'Amazonas State University',role:'Undergraduate Researcher, Finance Computational Models · Manaus, Brazil',bullets:['Developed an interpretable evolving fuzzy clustering model for financial market regime detection on the Ibovespa index (2016–2025), with emphasis on event explainability and macro-dynamic identification','Designed and implemented fuzzy algorithms in Python calibrated to capture market volatility, identify trend regimes, and generate asset allocation signals across bull, bear, and crisis periods','Applied a volatility-adaptive forgetting factor to enable online learning and real-time regime transitions without full model retraining','Applied machine learning methods including regression models and recurrent neural networks to analyze historical financial time series; assessed VaR and Conditional VaR to enhance risk mitigation strategies','Incorporated technical and fundamental indicators (moving averages, RSI, macroeconomic variables) to contextualize model predictions and support investment recommendations','Validated model performance through extensive backtesting across multiple market cycles; research presented at the Future Alpha 2026 Data-Driven Markets Summit in New York City'],tags:['Fuzzy Clustering','Market Regimes','Machine Learning','Python','Backtesting']},
+  {year:'Jul. 2023 – Feb. 2024',phase:'Dock',role:'Procurement Analyst I · (Remote) São Paulo, Brazil',bullets:['Managed a supplier portfolio of R$34 million annually across hardware, IT, and cloud vendors','Secured approximately R$1 million in savings through contract renegotiations','Improved net working capital by 3% by negotiating extended payment schedules with suppliers','Analyzed procurement requests to assess budget impacts and support capital allocation decisions','Developed detailed spending reports and data-driven analyses to inform strategic decision-making','Built a unified data dashboard reducing manual reporting workload and providing self-serve visibility for internal stakeholders'],tags:['Procurement','Cost Savings','Vendor Negotiation','Data Dashboards']},
+  {year:'Sep. 2025 – Apr. 2026',phase:'360 Huntington Fund',role:'Equity Research Analyst · Boston, US',bullets:['Authored equity research coverage reports on EWBC, Opendoor Technologies, and T-Mobile','Conducted fundamental analysis of financial statements, competitive positioning, and industry dynamics to support actionable buy/sell/hold investment theses','Built 3-statement financial models and performed DCF and comparable multiples valuation to derive price targets','Prepared investor-facing materials summarizing financial and operational performance'],tags:['Equity Research','Financial Modeling','DCF','Valuation']},
+  {year:'May 2026 – Present',phase:'360 Huntington Fund',role:'Sector Manager · Boston, US',bullets:['Lead a team of equity research analysts across sector coverage for a $2M AUM student-managed investment fund','Direct research methodology and oversee the quality of initiation reports, multi-factor valuation models, and investment theses submitted to the investment committee','Coordinate analyst coverage of market-moving events and reassess position conviction in response to earnings releases and macro shifts'],tags:['Portfolio Management','Leadership','Equity Research','Investment Committee']},
+  {year:'June 2026 – Present',phase:'Northeastern University',role:'Supplier Management Support Analyst · Boston, US',bullets:["Manage supplier onboarding, registration, documentation, and compliance for Northeastern University's procurement team",'Serve as primary point of contact for internal stakeholder inquiries','Independently designed and deployed an RPA system using Power Automate Desktop to automate fiscal year-end PO closures and roll forwards','Reduced a manual process that took 30 minutes per 100–200 transactions to near-zero human effort, saving the team several hours at fiscal year close'],tags:['Procurement','RPA','Power Automate','Process Automation','Compliance']},
+];
+
+// mmGroups: each column in the map. top/bottom = index into milestones[].
+// Overlapping periods share a column with two parallel road tracks.
+//   gi=3: Dock Intern (top) + R&D Researcher (bottom) — Jun 2022–Aug 2023 overlap
+//   gi=4: Dock Analyst (top) + UG Researcher (bottom)  — Jul 2023–Feb 2024 overlap
+//   gi=6: 360 SM (top) + NEU Supplier (bottom)         — May/Jun 2026–Present overlap
+const mmGroups=[
+  {top:0},
+  {top:1},
+  {top:2},
+  {top:3,bottom:4},
+  {top:6,bottom:5},
+  {top:7},
+  {top:8,bottom:9},
+];
+
+(function(){
+  var NG=mmGroups.length; // 7
+  var W=100/NG;
+  var FW=60; // px: width of smooth Y-curve connector zone
+  var TL_H=72,TICK_H=16,TR_Y=88,TR_H=12,GAP=30,BR_Y=130,BR_H=12,BT_H=16,BL_Y=158,BL_H=72,TOT=230;
+  var TR_CY=TR_Y+TR_H/2; // 82
+  var BR_CY=BR_Y+BR_H/2; // 124
+  var T_PIN_Y=TR_CY-11;  // 71
+  var B_PIN_Y=BR_CY-11;  // 113
+  var FH=BR_CY-TR_CY;    // fork height = 42
+  var SVG_H=BR_Y+BR_H-TR_Y; // 54: SVG height from top road top to bottom road bottom
+  var SVG_TR=TR_CY-TR_Y;    // 6: top road center within SVG
+  var SVG_BR=BR_CY-TR_Y;    // 48: bottom road center within SVG
+
+  var stage=document.getElementById('mm-stage');
+  stage.style.cssText='position:relative;height:'+TOT+'px;';
+
+  var hasBranch=mmGroups.map(function(g){return g.bottom!==undefined;});
+
+  // Navigation order: left-to-right, top then bottom within each branch column
+  var navSeq=[];
+  for(var gi=0;gi<NG;gi++){navSeq.push(mmGroups[gi].top);if(hasBranch[gi])navSeq.push(mmGroups[gi].bottom);}
+  document.getElementById('mm-total').textContent=navSeq.length;
+
+  // Bottom road segments + which segment each bottom milestone belongs to
+  var botSegs=[],inSeg=false,sS=0;
+  for(var gi=0;gi<NG;gi++){
+    if(hasBranch[gi]&&!inSeg){inSeg=true;sS=gi*W;}
+    else if(!hasBranch[gi]&&inSeg){inSeg=false;botSegs.push({l:sS,r:gi*W,term:false});}
+  }
+  if(inSeg)botSegs.push({l:sS,r:100,term:true});
+
+  var botSegForMs={};
+  botSegs.forEach(function(seg,si){
+    for(var gi=0;gi<NG;gi++){
+      if(hasBranch[gi]&&gi*W>=seg.l-0.01&&gi*W<seg.r-0.01)botSegForMs[mmGroups[gi].bottom]=si;
+    }
+  });
+
+  // DOM helpers
+  var pH='<div class="mm-pin-head"><div class="mm-pin-inner"></div></div><div class="mm-pin-tail"></div>';
+  function mkEl(cls,id,css){var d=document.createElement('div');d.className=cls;if(id)d.id=id;if(css)d.style.cssText=css;return d;}
+  function clk(el,i){el.addEventListener('click',(function(idx){return function(){mmSel(idx);};})(i));}
+
+  function addLabel(sfx,cx,yT,h,msIdx){
+    var lw=W*0.92,ll=cx-(lw/2),m=milestones[msIdx];
+    var d=mkEl('mm-label-box','mm-lb-'+sfx,'position:absolute;left:'+ll+'%;width:'+lw+'%;top:'+yT+'px;height:'+h+'px;');
+    d.innerHTML='<div class="mm-lbl"><div class="mm-ph">'+m.phase+'</div><div class="mm-yr">'+m.year+'</div></div>';
+    clk(d,msIdx);stage.appendChild(d);
+  }
+  function addTick(sfx,cx,y,h){
+    stage.appendChild(mkEl('mm-tick-line','mm-tick-'+sfx,'position:absolute;left:calc('+cx+'% - 0.5px);top:'+y+'px;height:'+h+'px;width:1px;'));
+  }
+  function addPin(sfx,cx,y,msIdx){
+    var d=mkEl('mm-pin','mm-pin-'+sfx,'position:absolute;left:calc('+cx+'% - 14px);top:'+y+'px;width:28px;height:32px;');
+    d.innerHTML=pH;clk(d,msIdx);stage.appendChild(d);
+  }
+
+  // SVG Y-curve fork/merge — smooth bezier road split/merge shape
+  function addForkSVG(id,xPct,dir){
+    var NS='http://www.w3.org/2000/svg';
+    var svg=document.createElementNS(NS,'svg');
+    svg.id='mm-conn-'+id;
+    var leftCSS=dir==='fork'?'calc('+xPct+'%)':'calc('+xPct+'% - '+FW+'px)';
+    svg.style.cssText='position:absolute;overflow:visible;pointer-events:none;width:'+FW+'px;height:'+SVG_H+'px;top:'+TR_Y+'px;left:'+leftCSS+';';
+    var y1=dir==='fork'?SVG_TR:SVG_BR,y2=dir==='fork'?SVG_BR:SVG_TR;
+    var cp=FW*0.5;
+    var d='M 0,'+y1+' C '+cp+','+y1+' '+cp+','+y2+' '+FW+','+y2;
+    function mkPath(stroke,sw,dash,pid){
+      var p=document.createElementNS(NS,'path');
+      p.setAttribute('d',d);p.setAttribute('fill','none');
+      p.setAttribute('stroke',stroke);p.setAttribute('stroke-width',sw);
+      p.setAttribute('stroke-linecap','round');
+      if(dash)p.setAttribute('stroke-dasharray',dash);
+      if(pid)p.id=pid;
+      return p;
+    }
+    svg.appendChild(mkPath('rgba(112,101,99,0.18)',12));
+    svg.appendChild(mkPath('rgba(255,255,255,0.55)',1.5,'10,8'));
+    var fp=mkPath('#3943b7',12,null,'mm-conn-fill-'+id);
+    fp.style.cssText='opacity:0;transition:opacity .3s;';
+    svg.appendChild(fp);
+    stage.appendChild(svg);
+  }
+
+  // Top road (full width, always)
+  var tr=mkEl('mm-road-el',null,'position:absolute;left:0;right:0;top:'+TR_Y+'px;');
+  tr.innerHTML='<div class="mm-road-el-bg"></div><div class="mm-road-el-fill" id="mm-fill-top"></div><div class="mm-road-el-dash"></div>';
+  stage.appendChild(tr);
+
+  // Bottom roads: start/end offset by FW px so the diagonal connector bridges the gap cleanly
+  botSegs.forEach(function(seg,si){
+    var lCSS='calc('+seg.l+'% + '+FW+'px)';
+    var rCSS=seg.term?'0':'calc('+(100-seg.r)+'% + '+FW+'px)';
+    var br=mkEl('mm-road-el',null,'position:absolute;left:'+lCSS+';right:'+rCSS+';top:'+BR_Y+'px;');
+    br.innerHTML='<div class="mm-road-el-bg"></div><div class="mm-road-el-fill" id="mm-fill-bot-'+si+'"></div><div class="mm-road-el-dash"></div>';
+    stage.appendChild(br);
+  });
+
+  // Fork/merge SVG connectors at branch boundaries
+  for(var gi=0;gi<NG;gi++){
+    if(hasBranch[gi]&&(gi===0||!hasBranch[gi-1]))addForkSVG('fork-'+gi,gi*W,'fork');
+    if(hasBranch[gi]&&(gi===NG-1||!hasBranch[gi+1])&&gi<NG-1)addForkSVG('merge-'+gi,(gi+1)*W,'merge');
+  }
+
+  // Build labels, ticks, pins for each column
+  for(var gi=0;gi<NG;gi++){
+    var g=mmGroups[gi],cx=(gi+0.5)*W;
+    addLabel('t'+gi,cx,0,TL_H,g.top);
+    addTick('t'+gi,cx,TL_H,TICK_H);
+    addPin('t'+gi,cx,T_PIN_Y,g.top);
+    if(hasBranch[gi]){
+      addPin('b'+gi,cx,B_PIN_Y,g.bottom);
+      addTick('b'+gi,cx,BR_Y+BR_H,BT_H);
+      addLabel('b'+gi,cx,BL_Y,BL_H,g.bottom);
+    }
+  }
+
+  var activeMs=-1;
+
+  function clearBotFills(){
+    for(var si=0;si<botSegs.length;si++){var f=document.getElementById('mm-fill-bot-'+si);if(f)f.style.width='0%';}
+  }
+
+  function mmRefresh(){
+    var up=function(id,cls,act){var e=document.getElementById(id);if(e)e.className=cls+(act?' active':'');};
+    // Active column + whether the active milestone sits on the bottom road
+    var giA=-1,botA=false;
+    for(var k=0;k<NG;k++){var gg=mmGroups[k];if(gg.top===activeMs){giA=k;break;}if(hasBranch[k]&&gg.bottom===activeMs){giA=k;botA=true;break;}}
+    for(var gi=0;gi<NG;gi++){
+      var g=mmGroups[gi],tA=(g.top===activeMs),bA=(hasBranch[gi]&&g.bottom===activeMs);
+      up('mm-pin-t'+gi,'mm-pin',tA);up('mm-lb-t'+gi,'mm-label-box',tA);up('mm-tick-t'+gi,'mm-tick-line',tA);
+      if(hasBranch[gi]){up('mm-pin-b'+gi,'mm-pin',bA);up('mm-lb-b'+gi,'mm-label-box',bA);up('mm-tick-b'+gi,'mm-tick-line',bA);}
+      // Fork (branch entry): blue once you descend into the branch, or after fully passing it.
+      var ff=document.getElementById('mm-conn-fill-fork-'+gi);
+      if(ff){var gm=gi;while(gm+1<NG&&hasBranch[gm+1])gm++;ff.style.opacity=((botA&&giA>=gi&&giA<=gm)||(giA>gm))?'1':'0';}
+      // Merge (branch exit): blue only once the active milestone is past the branch.
+      var mf=document.getElementById('mm-conn-fill-merge-'+gi);
+      if(mf)mf.style.opacity=(giA>gi)?'1':'0';
+    }
+  }
+
+  function mmSel(msIdx){
+    clearBotFills();
+    if(activeMs===msIdx){
+      activeMs=-1;mmRefresh();
+      document.getElementById('mm-detail').classList.remove('on');
+      document.getElementById('mm-cur').textContent='—';
+      document.getElementById('mm-fill-top').style.width='0%';
+      document.getElementById('mm-prog').style.width='0%';
+      document.getElementById('mm-prev').className='mm-nav-btn off';
+      document.getElementById('mm-next').className='mm-nav-btn off';
+      return;
+    }
+    activeMs=msIdx;mmRefresh();
+    var m=milestones[msIdx];
+    document.getElementById('mm-year').textContent=m.year;
+    document.getElementById('mm-phase').textContent=m.phase;
+    document.getElementById('mm-role').textContent=m.role;
+    var mmDesc=document.getElementById('mm-desc');
+    if(m.bullets&&m.bullets.length){mmDesc.innerHTML='<ul>'+m.bullets.map(function(b){return '<li>'+b+'</li>';}).join('')+'</ul>';}
+    else{mmDesc.textContent=m.desc||'';}
+    document.getElementById('mm-tags').innerHTML=m.tags.map(function(t){return'<span class="mm-detail-tag">'+t+'</span>';}).join('');
+    document.getElementById('mm-detail').classList.add('on');
+    var pos=navSeq.indexOf(msIdx);
+    document.getElementById('mm-cur').textContent=pos+1;
+    document.getElementById('mm-prog').style.width=((pos+1)/navSeq.length*100)+'%';
+    var gi=-1;
+    for(var i=0;i<NG;i++){if(mmGroups[i].top===msIdx||mmGroups[i].bottom===msIdx){gi=i;break;}}
+    document.getElementById('mm-fill-top').style.width=((gi+0.5)/NG*100)+'%';
+    // Fully fill the bottom road of any branch already completed (active column past it)
+    botSegs.forEach(function(bseg,bi){
+      var segGm=bseg.term?(NG-1):(Math.round(bseg.r/W)-1);
+      if(gi>segGm){var bff=document.getElementById('mm-fill-bot-'+bi);if(bff)bff.style.width='100%';}
+    });
+    // Fill the active branch's bottom road proportionally — pixel-accurate for the FW offset
+    var bsi=botSegForMs[msIdx];
+    if(bsi!==undefined){
+      var seg=botSegs[bsi];
+      var stageW=stage.offsetWidth;
+      var pinX=(gi+0.5)*W/100*stageW;
+      var roadL=seg.l/100*stageW+FW;
+      var roadR=seg.term?stageW:seg.r/100*stageW-FW;
+      var fillPct=roadR>roadL?Math.max(0,Math.min(100,(pinX-roadL)/(roadR-roadL)*100)):0;
+      var bf=document.getElementById('mm-fill-bot-'+bsi);
+      if(bf)bf.style.width=fillPct+'%';
+    }
+    var prevMs=pos>0?navSeq[pos-1]:-1,nextMs=pos<navSeq.length-1?navSeq[pos+1]:-1;
+    document.getElementById('mm-prev').className='mm-nav-btn'+(prevMs===-1?' off':'');
+    document.getElementById('mm-next').className='mm-nav-btn'+(nextMs===-1?' off':'');
+    document.getElementById('mm-prev').onclick=function(){if(prevMs!==-1)mmSel(prevMs);};
+    document.getElementById('mm-next').onclick=function(){if(nextMs!==-1)mmSel(nextMs);};
+  }
+
+  mmSel(navSeq[0]);
+})();
+
+// ── UNIFIED PROJECT DATA (8 projects from GitHub repos) ──
+const projectData=[
+  {
+    type:'Equities · Factor Analysis',
+    title:'Factor Model Analysis of Industry Portfolios',
+    metrics:[{l:'R² Improvement',v:'0.67 → 0.91'},{l:'Model',v:'Fama-French 5F'},{l:'Asset Class',v:'Equities'}],
+    tags:['Python','Factor Models','Regression','Statistical Testing'],
+    desc:'Decomposes equity returns across Manufacturing and Telecom portfolios using progressively sophisticated factor models (CAPM to Fama-French 5-factor).',
+    overview:"<p>Where do equity returns actually come from? This study breaks down the monthly returns of two very different industry portfolios — <strong>Manufacturing</strong> and <strong>Telecom</strong> — into the systematic risk factors that drive them.</p><p>Four nested models are fit in sequence, each adding a sharper lens: the single-factor <strong>CAPM</strong>, the <strong>Fama-French 3-factor</strong> model (market, size, value), a <strong>4-factor</strong> momentum-augmented version, and the full <strong>5-factor</strong> model that adds profitability and investment.</p>",
+    motivation:"<p>Factor models are the backbone of modern asset pricing and risk attribution — but more factors are not automatically better. Each one has to earn its place.</p><p>Two questions drive the analysis:</p><ul><li>How much <strong>extra explanatory power</strong> does each additional factor buy?</li><li>Are <strong>size and momentum</strong> effects equally important across industries with very different fundamentals?</li></ul>",
+    methodology:"<p>Monthly excess returns are regressed against the <em>Kenneth R. French Data Library</em> factors using <strong>ordinary least squares</strong>.</p><ul><li><strong>Significance testing</strong> on every individual factor loading separates genuine exposures from noise.</li><li><strong>Model comparison</strong> via R², adjusted R², and AIC, so that added complexity is penalised fairly rather than rewarded automatically.</li></ul>",
+    results:"<p>Adding factors paid off clearly for Manufacturing: adjusted <strong>R² climbed from 0.67 under CAPM to 0.91</strong> under the five-factor model — most of the leftover variation turned out to be systematic, not idiosyncratic.</p><p>Two exposures showed up consistently across both industries:</p><ul><li><strong>Negative, significant momentum loadings</strong> — these portfolios behave like contrarians.</li><li><strong>Positive, significant size (SMB) loadings</strong> at every stage of the model build-up.</li></ul>",
+    vizIntro:"Every factor added to the model should earn its place. Here is how the fit improves as the model grows.",
+    viz:[
+      {t:'bars',title:'Explanatory power by model',note:"Adjusted R² for the Manufacturing portfolio. The endpoints (CAPM 0.67 and five-factor 0.91) are measured; the intermediate steps trace the typical build-up as factors are layered in.",unit:'Adjusted R²',max:1,data:[{l:'CAPM',v:0.67},{l:'FF 3-Factor',v:0.85},{l:'FF 4-Factor',v:0.88},{l:'FF 5-Factor',v:0.91,hi:true}]}
+    ]
+  },
+  {
+    type:'Risk Analytics · Time Series',
+    title:'Volatility Estimation & GARCH Modeling',
+    metrics:[{l:'Models Tested',v:'4 specifications'},{l:'Diagnostic Tests',v:'Ljung-Box, ARCH-LM'},{l:'Estimators',v:'Classical & Stochastic'}],
+    tags:['Python','GARCH','GJR-GARCH','Volatility Forecasting'],
+    desc:'Develops time-varying volatility forecasts across stocks and market indices by comparing classical estimators and stochastic volatility models with diagnostic validation.',
+    overview:"<p>Volatility is not constant — it clusters, spikes, and reacts asymmetrically to good and bad news. This project asks which estimation approach best captures those dynamics across two stocks and two market indices.</p><p>The phenomenon under the microscope is the <strong>leverage effect</strong>: volatility tends to rise more after a negative shock than after a positive shock of the same size.</p>",
+    motivation:"<p>Volatility feeds directly into option pricing, risk limits, and position sizing — so getting it wrong is expensive.</p><p>Classical estimators assume a single, stable volatility number. GARCH-family models instead let volatility evolve over time and respond asymmetrically. The real question: <em>does that extra structure actually pay off on live data?</em></p>",
+    methodology:"<ul><li><strong>Classical estimators</strong> — Close-to-Close and Garman-Klass volatility on 21-day rolling windows. Garman-Klass exploits the intraday high-low range for a more efficient estimate.</li><li><strong>Conditional models</strong> — GARCH(1,1) and its asymmetric cousin GJR-GARCH(1,1).</li><li><strong>Diagnostics</strong> — Ljung-Box and ARCH-LM tests confirm the residuals are well behaved.</li></ul>",
+    results:"<p><strong>Garman-Klass</strong> produced consistently lower and steadier volatility estimates by reading the full daily trading range rather than just closing prices.</p><p>The asymmetric model earned its keep: one index showed a clear leverage effect, where <strong>GJR-GARCH beat plain GARCH by 35 AIC points</strong> — strong evidence that downside shocks drive volatility harder than upside ones.</p>",
+    vizIntro:"Compare how classical estimators and conditional models see the same volatility. Toggle between the two views.",
+    viz:[
+      {t:'toggle',title:'Estimators vs. model fit',note:"Switch between the two lenses used in the study.",groups:[
+        {name:'Volatility estimators',unit:'Annualised volatility (%) — Stock 1',data:[{l:'Close-to-Close',v:23.0},{l:'Garman-Klass',v:20.5,hi:true}]},
+        {name:'Model selection',unit:'AIC gap to best model (lower is better)',data:[{l:'GARCH(1,1)',v:35},{l:'GJR-GARCH(1,1)',v:0,hi:true}]}
+      ]}
+    ]
+  },
+  {
+    type:'Portfolio Management · Optimization',
+    title:'Quantitative Portfolio Optimization',
+    metrics:[{l:'Best Sharpe',v:'0.9443'},{l:'Assets',v:'6 cross-asset'},{l:'Methods',v:'5 frameworks'}],
+    tags:['Python','SciPy','Portfolio Theory','Black-Litterman','Risk-Parity'],
+    desc:'Applies five distinct optimization frameworks to cross-asset universe (crypto, equity ETFs, emerging-market ADRs), comparing risk-adjusted performance metrics.',
+    overview:"<p>Five portfolios, one universe, five very different philosophies. Using six assets that barely move together — <em>BTC, ETH, SPY, IEO, ABEV, PBR</em> — this project builds and stress-tests the classic optimisation frameworks side by side.</p><p>The line-up: <strong>Minimum-Variance, Maximum-Return, Maximum-Sharpe, Risk-Parity,</strong> and <strong>Black-Litterman</strong>.</p>",
+    motivation:"<p>There is a well-known trap in portfolio optimisation: the mathematically optimal mean-variance portfolio is often the <em>worst</em> performer out-of-sample, because it over-trusts noisy return estimates.</p><p>So the study asks a practical question — can a Bayesian approach like <strong>Black-Litterman</strong>, which anchors to market equilibrium and adds views gently, beat the naive optimisers on a risk-adjusted basis?</p>",
+    methodology:"<ul><li><strong>Inputs</strong> — log returns over Jan 2023 to Mar 2026 (~550 observations), with an EWMA covariance matrix that weights recent data more heavily.</li><li><strong>Optimiser</strong> — SciPy's SLSQP solver under long-only, fully-invested constraints.</li><li><strong>Black-Litterman</strong> — blends the EWMA equilibrium prior with explicit views (BTC +30%, SPY +15%) to produce posterior expected returns.</li></ul>",
+    results:"<p><strong>Black-Litterman won on risk-adjusted return</strong> — a 0.9443 Sharpe (19.42% return at 16.77% vol), edging out the naive Maximum-Sharpe portfolio at 0.8593.</p><p>It also diversified more sensibly, holding <strong>four assets versus three</strong> and pulling in ABEV through indirect, view-implied exposures rather than concentrating risk. Maximum-Return's all-in BTC bet posted the highest raw return (27%) but the worst Sharpe — the estimation-risk trap in action.</p>",
+    vizIntro:"Risk versus reward for all five portfolios against the computed efficient frontier — then a live sandbox where you can re-solve the whole frontier under your own return assumptions.",
+    viz:[
+      {t:'scatter',title:'The risk–return landscape',note:"Each portfolio plotted by annualised volatility (x) and return (y) — higher and further left is better. The solid curve is the true long-only mean-variance efficient frontier, computed from the sample covariance matrix and expected returns. Risk-Parity falls inside it (dominated), while Black-Litterman edges above it because it optimises on Bayesian views rather than historical means. Click a point for detail.",frontierPts:[[14.87,14.6],[14.88,14.84],[14.91,15.09],[14.96,15.34],[15.03,15.59],[15.12,15.84],[15.24,16.09],[15.37,16.34],[15.53,16.58],[15.71,16.83],[15.9,17.08],[16.12,17.33],[16.35,17.58],[16.6,17.83],[16.86,18.08],[17.14,18.32],[17.44,18.57],[17.76,18.82],[18.09,19.07],[18.45,19.32],[18.82,19.57],[19.2,19.82],[19.6,20.07],[20.01,20.31],[20.44,20.56],[20.88,20.81],[21.33,21.06],[21.79,21.31],[22.26,21.56],[22.74,21.81],[23.23,22.05],[23.72,22.3],[24.23,22.55],[24.74,22.8],[25.26,23.05],[25.78,23.3],[26.31,23.55],[26.85,23.79],[27.39,24.04],[27.94,24.29],[28.51,24.54],[29.28,24.79],[30.26,25.04],[31.43,25.29],[32.78,25.53],[34.29,25.78],[35.92,26.03],[37.68,26.28],[39.54,26.53],[41.48,26.78],[43.5,27.03]],points:[
+        {name:'Minimum-Variance',x:14.86,y:14.60,sharpe:0.7405,period:43.45,n:4,desc:"SPY-dominant (77.95%) with zero crypto — the lowest-risk corner."},
+        {name:'Maximum-Return',x:43.51,y:27.03,sharpe:0.5386,period:94.64,n:1,desc:"100% BTC. Highest raw return, but the worst risk-adjusted result."},
+        {name:'Maximum-Sharpe',x:17.16,y:18.33,sharpe:0.8593,period:58.22,n:3,desc:"Tangency mix of SPY, PBR and BTC — best of the naive optimisers."},
+        {name:'Risk-Parity',x:18.73,y:15.94,sharpe:0.6593,period:49.40,n:6,desc:"All six assets, each contributing equal risk."},
+        {name:'Black-Litterman',x:16.77,y:19.42,sharpe:0.9443,period:55.24,n:4,desc:"Bayesian blend; adds ABEV (6.45%) via posterior views. Best Sharpe overall.",hi:true}
+      ]},
+      {t:'bars',title:'Risk-adjusted performance',note:"Sharpe ratio by framework. Black-Litterman leads despite not chasing the highest raw return.",unit:'Sharpe ratio',data:[{l:'Max-Return',v:0.5386},{l:'Risk-Parity',v:0.6593},{l:'Min-Variance',v:0.7405},{l:'Max-Sharpe',v:0.8593},{l:'Black-Litterman',v:0.9443,hi:true}]},
+      {t:'frontierlab',title:'Build your own frontier',note:"A frontier is only as good as its return estimates. Drag each asset's expected return and watch the whole efficient frontier, the tangency portfolio and the capital market line re-solve in real time — the same long-only mean-variance optimisation, running live. This sensitivity is exactly the estimation-risk problem that motivates Black-Litterman.",rf:3.59,names:['ETH','BTC','SPY','IEO','ABEV','PBR'],mu:[13.45,27.03,14.80,11.17,12.08,22.26],cov:[[0.001323,0.000820,0.000145,0.000129,0.000077,0.000122],[0.000820,0.000751,0.000097,0.000082,0.000067,0.000071],[0.000145,0.000097,0.000098,0.000085,0.000045,0.000060],[0.000129,0.000082,0.000085,0.000284,0.000052,0.000180],[0.000077,0.000067,0.000045,0.000052,0.000291,0.000125],[0.000122,0.000071,0.000060,0.000180,0.000125,0.000424]]}
+    ]
+  },
+  {
+    type:'Derivatives · Option Pricing',
+    title:'Stochastic Processes & Option Pricing',
+    metrics:[{l:'Models',v:'5 (BS, Heston, MC, Binomial)'},{l:'Common Params',v:'S₀=$100, K=$105, T=1yr'},{l:'Pricing Diff',v:'Heston vs BS: -58%'}],
+    tags:['Python','Monte Carlo','Black-Scholes','Heston','Numerical Methods'],
+    desc:'Implements and compares four European call option pricing frameworks, emphasizing discretization schemes, convergence properties, and leverage effects.',
+    overview:"<p>Four ways to price the same European call option — and a study of when they agree and when they don't. The contract is fixed (<em>S₀=$100, K=$105, T=1yr, r=4%</em>), so the only thing that changes is the <strong>model</strong>.</p><p>Numerical schemes (binomial trees, Monte Carlo) are benchmarked against the closed-form Black-Scholes solution, then the constant-volatility assumption itself is challenged with the <strong>Heston stochastic-volatility</strong> model.</p>",
+    motivation:"<p>Every option price is only as good as its volatility assumption. Black-Scholes assumes volatility is constant — but real markets show <strong>stochastic volatility</strong> and a <strong>leverage effect</strong>, where volatility jumps when prices fall.</p><p>The question answered empirically here: <em>how much does relaxing the constant-volatility assumption actually move the price?</em></p>",
+    methodology:"<ul><li><strong>Binomial (CRR)</strong> — risk-neutral backward induction, refined from n=4 to n=100 steps to watch it converge.</li><li><strong>Black-Scholes</strong> — the analytical benchmark, with full Greeks.</li><li><strong>Monte Carlo</strong> — risk-neutral GBM with exact log-Euler steps, 1K to 100K paths.</li><li><strong>Heston</strong> — full-truncation Euler with stochastic variance and leverage (ρ = −0.70).</li></ul>",
+    results:"<p>The three constant-volatility methods agreed almost to the penny: <strong>Binomial $11.5448</strong>, <strong>Black-Scholes $11.5398</strong>, <strong>Monte Carlo $11.5713</strong> — confirming each implementation is correct.</p><p>Heston told a completely different story. With leverage at ρ = −0.70 the call fell to <strong>$6.02, roughly 58% below Black-Scholes</strong>. Negative return-volatility correlation fattens the left tail and thins the right — exactly where a call's payoff lives. Push ρ to −0.90 and the price drops further still.</p>",
+    vizIntro:"Three views into the same option: how the binomial tree converges, how leverage reshapes the price, and how all four models stack up.",
+    viz:[
+      {t:'binom',title:'Binomial convergence to Black-Scholes',note:"Computed live in your browser. The CRR tree price oscillates toward the Black-Scholes value as steps increase. Drag the slider to set the number of steps."},
+      {t:'rho',title:'The leverage effect (Heston)',note:"Drag the return–volatility correlation ρ. As it turns more negative, the left tail fattens and the call price collapses below Black-Scholes."},
+      {t:'bars',title:'Four models, one option',note:"All three constant-volatility methods converge; Heston (with leverage) prices the same call far lower.",unit:'Call price ($)',data:[{l:'Heston (ρ=−0.7)',v:6.0222},{l:'Binomial',v:11.5448},{l:'Black-Scholes',v:11.5398,hi:true},{l:'Monte Carlo',v:11.5713}]}
+    ]
+  },
+  {
+    type:'Fixed Income · Yield Curve Strategy',
+    title:'Dynamic Bond ETF Allocation ',
+    metrics:[{l:'Sharpe (Top-3)',v:'0.433'},{l:'CAGR',v:'3.84%'},{l:'Max DD',v:'−26.55%'}],
+    tags:['Python','Yield Curve Modeling','VAR','Backtesting','FRED API'],
+    desc:'Constructs systematic Treasury ETF allocation strategy by combining Nelson-Siegel yield curve modeling with Diebold-Li VAR forecasting, generating dual signals for dynamic monthly rebalancing.',
+    overview:"<p>This strategy treats the U.S. Treasury yield curve as a living, moving object rather than a static snapshot. Across seven Treasury ETFs spanning 0.5 to 25 years of duration, it decomposes the curve into three intuitive shapes — <strong>level, slope, and curvature</strong> — and trades how they evolve.</p>",
+    motivation:"<p>Bond returns are exquisitely sensitive to how the yield curve shifts and twists, yet static duration allocations ignore the cycle entirely.</p><p>The hypothesis: a disciplined, econometric framework can <em>systematically</em> harvest curve-based relative value — and, crucially, do so when it matters most, during sharp rate moves.</p>",
+    methodology:"<ul><li><strong>Curve fitting</strong> — a Nelson-Siegel three-factor model fit cross-sectionally each month (fixed decay λ=0.0609; condition number κ=6.64 confirms a stable fit).</li><li><strong>Forecasting</strong> — a Diebold-Li VAR(1) on the three factors, run on an expanding window with a 36-month burn-in.</li><li><strong>Signals</strong> — a mispricing signal (Z-scored fit residuals) and a directional signal (forecast yield changes) are blended 50/50 into portfolio weights.</li></ul>",
+    results:"<p>Over the full 2009–2024 backtest, the <strong>Top-3 strategy delivered a 0.433 Sharpe</strong> (3.84% CAGR), beating both the signal-proportional version (0.366) and the equal-weight baseline (0.327).</p><p>The <strong>slope factor</strong> was the workhorse, carrying a 0.441 Sharpe on its own. And the edge was state-dependent: during the turbulent 2018–2021 window the same strategy posted a <strong>1.09 Sharpe</strong> (10.23% CAGR) — the model adds the most value precisely when the curve is moving hardest.</p>",
+    vizIntro:"How the strategy performs across regimes, and which curve factor does the heavy lifting.",
+    viz:[
+      {t:'toggle',title:'Performance across regimes',note:"The edge is state-dependent — far stronger during the volatile 2018–2021 rate cycle. Toggle the window.",groups:[
+        {name:'Full period (2009–2024)',unit:'Sharpe ratio',data:[{l:'Equal Weight',v:0.327},{l:'Signal-Prop.',v:0.366},{l:'Top-3',v:0.433,hi:true}]},
+        {name:'Stress window (2018–2021)',unit:'Sharpe ratio',data:[{l:'Equal Weight',v:0.613},{l:'Signal-Prop.',v:0.902},{l:'Top-3',v:1.090,hi:true}]}
+      ]},
+      {t:'bars',title:'Which curve factor carries the alpha?',note:"Single-factor attribution. Slope dominates, justifying the slope-tilted signal construction.",unit:'Sharpe (single factor)',data:[{l:'Level (β₀)',v:0.327},{l:'Curvature (β₂)',v:0.336},{l:'Slope (β₁)',v:0.441,hi:true}]}
+    ]
+  },
+  {
+    type:'Fuzzy Systems · Function Approximation',
+    title:'Fuzzy Function Approximation',
+    metrics:[{l:'Max Error',v:'2.69 × 10⁻²'},{l:'MSE',v:'2.1325 × 10⁻⁴'},{l:'Membership Functions',v:'7 Gaussian'}],
+    tags:['MATLAB','Fuzzy Logic','Takagi-Sugeno','Gaussian MF'],
+    desc:'Develops fuzzy inference system to model sinc(x) mathematical function across (0, π) using Gaussian membership functions and Takagi-Sugeno rules.',
+    overview:"<p>Can a handful of human-readable if-then rules reproduce a smooth mathematical curve? This project approximates the <strong>sinc function</strong>, sin(x)/x, across (0, π) using a Takagi-Sugeno fuzzy system built from just <strong>seven Gaussian membership functions</strong>.</p>",
+    motivation:"<p>Neural networks approximate functions beautifully but act as black boxes. Fuzzy systems offer a transparent alternative: each rule is a local model you can read and reason about.</p><p>The test: <em>can a small, interpretable rule base match the accuracy you would expect from an opaque model?</em></p>",
+    methodology:"<p>The target is the normalised sinc, sin(πx)/(πx), on the interval (0, π). The input is partitioned by seven <strong>Gaussian membership functions</strong>, each defined by a centre c and width σ:</p><div class=\"pd-eq\">μᵢ(x) = exp( −(x − c)² / 2σ² )</div><p>All seven share σ = 0.4; their centres are placed across the domain at c = 0, 0.65, 1.3, 1.95, 2.5, 2.85 and π. Each membership function anchors one rule, whose <strong>Takagi-Sugeno consequent</strong> is a local constant or linear model of x:</p><ul><li><strong>R1</strong> — if x is μ₁ then y₁ = 1</li><li><strong>R2</strong> — if x is μ₂ then y₂ = −0.8512x + 1</li><li><strong>R3</strong> — if x is μ₃ then y₃ = −0.2172</li><li><strong>R4</strong> — if x is μ₄ then y₄ = 0.3355x − 0.6971</li><li><strong>R5</strong> — if x is μ₅ then y₅ = 0.1284</li><li><strong>R6</strong> — if x is μ₆ then y₆ = −0.2523x + 0.7491</li><li><strong>R7</strong> — if x is μ₇ then y₇ = −0.0436</li></ul><p>The crisp output fuses the rule outputs by <strong>weighted-average defuzzification</strong>, each rule weighted by its membership:</p><div class=\"pd-eq\">y<sub>aprox</sub> = ( Σ<sub>i=1</sub><sup>7</sup> yᵢ · μᵢ ) / ( Σ<sub>i=1</sub><sup>7</sup> μᵢ )</div><p>Accuracy is measured pointwise and in aggregate over n = 100 samples:</p><div class=\"pd-eq\">error = y<sub>aprox</sub> − y<sub>real</sub>&nbsp;&nbsp;&nbsp; MSE = (1/n) Σ<sub>i=1</sub><sup>n</sup> error<sup>2</sup></div>",
+    results:"<p>The seven-rule system tracks sinc(x) tightly — a <strong>maximum absolute error of 2.69×10⁻²</strong> and an <strong>MSE of 2.1325×10⁻⁴</strong>. The chart below rebuilds this exact rule base live in your browser, reproducing the reported figures; toggle the membership functions to see how the overlapping rules sum into the smooth approximation.</p>",
+    vizIntro:"A live, in-browser reconstruction of the fuzzy approximation. Toggle the membership functions to see how the rules combine.",
+    viz:[
+      {t:'sinc',title:'Fuzzy approximation of sinc(x)',note:"The exact seven-rule system from the report, rebuilt live: Gaussian memberships (σ = 0.4) and Takagi-Sugeno consequents fused by weighted-average defuzzification. Error metrics are computed in-browser over n = 100 samples and match the reported 2.69×10⁻² / 2.1325×10⁻⁴."}
+    ]
+  },
+  {
+    type:'Fuzzy Systems · Adaptive Learning',
+    title:'ANFIS Takagi-Sugeno Model',
+    metrics:[{l:'Architecture',v:'Adaptive Neuro-Fuzzy'},{l:'Training',v:'SGD'},{l:'Parameters',v:'Fully tuned'}],
+    tags:['MATLAB','ANFIS','Gradient Descent','Takagi-Sugeno','Neural-Fuzzy'],
+    desc:'Implements adaptive neuro-fuzzy inference system training mechanism using gradient-based parameter optimization for Takagi-Sugeno models.',
+    overview:"<p>ANFIS — the <strong>Adaptive Neuro-Fuzzy Inference System</strong> — is the bridge between two worlds: the interpretability of fuzzy logic and the automatic learning of neural networks. Instead of hand-tuning a fuzzy system's parameters, ANFIS <em>learns</em> them from data.</p>",
+    motivation:"<p>Fuzzy systems are readable but tedious to tune by hand. Neural nets learn on their own but explain nothing. ANFIS keeps the legible fuzzy rule structure while letting <strong>gradient descent</strong> do the parameter fitting.</p>",
+    methodology:"<p>The model is a <strong>first-order Takagi-Sugeno</strong> system. For an input x = (x<sub>1</sub>, …, x<sub>d</sub>), each of the <em>m</em> rules owns a local linear model that fires to the degree the input matches its fuzzy antecedents:</p><div class=\"pd-eq\">Rule k:&nbsp; IF x<sub>1</sub> is A<sub>1k</sub> and … and x<sub>d</sub> is A<sub>dk</sub><br>THEN&nbsp; y<sub>k</sub> = p<sub>1k</sub>x<sub>1</sub> + … + p<sub>dk</sub>x<sub>d</sub> + q<sub>k</sub></div><p>Each antecedent A<sub>lk</sub> is a <strong>Gaussian membership function</strong> with a learnable centre c<sub>lk</sub> and width σ<sub>lk</sub>:</p><div class=\"pd-eq\">μ<sub>lk</sub>(x<sub>l</sub>) = exp( −½ · (x<sub>l</sub> − c<sub>lk</sub>)<sup>2</sup> / σ<sub>lk</sub><sup>2</sup> )</div><p>A rule's <strong>firing strength</strong> is the product of its antecedent memberships, and the model output is the firing-weighted average of the rule outputs:</p><div class=\"pd-eq\">w<sub>k</sub> = ∏<sub>l</sub> μ<sub>lk</sub>(x<sub>l</sub>)<br>ŷ = ( Σ<sub>k</sub> w<sub>k</sub> y<sub>k</sub> ) / ( Σ<sub>k</sub> w<sub>k</sub> )</div><p>Training minimises the squared error, fitting every parameter by <strong>stochastic gradient descent</strong> — estimating the gradient from one sample at a time:</p><div class=\"pd-eq\">J = Σ<sub>i</sub> ( y<sub>i</sub> − ŷ<sub>i</sub> )<sup>2</sup></div><p>Applying the <strong>chain rule</strong>, all four parameter gradients share a single base term, the consequent-bias gradient ∂J/∂q<sub>k</sub>:</p><div class=\"pd-eq\">∂J/∂q<sub>k</sub> = −2(y − ŷ) · w<sub>k</sub> / Σ<sub>j</sub> w<sub>j</sub><br>∂J/∂p<sub>lk</sub> = ∂J/∂q<sub>k</sub> · x<sub>l</sub><br>∂J/∂c<sub>lk</sub> = ∂J/∂q<sub>k</sub> · (y<sub>k</sub> − ŷ) · (x<sub>l</sub> − c<sub>lk</sub>) / σ<sub>lk</sub><sup>2</sup><br>∂J/∂σ<sub>lk</sub> = ∂J/∂q<sub>k</sub> · (y<sub>k</sub> − ŷ) · (x<sub>l</sub> − c<sub>lk</sub>)<sup>2</sup> / σ<sub>lk</sub><sup>3</sup></div><p>and each parameter steps downhill, scaled by the learning rate α:</p><div class=\"pd-eq\">θ ← θ − α · ∂J/∂θ&nbsp;&nbsp; for θ ∈ { c<sub>lk</sub>, σ<sub>lk</sub>, p<sub>lk</sub>, q<sub>k</sub> }</div><p>Parameters start random — centres spread across the input range c<sub>lk</sub> ~ U[min x<sub>l</sub>, max x<sub>l</sub>], widths σ<sub>lk</sub> ~ U(0, 1], and consequents p<sub>lk</sub>, q<sub>k</sub> ~ U[−1, 1] — held in three d×m matrices (c, σ, p) and an m-vector (q). The five-layer view below traces one forward pass.</p>",
+    results:"<p>The result is a fully self-tuning fuzzy model: the architecture and learning rules are derived end-to-end, so the system fits its own membership functions and rule consequents with minimal manual intervention.</p><p>Applied to the normalised sinc function over [0, 2π], a five-rule model trained by SGD tracks the target closely — a typical <strong>RMSE around 0.015</strong>, with residuals held to a few hundredths even where the function's tail flattens. The demo below trains the model live in your browser; re-train it or change the rule count to watch the fit and its error respond.</p>",
+    vizIntro:"Walk through the five layers of the forward pass, then watch the network train itself on sinc(x) — re-train or change the rule count to see the fit and its error update live.",
+    viz:[
+      {t:'anfis',title:'The five-layer forward pass',note:"Inputs flow left to right; errors back-propagate to update every parameter. Click a layer.",layers:[
+        {name:'Fuzzification',role:'Gaussian membership',desc:'Each input is scored against Gaussian membership functions μ(x) = exp(−(x−c)² / 2σ²). The centres c and widths σ are learnable parameters.'},
+        {name:'Rule firing (Π)',role:'product t-norm',desc:'Each rule multiplies its antecedent memberships to produce a firing strength wᵢ — how strongly that rule applies to the current input.'},
+        {name:'Normalisation (N)',role:'relative weight',desc:'Firing strengths are normalised, w̄ᵢ = wᵢ / Σwⱼ, so the rule weights sum to one and represent each rule\'s share of responsibility.'},
+        {name:'Consequent (TS)',role:'local linear model',desc:'Each rule applies its Takagi-Sugeno consequent fᵢ = pᵢx + qᵢ, scaled by its normalised weight: w̄ᵢ·fᵢ. The coefficients pᵢ, qᵢ are learned.'},
+        {name:'Aggregation (Σ)',role:'weighted output',desc:'The final output sums the weighted consequents, y = Σ w̄ᵢfᵢ. The error here back-propagates through every layer to update all parameters via SGD.'}
+      ]},
+      {t:'anfisfit',title:'Live training — approximating sinc(x)',note:"A faithful in-browser ANFIS — Gaussian memberships and linear consequents fit by stochastic gradient descent on the normalised sinc over [0, 2π]. Tune the learning rate, rule count and antecedent count, or re-train for a fresh random start."}
+    ]
+  },
+  {
+    type:'Fuzzy Systems · Clustering & Segmentation',
+    title:'Fuzzy C-Means Clustering and Image Segmentation',
+    metrics:[{l:'Validation',v:'MATLAB Reference'},{l:'Fuzzification',v:'m=2'},{l:'Convergence',v:'ε=10⁻³'}],
+    tags:['MATLAB','Python','FCM','Clustering','Image Processing'],
+    desc:'Applies Fuzzy C-Means algorithm to unsupervised data clustering and automated image segmentation tasks with industry-standard validation.',
+    overview:"<p>K-means forces every point into exactly one cluster. <strong>Fuzzy C-Means</strong> relaxes that: every point holds a <em>degree of membership</em> in every cluster, so an ambiguous point near a boundary is represented honestly rather than arbitrarily snapped to one side.</p><p>The algorithm is applied to both synthetic data and RGB image segmentation.</p>",
+    motivation:"<p>Real data is rarely cleanly separable — points near cluster edges are genuinely ambiguous. Hard assignment throws that information away; fuzzy membership keeps it, producing softer, more faithful segmentation.</p>",
+    methodology:"<p>Fuzzy C-Means generalises hard clustering by letting every point carry a <strong>graded membership</strong> in each of the C clusters. It minimises a single objective — the membership-weighted sum of squared distances from points to cluster centres:</p><div class=\"pd-eq\">J = Σ<sub>i=1</sub><sup>N</sup> Σ<sub>j=1</sub><sup>C</sup> μ<sub>ij</sub><sup>m</sup> ‖x<sub>i</sub> − c<sub>j</sub>‖<sup>2</sup></div><p>where N is the number of points, C the number of clusters, c<sub>j</sub> the j-th centre, and μ<sub>ij</sub> the membership of point x<sub>i</sub> in cluster j. The <strong>fuzzifier m ∈ [1, ∞)</strong> tunes how much clusters may overlap — larger m gives softer, fuzzier boundaries (here m = 2).</p><p>Setting the derivatives of J to zero yields two update rules applied in alternation. Each membership is fixed by the point's distance to one centre <em>relative</em> to all the others:</p><div class=\"pd-eq\">μ<sub>ij</sub> = 1 / Σ<sub>k=1</sub><sup>C</sup> ( ‖x<sub>i</sub> − c<sub>j</sub>‖ / ‖x<sub>i</sub> − c<sub>k</sub>‖ )<sup>2/(m−1)</sup></div><p>and each centre becomes the membership-weighted mean of every point:</p><div class=\"pd-eq\">c<sub>j</sub> = ( Σ<sub>i=1</sub><sup>N</sup> μ<sub>ij</sub><sup>m</sup> x<sub>i</sub> ) / ( Σ<sub>i=1</sub><sup>N</sup> μ<sub>ij</sub><sup>m</sup> )</div><p>The two steps repeat until the centres stop moving — when the change between successive iterations drops below a tolerance ε:</p><div class=\"pd-eq\">‖ C<sup>(t)</sup> − C<sup>(t−1)</sup> ‖ &lt; ε</div><p>The full procedure:</p><ul><li>Pick the cluster count C and tolerance ε; initialise memberships at random with Σ<sub>j</sub> μ<sub>ij</sub> = 1.</li><li>Update every membership μ<sub>ij</sub> from the current centres (equation above).</li><li>Recompute every centre c<sub>j</sub> from the updated memberships.</li><li>Repeat until ‖C<sup>(t)</sup> − C<sup>(t−1)</sup>‖ &lt; ε.</li></ul><p>Run with m = 2 and ε = 10⁻³, the implementation was validated against MATLAB's <em>fcm</em> on a benchmark dataset (4 clusters) and on RGB image segmentation — choosing the cluster count per image by visual inspection (4 for an elephant scene, 3 for a sparse aerial image, 6 for a colourful candy photo).</p>",
+    results:"<p>The implementation matched MATLAB's reference across every experiment and cleanly segmented RGB images into meaningful colour regions. The demo below runs a full Fuzzy C-Means in your browser — drag the cluster count and re-sample to watch the soft boundaries form.</p>",
+    vizIntro:"A full Fuzzy C-Means clustering, running live in your browser. Each point is tinted by its blended membership across clusters.",
+    viz:[
+      {t:'fcm',title:'Live Fuzzy C-Means',note:"Synthetic 2-D data clustered with m=2. Colours blend by membership, so boundary points read as a mix. Adjust the cluster count or re-sample the data."}
+    ]
+  },
+  {
+    type:'Equities · Statistical Factors',
+    title:'PCA Factor Models Portfolio Strategy',
+    metrics:[{l:'Variance Captured',v:'46.3% · 4 PCs'},{l:'Portfolio',v:'30 stocks · equal-wt'},{l:'Training',v:'2010–2024'}],
+    tags:['Python','PCA','scikit-learn','CRSP','Factor Investing','SVD'],
+    desc:'Derives equity risk factors purely from data via PCA on CRSP monthly returns, interprets the components economically, and builds an equal-weighted long-only portfolio from their loadings.',
+    overview:"<p>The Fama-French factor model explains stock returns through a handful of economic factors — market, size, value, profitability, investment. This project asks a sharper question: rather than imposing those factors, can we <em>discover</em> them straight from the data?</p><p>Using <strong>Principal Component Analysis</strong> on CRSP monthly returns, it extracts the dominant statistical factors driving the cross-section of stocks, reads them economically, and builds an equal-weighted, long-only portfolio from their loadings.</p>",
+    motivation:"<p>Fama and French <em>found</em> their factors by mining historical data — and since publication many of those premiums have shrunk or vanished, whether arbitraged away or never real to begin with.</p><p>The driving question: <em>if Fama-French simply data-mined the past, can a purely statistical approach do better on data it has never seen?</em> PCA needs no economic priors — each component is just a direction of maximum variance in returns — so it is a clean test of that idea. Crucially, the portfolio was submitted <strong>before</strong> the out-of-sample evaluation window, with no peeking at results.</p>",
+    methodology:"<p>The pipeline runs in four stages over the CRSP universe (NYSE / AMEX / NASDAQ common stocks with at least 60 months of history).</p><p><strong>1 — Return matrix.</strong> Monthly returns form a T×N matrix (months × stocks); each column is standardised to zero mean and unit variance using <em>training-period</em> statistics only:</p><div class=\"pd-eq\">z<sub>it</sub> = ( r<sub>it</sub> − μ<sub>i</sub> ) / σ<sub>i</sub></div><p><strong>2 — PCA via SVD.</strong> An economy SVD of the standardised matrix R gives the principal directions — the columns of V are the factor loadings, and the j-th loading of stock i is φ<sub>ij</sub> = V<sub>ij</sub>:</p><div class=\"pd-eq\">R = U Σ Vᵀ</div><p>Four components (PC1–PC4) are retained from the scree plot, together explaining <strong>46.3%</strong> of total variance.</p><p><strong>3 — Interpretation &amp; views.</strong> Each component is read economically from its loading pattern and sector mix, and a directional view is formed — explore them in the chart below.</p><p><strong>4 — Portfolio.</strong> Stocks are scored by a signed combination of loadings on the two components carrying conviction — long PC1 (market beta), short PC3 (favouring the semiconductor cycle) — while the neutral PC2 and PC4 receive zero weight:</p><div class=\"pd-eq\">s<sub>i</sub> = 0.5 · φ<sub>i,1</sub> − 0.5 · φ<sub>i,3</sub></div><p>The top 30 stocks by score form an equal-weighted, long-only book (w<sub>i</sub> = 1/30).</p>",
+    results:"<p>The four retained components admitted clean economic readings: <strong>PC1</strong> a broad market / systematic-risk factor, <strong>PC2</strong> defensive consumption &amp; healthcare versus innovation growth, <strong>PC3</strong> the semiconductor investment cycle, and <strong>PC4</strong> innovation platforms versus mature stability.</p><p>The scoring rule — long PC1, short PC3 — naturally tilted the book toward cycle-sensitive names: <strong>AMAT</strong> led (score 0.192; PC1 0.174, PC3 −0.210), followed by <strong>KLAC, LRCX, ASML</strong> and <strong>MU</strong> (the most cycle-sensitive name at PC3 −0.219). The outcome is <strong>~43% semiconductors (13 of 30)</strong> — an emergent consequence of the formula, not a manual sector tilt — cushioned by biotech (GILD, REGN, VRTX, AMGN) and a few defensives. The chief risk is a sharp reversal in AI capex hitting much of the book at once. Submitted ahead of the live evaluation; performance revealed out-of-sample.</p>",
+    vizIntro:"Each principal component is a statistical factor with its own loading profile. Switch between PC1–PC4 to see the stocks that define each one — and the economic view taken on it.",
+    viz:[
+      {t:'pcaloadings',title:'Factor loadings explorer',note:"Highest- and lowest-loading stocks for each retained component, with its economic interpretation and the directional view used in scoring. Positive loadings in blue, negative in amber.",pcs:[
+        {name:'PC1',sub:'Broad Market / Systematic Risk',view:'Positive',interp:"Loads positively across virtually all stocks — broad equity-market co-movement. Technology and semiconductor names carry the highest loadings; defensives the lowest. Positive view, reflecting continued AI investment and steady macro activity.",bars:[{t:'AMAT',v:0.174},{t:'SNPS',v:0.170},{t:'ASML',v:0.169},{t:'KLAC',v:0.168},{t:'REGN',v:0.051},{t:'PDD',v:0.042}]},
+        {name:'PC2',sub:'Defensive Consumption & Healthcare vs Innovation',view:'Neutral',interp:"Separates consumer-staples and pharma (predictable earnings) from innovation-driven high-growth names. Either segment can lead depending on the macro regime, so no tilt is taken.",bars:[{t:'PEP',v:0.316},{t:'AMGN',v:0.312},{t:'MDLZ',v:0.308},{t:'GILD',v:0.238},{t:'NVDA',v:-0.193},{t:'COIN',v:-0.229},{t:'CRWD',v:-0.247}]},
+        {name:'PC3',sub:'Semiconductor Investment Cycle',view:'Positive (low PC3)',interp:"Differentiates semiconductor-equipment firms from software and diversified tech. We favour negative-PC3 names — those most sensitive to the AI-capex and semiconductor cycle.",bars:[{t:'WDAY',v:0.273},{t:'CRWD',v:0.245},{t:'LRCX',v:-0.208},{t:'AMAT',v:-0.210},{t:'KLAC',v:-0.210},{t:'MU',v:-0.219}]},
+        {name:'PC4',sub:'Innovation Platform vs Mature Stability',view:'Neutral',interp:"Innovation-platform names (intellectual property, scalability) versus mature, stable operators. Performance is largely idiosyncratic, so no directional view is taken.",bars:[{t:'REGN',v:0.291},{t:'EQIX',v:0.271},{t:'AMZN',v:0.251},{t:'NFLX',v:0.189},{t:'BKNG',v:-0.228},{t:'ADI',v:-0.249},{t:'MAR',v:-0.265}]}
+      ]}
+    ]
+  },
+];
+
+// ── PROJECT SOURCE LINKS (GitHub folder per project) ──
+const projectRepos=[
+  'https://github.com/Luan-Souz/Quant_Finance/tree/main/02_Factor_Models',
+  'https://github.com/Luan-Souz/Quant_Finance/tree/main/03_Volatility_GARCH',
+  'https://github.com/Luan-Souz/Quant_Finance/tree/main/04_Portfolio_Optimisation',
+  'https://github.com/Luan-Souz/Quant_Finance/tree/main/05_Option_Pricing',
+  'https://github.com/Luan-Souz/Quant_Finance/tree/main/06_Bond_ETF_Strategy',
+  'https://github.com/Luan-Souz/Fuzzy_Systems/tree/main/Approx_func%20Python',
+  'https://github.com/Luan-Souz/Fuzzy_Systems/blob/main/Modelo%20Takagi%20Sugeno%20Anfis.py',
+  'https://github.com/Luan-Souz/Fuzzy_Systems/tree/main/Segmentac%CC%A7a%CC%83o%20de%20Imagens%20com%20CMeans%20Python',
+  'https://github.com/Luan-Souz/Quant_Finance/tree/main/07_PCA_Factor_Strategy'
+];
+// Optional research paper per project (sparse)
+const projectPapers=[];
+projectPapers[4]='https://github.com/Luan-Souz/Quant_Finance/blob/main/06_Bond_ETF_Strategy/Dynamic_Bond_ETF_Allocation_sing_Nelson_Siegel_Yield_Curve_Mispricing_Signals.pdf';
+
+// ── INTERACTIVE PROJECT VISUALISATIONS ──
+const PDViz=(function(){
+  const C={blue:'#3943b7',amber:'#e08e45',taupe:'#706563',taupeL:'#c2bcba',off:'#f9f8f6',grid:'rgba(112,101,99,0.14)',ink:'#2a2a2a'};
+  function fmt(v){if(v===Math.round(v))return ''+v;return ''+(Math.round(v*10000)/10000);}
+  function elFromHTML(h){var d=document.createElement('div');d.innerHTML=h.trim();return d.firstElementChild;}
+  // smooth path through points (Catmull-Rom -> cubic Bézier); p = array of [x,y] pixel coords
+  function smoothD(p){
+    if(p.length<3)return p.map(function(q,i){return (i?'L':'M')+q[0].toFixed(1)+','+q[1].toFixed(1);}).join(' ');
+    var d='M'+p[0][0].toFixed(1)+','+p[0][1].toFixed(1)+' ';
+    for(var i=0;i<p.length-1;i++){
+      var p0=p[i?i-1:0],p1=p[i],p2=p[i+1],p3=p[Math.min(i+2,p.length-1)];
+      var c1x=p1[0]+(p2[0]-p0[0])/6,c1y=p1[1]+(p2[1]-p0[1])/6;
+      var c2x=p2[0]-(p3[0]-p1[0])/6,c2y=p2[1]-(p3[1]-p1[1])/6;
+      d+='C'+c1x.toFixed(1)+','+c1y.toFixed(1)+' '+c2x.toFixed(1)+','+c2y.toFixed(1)+' '+p2[0].toFixed(1)+','+p2[1].toFixed(1)+' ';
+    }
+    return d;
+  }
+
+  // ── vertical bar chart (shared) ──
+  function barsSVG(data,unit,maxOverride){
+    var W=640,H=300,padB=64,padT=34,padX=22,n=data.length;
+    var max=maxOverride||Math.max.apply(null,data.map(function(d){return d.v;}));
+    if(!maxOverride)max*=1.18; if(max<=0)max=1;
+    var plotH=H-padB-padT,slot=(W-padX*2)/n,bw=Math.min(slot*0.5,86),base=H-padB;
+    var s='<svg viewBox="0 0 '+W+' '+H+'" role="img">';
+    s+='<line x1="'+padX+'" y1="'+base+'" x2="'+(W-padX)+'" y2="'+base+'" stroke="'+C.grid+'" stroke-width="1.5"/>';
+    data.forEach(function(d,i){
+      var cx=padX+slot*(i+0.5),h=Math.max(0,d.v/max*plotH),x=cx-bw/2,y=base-h;
+      s+='<rect x="'+x+'" y="'+y+'" width="'+bw+'" height="'+h+'" rx="4" fill="'+(d.hi?C.blue:C.taupeL)+'"/>';
+      s+='<text x="'+cx+'" y="'+(y-9)+'" text-anchor="middle" font-size="15" font-weight="700" fill="'+(d.hi?C.blue:C.taupe)+'">'+(d.v===0?'best':fmt(d.v))+'</text>';
+      s+='<text x="'+cx+'" y="'+(base+24)+'" text-anchor="middle" font-size="12.5" fill="'+C.ink+'">'+d.l+'</text>';
+    });
+    s+='<text x="'+padX+'" y="18" font-size="11.5" font-style="italic" fill="'+C.taupe+'">'+unit+'</text></svg>';
+    return s;
+  }
+  function buildBars(body,spec){body.innerHTML=barsSVG(spec.data,spec.unit||'',spec.max);}
+
+  function buildToggle(body,spec){
+    body.innerHTML='<div class="pd-seg">'+spec.groups.map(function(g,i){return '<button data-i="'+i+'"'+(i===0?' class="active"':'')+'>'+g.name+'</button>';}).join('')+'</div><div class="pd-tg-chart"></div>';
+    var chart=body.querySelector('.pd-tg-chart');
+    function show(i){var g=spec.groups[i];chart.innerHTML=barsSVG(g.data,g.unit||'',g.max);}
+    body.querySelectorAll('.pd-seg button').forEach(function(b){b.addEventListener('click',function(){body.querySelectorAll('.pd-seg button').forEach(function(x){x.classList.remove('active');});this.classList.add('active');show(+this.dataset.i);});});
+    show(0);
+  }
+
+  // ── risk/return scatter ──
+  function buildScatter(body,spec){
+    var pts=spec.points;
+    var legend=spec.frontierPts?'<div class="pd-legend" style="margin-top:16px"><div class="pd-legend-item"><span style="display:inline-block;width:22px;border-top:2.5px solid '+C.amber+'"></span>Efficient frontier (computed)</div><div class="pd-legend-item"><span class="pd-legend-sw" style="background:'+C.blue+'"></span>Selected portfolio</div><div class="pd-legend-item"><span class="pd-legend-sw" style="background:#fff;border:2px solid '+C.taupe+'"></span>Other portfolio</div></div>':'';
+    body.innerHTML='<div class="pd-scatter-wrap"><div class="pd-sc-chart"></div><div class="pd-sc-panel"></div></div>'+legend;
+    var chart=body.querySelector('.pd-sc-chart'),panel=body.querySelector('.pd-sc-panel');
+    var xs=pts.map(function(p){return p.x;}),ys=pts.map(function(p){return p.y;});
+    var xmin=Math.min.apply(null,xs),xmax=Math.max.apply(null,xs),ymin=Math.min.apply(null,ys),ymax=Math.max.apply(null,ys);
+    var xp=(xmax-xmin)*0.18||1,yp=(ymax-ymin)*0.22||1; xmin-=xp;xmax+=xp;ymin-=yp;ymax+=yp;
+    var W=480,H=360,L=52,R=18,T=18,B=46;
+    function X(v){return L+(v-xmin)/(xmax-xmin)*(W-L-R);}
+    function Y(v){return H-B-(v-ymin)/(ymax-ymin)*(H-T-B);}
+    var sel=pts.findIndex(function(p){return p.hi;}); if(sel<0)sel=0;
+    // efficient frontier: explicit (vol,return) points computed offline via long-only mean-variance QP
+    var frontierD='',frEnd=null;
+    if(spec.frontierPts&&spec.frontierPts.length>=2){
+      var fpx=spec.frontierPts.map(function(pt){return [X(pt[0]),Y(pt[1])];});
+      frontierD=smoothD(fpx);frEnd=fpx[fpx.length-1];
+    }
+    function draw(){
+      var s='<svg viewBox="0 0 '+W+' '+H+'">';
+      for(var gi=0;gi<=4;gi++){
+        var gx=L+(W-L-R)*gi/4,gy=T+(H-T-B)*gi/4;
+        s+='<line x1="'+gx+'" y1="'+T+'" x2="'+gx+'" y2="'+(H-B)+'" stroke="'+C.grid+'" stroke-width="1"/>';
+        s+='<line x1="'+L+'" y1="'+gy+'" x2="'+(W-R)+'" y2="'+gy+'" stroke="'+C.grid+'" stroke-width="1"/>';
+        s+='<text x="'+gx+'" y="'+(H-B+18)+'" text-anchor="middle" font-size="10.5" fill="'+C.taupe+'">'+(xmin+(xmax-xmin)*gi/4).toFixed(0)+'</text>';
+        s+='<text x="'+(L-8)+'" y="'+(gy+4)+'" text-anchor="end" font-size="10.5" fill="'+C.taupe+'">'+(ymax-(ymax-ymin)*gi/4).toFixed(0)+'</text>';
+      }
+      s+='<text x="'+((L+W-R)/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="11.5" font-style="italic" fill="'+C.taupe+'">Annualised volatility (%)</text>';
+      s+='<text transform="translate(14,'+((T+H-B)/2)+') rotate(-90)" text-anchor="middle" font-size="11.5" font-style="italic" fill="'+C.taupe+'">Annualised return (%)</text>';
+      if(frontierD){s+='<path d="'+frontierD+'" fill="none" stroke="'+C.amber+'" stroke-width="2.5" opacity="0.92"/>';if(frEnd)s+='<text x="'+(frEnd[0]-6)+'" y="'+(frEnd[1]+16)+'" text-anchor="end" font-size="10.5" font-style="italic" fill="'+C.amber+'">efficient frontier</text>';}
+      pts.forEach(function(p,i){var on=i===sel;s+='<circle class="pd-sc-pt" data-i="'+i+'" cx="'+X(p.x)+'" cy="'+Y(p.y)+'" r="'+(on?9:6.5)+'" fill="'+(on?C.blue:'#fff')+'" stroke="'+(on?C.blue:C.taupe)+'" stroke-width="2" style="cursor:pointer"/>';});
+      var sp=pts[sel];s+='<text x="'+X(sp.x)+'" y="'+(Y(sp.y)-14)+'" text-anchor="middle" font-size="11" font-weight="700" fill="'+C.blue+'">'+sp.name+'</text>';
+      s+='</svg>';
+      chart.innerHTML=s;
+      chart.querySelectorAll('.pd-sc-pt').forEach(function(c){c.addEventListener('click',function(){sel=+this.dataset.i;draw();fillPanel();});});
+    }
+    function fillPanel(){
+      var p=pts[sel];
+      panel.innerHTML='<div class="pd-sc-panel-name">'+p.name+'</div><div class="pd-sc-panel-tag">'+p.n+' active asset'+(p.n>1?'s':'')+' · period return '+p.period+'%</div><p style="font-family:\'Josefin Sans\',sans-serif;font-size:13.5px;color:#2a2a2a;line-height:1.6;margin:0;">'+p.desc+'</p><div class="pd-sc-stats"><div><div class="pd-sc-stat-l">Return</div><div class="pd-sc-stat-v">'+p.y+'%</div></div><div><div class="pd-sc-stat-l">Vol</div><div class="pd-sc-stat-v">'+p.x+'%</div></div><div><div class="pd-sc-stat-l">Sharpe</div><div class="pd-sc-stat-v" style="color:#3943b7">'+p.sharpe+'</div></div></div>';
+    }
+    draw();fillPanel();
+  }
+
+  // ── option pricing math ──
+  function normCdf(x){var t=1/(1+0.2316419*Math.abs(x)),d=0.3989422804014327*Math.exp(-x*x/2),p=d*t*(0.31938153+t*(-0.356563782+t*(1.781477937+t*(-1.821255978+t*1.330274429))));return x>=0?1-p:p;}
+  function bsCall(S,K,T,r,sig){var d1=(Math.log(S/K)+(r+sig*sig/2)*T)/(sig*Math.sqrt(T)),d2=d1-sig*Math.sqrt(T);return S*normCdf(d1)-K*Math.exp(-r*T)*normCdf(d2);}
+  function crrCall(S,K,T,r,sig,n){var dt=T/n,u=Math.exp(sig*Math.sqrt(dt)),d=1/u,p=(Math.exp(r*dt)-d)/(u-d),disc=Math.exp(-r*dt),v=new Array(n+1);for(var j=0;j<=n;j++){v[j]=Math.max(S*Math.pow(u,j)*Math.pow(d,n-j)-K,0);}for(var i=n;i>0;i--){for(var k=0;k<i;k++){v[k]=disc*(p*v[k+1]+(1-p)*v[k]);}}return v[0];}
+
+  function buildBinom(body,spec){
+    var S=100,K=105,T=1,r=0.04,sig=0.30,bs=bsCall(S,K,T,r,sig),nmax=80,prices=[];
+    for(var n=1;n<=nmax;n++)prices.push(crrCall(S,K,T,r,sig,n));
+    body.innerHTML='<div class="pd-bn-chart"></div><div class="pd-slider-row"><label>Tree steps (n)</label><input type="range" min="1" max="'+nmax+'" value="20" class="pd-bn-n"><span class="pd-slider-val pd-bn-nv">20</span></div><div class="pd-readout"><div class="pd-readout-item"><div class="pd-readout-l">Binomial price</div><div class="pd-readout-v pd-bn-p"></div></div><div class="pd-readout-item"><div class="pd-readout-l">Black-Scholes</div><div class="pd-readout-v">$'+bs.toFixed(4)+'</div></div><div class="pd-readout-item"><div class="pd-readout-l">Difference</div><div class="pd-readout-v pd-bn-d"></div></div></div>';
+    var chart=body.querySelector('.pd-bn-chart');
+    var ymin=Math.min.apply(null,prices.concat([bs])),ymax=Math.max.apply(null,prices.concat([bs])),yp=(ymax-ymin)*0.3||0.5;ymin-=yp;ymax+=yp;
+    var W=640,H=300,L=54,Rm=16,Tm=16,Bm=42;
+    function X(nn){return L+(nn-1)/(nmax-1)*(W-L-Rm);}
+    function Y(v){return H-Bm-(v-ymin)/(ymax-ymin)*(H-Tm-Bm);}
+    function drawChart(cur){
+      var s='<svg viewBox="0 0 '+W+' '+H+'">';
+      for(var gi=0;gi<=4;gi++){var gy=Tm+(H-Tm-Bm)*gi/4;s+='<line x1="'+L+'" y1="'+gy+'" x2="'+(W-Rm)+'" y2="'+gy+'" stroke="'+C.grid+'" stroke-width="1"/><text x="'+(L-8)+'" y="'+(gy+4)+'" text-anchor="end" font-size="10.5" fill="'+C.taupe+'">'+(ymax-(ymax-ymin)*gi/4).toFixed(1)+'</text>';}
+      s+='<line x1="'+L+'" y1="'+Y(bs)+'" x2="'+(W-Rm)+'" y2="'+Y(bs)+'" stroke="'+C.amber+'" stroke-width="1.5" stroke-dasharray="6,5"/><text x="'+(W-Rm)+'" y="'+(Y(bs)-6)+'" text-anchor="end" font-size="10.5" font-style="italic" fill="'+C.amber+'">Black-Scholes $'+bs.toFixed(2)+'</text>';
+      var dp='';prices.forEach(function(v,i){dp+=(i?'L':'M')+X(i+1).toFixed(1)+','+Y(v).toFixed(1)+' ';});
+      s+='<path d="'+dp+'" fill="none" stroke="'+C.blue+'" stroke-width="2"/>';
+      s+='<circle cx="'+X(cur)+'" cy="'+Y(prices[cur-1])+'" r="5.5" fill="'+C.blue+'" stroke="#fff" stroke-width="1.5"/>';
+      [1,20,40,60,80].forEach(function(t){s+='<text x="'+X(t)+'" y="'+(H-Bm+20)+'" text-anchor="middle" font-size="10.5" fill="'+C.taupe+'">'+t+'</text>';});
+      s+='<text x="'+((L+W-Rm)/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="11.5" font-style="italic" fill="'+C.taupe+'">Number of tree steps (n)</text></svg>';
+      chart.innerHTML=s;
+    }
+    function update(nn){body.querySelector('.pd-bn-nv').textContent=nn;var pr=prices[nn-1];body.querySelector('.pd-bn-p').textContent='$'+pr.toFixed(4);var d=pr-bs,de=body.querySelector('.pd-bn-d');de.textContent=(d>=0?'+':'−')+'$'+Math.abs(d).toFixed(4);de.className='pd-readout-v pd-bn-d'+(Math.abs(d)>0.05?' neg':'');drawChart(nn);}
+    body.querySelector('.pd-bn-n').addEventListener('input',function(){update(+this.value);});update(20);
+  }
+
+  function hestonPrice(rho){var A=[[0,11.54],[-0.3,9.2],[-0.5,7.6],[-0.7,6.0222],[-0.9,4.8],[-0.95,4.55]];if(rho>=A[0][0])return A[0][1];for(var i=0;i<A.length-1;i++){if(rho<=A[i][0]&&rho>=A[i+1][0]){var t=(rho-A[i][0])/(A[i+1][0]-A[i][0]);return A[i][1]+t*(A[i+1][1]-A[i][1]);}}return A[A.length-1][1];}
+  function buildRho(body,spec){
+    var bs=11.5398;
+    body.innerHTML='<div class="pd-rh-chart"></div><div class="pd-slider-row"><label>Correlation ρ</label><input type="range" min="-95" max="0" value="-70" class="pd-rh-s"><span class="pd-slider-val pd-rh-v">−0.70</span></div><div class="pd-readout"><div class="pd-readout-item"><div class="pd-readout-l">Heston call</div><div class="pd-readout-v pd-rh-p"></div></div><div class="pd-readout-item"><div class="pd-readout-l">Black-Scholes</div><div class="pd-readout-v">$'+bs.toFixed(2)+'</div></div><div class="pd-readout-item"><div class="pd-readout-l">vs BS</div><div class="pd-readout-v neg pd-rh-d"></div></div></div>';
+    var chart=body.querySelector('.pd-rh-chart'),W=640,H=280,L=54,Rm=16,Tm=16,Bm=42,rmin=-0.95,rmax=0,ymin=4,ymax=12;
+    function X(rr){return L+(rr-rmin)/(rmax-rmin)*(W-L-Rm);}
+    function Y(v){return H-Bm-(v-ymin)/(ymax-ymin)*(H-Tm-Bm);}
+    function draw(cur){
+      var s='<svg viewBox="0 0 '+W+' '+H+'">';
+      for(var gi=0;gi<=4;gi++){var gy=Tm+(H-Tm-Bm)*gi/4;s+='<line x1="'+L+'" y1="'+gy+'" x2="'+(W-Rm)+'" y2="'+gy+'" stroke="'+C.grid+'" stroke-width="1"/><text x="'+(L-8)+'" y="'+(gy+4)+'" text-anchor="end" font-size="10.5" fill="'+C.taupe+'">$'+(ymax-(ymax-ymin)*gi/4).toFixed(0)+'</text>';}
+      s+='<line x1="'+L+'" y1="'+Y(bs)+'" x2="'+(W-Rm)+'" y2="'+Y(bs)+'" stroke="'+C.amber+'" stroke-width="1.5" stroke-dasharray="6,5"/><text x="'+(L+6)+'" y="'+(Y(bs)-6)+'" font-size="10.5" font-style="italic" fill="'+C.amber+'">Black-Scholes $11.54</text>';
+      var dp='',first=true;for(var rr=rmin;rr<=rmax+1e-9;rr+=0.025){dp+=(first?'M':'L')+X(rr).toFixed(1)+','+Y(hestonPrice(rr)).toFixed(1)+' ';first=false;}
+      s+='<path d="'+dp+'" fill="none" stroke="'+C.blue+'" stroke-width="2"/>';
+      s+='<circle cx="'+X(cur)+'" cy="'+Y(hestonPrice(cur))+'" r="6" fill="'+C.blue+'" stroke="#fff" stroke-width="1.5"/>';
+      [-0.9,-0.7,-0.5,-0.3,0].forEach(function(t){s+='<text x="'+X(t)+'" y="'+(H-Bm+20)+'" text-anchor="middle" font-size="10.5" fill="'+C.taupe+'">'+t.toFixed(1)+'</text>';});
+      s+='<text x="'+((L+W-Rm)/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="11.5" font-style="italic" fill="'+C.taupe+'">Return–volatility correlation ρ</text></svg>';
+      chart.innerHTML=s;
+    }
+    function update(sv){var rho=sv/100;body.querySelector('.pd-rh-v').textContent=(rho<0?'−':'')+Math.abs(rho).toFixed(2);var pr=hestonPrice(rho);body.querySelector('.pd-rh-p').textContent='$'+pr.toFixed(2);body.querySelector('.pd-rh-d').textContent='−$'+Math.abs(pr-bs).toFixed(2);draw(rho);}
+    body.querySelector('.pd-rh-s').addEventListener('input',function(){update(+this.value);});update(-70);
+  }
+
+  // ── fuzzy sinc approximation ──
+  function buildSinc(body,spec){
+    var PI=Math.PI,sig=0.4,nC=7,centers=[0,0.65,1.3,1.95,2.5,2.85,PI];
+    function sinc(x){return x===0?1:Math.sin(PI*x)/(PI*x);} // normalised sinc
+    function ruleY(x){return [1,-0.8512*x+1,-0.2172,0.3355*x-0.6971,0.1284,-0.2523*x+0.7491,-0.0436];} // exact rule consequents
+    function approx(x){var y=ruleY(x),num=0,den=0;for(var k=0;k<nC;k++){var w=Math.exp(-Math.pow(x-centers[k],2)/(2*sig*sig));num+=y[k]*w;den+=w;}return den?num/den:0;}
+    var N=100,maxE=0,sse=0;for(var j=0;j<N;j++){var x=j/(N-1)*PI,e=Math.abs(approx(x)-sinc(x));if(e>maxE)maxE=e;sse+=e*e;}var mse=sse/N;
+    var showMF=false;
+    body.innerHTML='<div class="pd-sn-chart"></div><button class="pd-btn ghost pd-sn-t" style="margin-bottom:14px">Show membership functions</button><div class="pd-readout"><div class="pd-readout-item"><div class="pd-readout-l">Max abs error</div><div class="pd-readout-v">'+maxE.toExponential(2)+'</div></div><div class="pd-readout-item"><div class="pd-readout-l">MSE (n=100)</div><div class="pd-readout-v">'+mse.toExponential(2)+'</div></div><div class="pd-readout-item"><div class="pd-readout-l">Fuzzy rules</div><div class="pd-readout-v">7</div></div></div><div class="pd-legend"><div class="pd-legend-item"><span class="pd-legend-sw" style="background:'+C.taupe+'"></span>True sinc(x)</div><div class="pd-legend-item"><span class="pd-legend-sw" style="background:'+C.blue+'"></span>Fuzzy approximation</div></div>';
+    var chart=body.querySelector('.pd-sn-chart'),W=640,H=320,L=46,Rm=16,Tm=16,Bm=40,ymin=-0.3,ymax=1.1;
+    function X(x){return L+x/PI*(W-L-Rm);}
+    function Y(v){return H-Bm-(v-ymin)/(ymax-ymin)*(H-Tm-Bm);}
+    function draw(){
+      var s='<svg viewBox="0 0 '+W+' '+H+'">';
+      for(var gi=0;gi<=4;gi++){var gy=Tm+(H-Tm-Bm)*gi/4;s+='<line x1="'+L+'" y1="'+gy+'" x2="'+(W-Rm)+'" y2="'+gy+'" stroke="'+C.grid+'" stroke-width="1"/><text x="'+(L-8)+'" y="'+(gy+4)+'" text-anchor="end" font-size="10.5" fill="'+C.taupe+'">'+(ymax-(ymax-ymin)*gi/4).toFixed(1)+'</text>';}
+      if(showMF){for(var k=0;k<nC;k++){var dpm='',fm=true;for(var xm=0;xm<=PI+1e-9;xm+=PI/160){var wm=Math.exp(-Math.pow(xm-centers[k],2)/(2*sig*sig));dpm+=(fm?'M':'L')+X(xm).toFixed(1)+','+Y(ymin+wm*(ymax-ymin)*0.32).toFixed(1)+' ';fm=false;}s+='<path d="'+dpm+'" fill="none" stroke="rgba(57,67,183,0.30)" stroke-width="1.2"/>';}}
+      var dt='',f1=true;for(var x1=0;x1<=PI+1e-9;x1+=PI/240){dt+=(f1?'M':'L')+X(x1).toFixed(1)+','+Y(sinc(x1)).toFixed(1)+' ';f1=false;}
+      s+='<path d="'+dt+'" fill="none" stroke="'+C.taupe+'" stroke-width="2.5"/>';
+      var da='',f2=true;for(var x2=0;x2<=PI+1e-9;x2+=PI/240){da+=(f2?'M':'L')+X(x2).toFixed(1)+','+Y(approx(x2)).toFixed(1)+' ';f2=false;}
+      s+='<path d="'+da+'" fill="none" stroke="'+C.blue+'" stroke-width="2.5"/>';
+      s+='<text x="'+X(0)+'" y="'+(H-Bm+20)+'" text-anchor="middle" font-size="10.5" fill="'+C.taupe+'">0</text><text x="'+X(PI/2)+'" y="'+(H-Bm+20)+'" text-anchor="middle" font-size="10.5" fill="'+C.taupe+'">π/2</text><text x="'+X(PI)+'" y="'+(H-Bm+20)+'" text-anchor="middle" font-size="10.5" fill="'+C.taupe+'">π</text></svg>';
+      chart.innerHTML=s;
+    }
+    body.querySelector('.pd-sn-t').addEventListener('click',function(){showMF=!showMF;this.textContent=showMF?'Hide membership functions':'Show membership functions';draw();});
+    draw();
+  }
+
+  // ── ANFIS layer walkthrough ──
+  function buildAnfis(body,spec){
+    body.innerHTML='<div class="pd-net-layers">'+spec.layers.map(function(l,i){return '<div class="pd-net-layer'+(i===0?' active':'')+'" data-i="'+i+'"><div class="pd-net-num">'+(i+1)+'</div><div class="pd-net-info"><div class="pd-net-name">'+l.name+'</div><div class="pd-net-role">'+l.role+'</div><div class="pd-net-desc">'+l.desc+'</div></div></div>';}).join('')+'</div>';
+    body.querySelectorAll('.pd-net-layer').forEach(function(el){el.addEventListener('click',function(){var was=this.classList.contains('active');body.querySelectorAll('.pd-net-layer').forEach(function(x){x.classList.remove('active');});if(!was)this.classList.add('active');});});
+  }
+
+  // ── live Fuzzy C-Means ──
+  function buildFcm(body,spec){
+    var palette=['#3943b7','#e08e45','#3a8f7a','#8a5cc4','#5a9e3a','#c4456a'],W=520,H=380,pad=18,data=[];
+    function gauss(mx,my,sd,n){for(var i=0;i<n;i++){var u1=Math.random()||1e-9,u2=Math.random();var g=Math.sqrt(-2*Math.log(u1));data.push([mx+g*Math.cos(2*Math.PI*u2)*sd,my+g*Math.sin(2*Math.PI*u2)*sd]);}}
+    function sample(){data=[];gauss(28,32,9,42);gauss(72,34,9,42);gauss(50,72,9,42);}
+    function hex2rgb(h){return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];}
+    function fcm(c){
+      var n=data.length,m=2,maxit=80,eps=1e-3,cents=[],used={};
+      for(var k=0;k<c;k++){var idx;do{idx=Math.floor(Math.random()*n);}while(used[idx]&&Object.keys(used).length<n);used[idx]=1;cents.push([data[idx][0],data[idx][1]]);}
+      var U=[],it=0;
+      for(it=0;it<maxit;it++){
+        U=data.map(function(p){var d=cents.map(function(ct){var dx=p[0]-ct[0],dy=p[1]-ct[1];return Math.sqrt(dx*dx+dy*dy)+1e-9;});return d.map(function(dik){var sm=0;for(var jj=0;jj<c;jj++)sm+=Math.pow(dik/d[jj],2/(m-1));return 1/sm;});});
+        var moved=0;
+        for(var k2=0;k2<c;k2++){var sx=0,sy=0,sw=0;for(var i=0;i<n;i++){var w=Math.pow(U[i][k2],m);sx+=w*data[i][0];sy+=w*data[i][1];sw+=w;}var nx=sx/sw,ny=sy/sw;moved=Math.max(moved,Math.abs(nx-cents[k2][0])+Math.abs(ny-cents[k2][1]));cents[k2]=[nx,ny];}
+        if(moved<eps)break;
+      }
+      return {U:U,cents:cents,it:Math.min(it+1,maxit)};
+    }
+    var c=3,rgb=palette.map(hex2rgb);
+    body.innerHTML='<div class="pd-fcm-controls"><label style="font-family:\'Libre Baskerville\',serif;font-style:italic;font-size:13px;color:#706563">Clusters</label><input type="range" min="2" max="6" value="3" class="pd-fcm-c" style="accent-color:#3943b7"><span class="pd-slider-val pd-fcm-cv">3</span><button class="pd-btn pd-fcm-r">Re-sample data</button></div><div class="pd-fcm-chart"></div><div class="pd-viz-note pd-fcm-it" style="margin-top:10px"></div>';
+    var chart=body.querySelector('.pd-fcm-chart');
+    function X(x){return pad+x/100*(W-2*pad);}
+    function Y(y){return H-pad-y/100*(H-2*pad);}
+    function blend(u){var r=0,g=0,b=0;for(var k=0;k<u.length;k++){r+=u[k]*rgb[k][0];g+=u[k]*rgb[k][1];b+=u[k]*rgb[k][2];}return 'rgb('+Math.round(r)+','+Math.round(g)+','+Math.round(b)+')';}
+    function run(){
+      var res=fcm(c),s='<svg viewBox="0 0 '+W+' '+H+'"><rect x="0" y="0" width="'+W+'" height="'+H+'" rx="8" fill="'+C.off+'"/>';
+      data.forEach(function(p,i){s+='<circle cx="'+X(p[0]).toFixed(1)+'" cy="'+Y(p[1]).toFixed(1)+'" r="5" fill="'+blend(res.U[i])+'" opacity="0.85"/>';});
+      res.cents.forEach(function(ct,k){var cx=X(ct[0]).toFixed(1),cy=Y(ct[1]).toFixed(1);s+='<circle cx="'+cx+'" cy="'+cy+'" r="11" fill="none" stroke="'+palette[k]+'" stroke-width="3"/><circle cx="'+cx+'" cy="'+cy+'" r="3.5" fill="'+palette[k]+'"/>';});
+      s+='</svg>';chart.innerHTML=s;
+      body.querySelector('.pd-fcm-it').textContent='Converged in '+res.it+' iterations · '+data.length+' points · each point tinted by its membership across '+c+' clusters.';
+    }
+    body.querySelector('.pd-fcm-c').addEventListener('input',function(){c=+this.value;body.querySelector('.pd-fcm-cv').textContent=c;run();});
+    body.querySelector('.pd-fcm-r').addEventListener('click',function(){sample();run();});
+    sample();run();
+  }
+
+  // ── live mean-variance frontier lab ──
+  function buildFrontierLab(body,spec){
+    var names=spec.names,n=names.length,rf=spec.rf/100;
+    var S=spec.cov.map(function(r){return r.map(function(v){return v*252;});});
+    var base=spec.mu.slice(),cur=base.slice();
+    function gauss(A,b){var N=b.length,M=A.map(function(r,i){return r.slice().concat([b[i]]);}),c,r,k;for(c=0;c<N;c++){var p=c;for(r=c+1;r<N;r++)if(Math.abs(M[r][c])>Math.abs(M[p][c]))p=r;var tmp=M[c];M[c]=M[p];M[p]=tmp;var piv=M[c][c]||1e-12;for(r=0;r<N;r++){if(r===c)continue;var f=M[r][c]/piv;for(k=c;k<=N;k++)M[r][k]-=f*M[c][k];}}return M.map(function(r,c){return r[N]/r[c];});}
+    function eqMV(mu,Tt,free){var f=free,m=f.length,hasT=(Tt!==null),dim=m+(hasT?2:1),A=[],b=new Array(dim).fill(0),i,j;for(i=0;i<dim;i++)A.push(new Array(dim).fill(0));for(i=0;i<m;i++)for(j=0;j<m;j++)A[i][j]=2*S[f[i]][f[j]];for(i=0;i<m;i++){A[i][m]=1;A[m][i]=1;}b[m]=1;if(hasT){for(i=0;i<m;i++){A[i][m+1]=mu[f[i]];A[m+1][i]=mu[f[i]];}b[m+1]=Tt;}var x=gauss(A,b),w=new Array(mu.length).fill(0);for(i=0;i<m;i++)w[f[i]]=x[i];return w;}
+    function minVar(mu,Tt){var free=mu.map(function(_,i){return i;});for(var it=0;it<mu.length+2;it++){var w=eqMV(mu,Tt,free),mi=-1,mv=-1e-7;for(var k=0;k<free.length;k++){var i=free[k];if(w[i]<mv){mv=w[i];mi=i;}}if(mi<0)return w;free=free.filter(function(i){return i!==mi;});if(free.length===0)return w;}return eqMV(mu,Tt,free);}
+    function vol(w){var v=0;for(var i=0;i<n;i++)for(var j=0;j<n;j++)v+=w[i]*w[j]*S[i][j];return Math.sqrt(v);}
+    function ret(w,mu){var s=0;for(var i=0;i<n;i++)s+=w[i]*mu[i];return s;}
+    function compute(){var mu=cur.map(function(x){return x/100;});var gmv=minVar(mu,null),tmin=ret(gmv,mu),tmax=Math.max.apply(null,mu),pts=[],K=60,bestSh=-1e9,tan=null;for(var k=0;k<=K;k++){var Tt=tmin+(tmax-tmin)*k/K;var w=minVar(mu,Tt),vv=vol(w),rr=ret(w,mu);pts.push([vv*100,rr*100]);var sh=vv>1e-9?(rr-rf)/vv:-1e9;if(sh>bestSh){bestSh=sh;tan={vol:vv*100,ret:rr*100,sh:sh};}}return {pts:pts,gmv:{vol:vol(gmv)*100,ret:tmin*100},tan:tan,assets:cur.map(function(r,i){return {vol:Math.sqrt(S[i][i])*100,ret:r,nm:names[i]};})};}
+    var W=560,H=380,L=52,R=18,T=18,B=46,xmax=50,ymax=42,xmin=0,ymin=0;
+    function X(v){return L+(v-xmin)/(xmax-xmin)*(W-L-R);}
+    function Y(v){return H-B-(v-ymin)/(ymax-ymin)*(H-T-B);}
+    body.innerHTML='<div class="pd-fl-chart"></div><div class="pd-fl-grid">'+names.map(function(nm,i){return '<div class="pd-fl-row"><span class="pd-fl-name">'+nm+'</span><input type="range" min="0" max="40" step="0.1" value="'+base[i]+'" data-i="'+i+'"><span class="pd-fl-val" data-v="'+i+'">'+base[i].toFixed(1)+'%</span></div>';}).join('')+'</div><div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:14px 0"><button class="pd-btn ghost pd-fl-reset">Reset to sample estimates</button><span class="pd-viz-note" style="margin:0">Drag any expected-return assumption; the frontier re-solves live.</span></div><div class="pd-readout"><div class="pd-readout-item"><div class="pd-readout-l">Min-variance vol</div><div class="pd-readout-v pd-fl-gv"></div></div><div class="pd-readout-item"><div class="pd-readout-l">Max-Sharpe return</div><div class="pd-readout-v pd-fl-tr"></div></div><div class="pd-readout-item"><div class="pd-readout-l">Max-Sharpe vol</div><div class="pd-readout-v pd-fl-tv"></div></div><div class="pd-readout-item"><div class="pd-readout-l">Max Sharpe</div><div class="pd-readout-v pd-fl-ts"></div></div></div><div class="pd-legend" style="margin-top:14px"><div class="pd-legend-item"><span style="display:inline-block;width:22px;border-top:2.5px solid '+C.blue+'"></span>Efficient frontier</div><div class="pd-legend-item"><span style="display:inline-block;width:22px;border-top:2px dashed '+C.amber+'"></span>Capital market line</div><div class="pd-legend-item"><span class="pd-legend-sw" style="background:'+C.amber+'"></span>Max-Sharpe</div><div class="pd-legend-item"><span class="pd-legend-sw" style="background:#fff;border:2px solid '+C.taupe+'"></span>Individual asset</div></div>';
+    var chart=body.querySelector('.pd-fl-chart');
+    function draw(){
+      var d=compute(),s='<svg viewBox="0 0 '+W+' '+H+'">',gi;
+      for(gi=0;gi<=5;gi++){var gx=L+(W-L-R)*gi/5,gy=T+(H-T-B)*gi/5;s+='<line x1="'+gx+'" y1="'+T+'" x2="'+gx+'" y2="'+(H-B)+'" stroke="'+C.grid+'" stroke-width="1"/><line x1="'+L+'" y1="'+gy+'" x2="'+(W-R)+'" y2="'+gy+'" stroke="'+C.grid+'" stroke-width="1"/><text x="'+gx+'" y="'+(H-B+18)+'" text-anchor="middle" font-size="10.5" fill="'+C.taupe+'">'+(xmin+(xmax-xmin)*gi/5).toFixed(0)+'</text><text x="'+(L-8)+'" y="'+(gy+4)+'" text-anchor="end" font-size="10.5" fill="'+C.taupe+'">'+(ymax-(ymax-ymin)*gi/5).toFixed(0)+'</text>';}
+      s+='<text x="'+((L+W-R)/2)+'" y="'+(H-6)+'" text-anchor="middle" font-size="11.5" font-style="italic" fill="'+C.taupe+'">Annualised volatility (%)</text><text transform="translate(14,'+((T+H-B)/2)+') rotate(-90)" text-anchor="middle" font-size="11.5" font-style="italic" fill="'+C.taupe+'">Annualised return (%)</text>';
+      // capital market line
+      var sl=d.tan.sh,rfp=rf*100,xe=sl>1e-6?Math.min(xmax,(ymax-rfp)/sl):xmax;
+      s+='<line x1="'+X(0)+'" y1="'+Y(rfp)+'" x2="'+X(xe)+'" y2="'+Y(rfp+sl*xe)+'" stroke="'+C.amber+'" stroke-width="2" stroke-dasharray="6,5" opacity="0.85"/>';
+      // individual assets
+      d.assets.forEach(function(a){s+='<circle cx="'+X(a.vol)+'" cy="'+Y(a.ret)+'" r="4" fill="#fff" stroke="'+C.taupe+'" stroke-width="1.5"/><text x="'+(X(a.vol)+7)+'" y="'+(Y(a.ret)+3.5)+'" font-size="9.5" fill="'+C.taupe+'">'+a.nm+'</text>';});
+      // frontier
+      var fpx=d.pts.map(function(pt){return [X(pt[0]),Y(pt[1])];});
+      s+='<path d="'+smoothD(fpx)+'" fill="none" stroke="'+C.blue+'" stroke-width="2.5"/>';
+      // markers
+      s+='<circle cx="'+X(d.gmv.vol)+'" cy="'+Y(d.gmv.ret)+'" r="5" fill="'+C.blue+'" stroke="#fff" stroke-width="1.5"/>';
+      s+='<circle cx="'+X(d.tan.vol)+'" cy="'+Y(d.tan.ret)+'" r="6" fill="'+C.amber+'" stroke="#fff" stroke-width="1.5"/>';
+      s+='</svg>';chart.innerHTML=s;
+      body.querySelector('.pd-fl-gv').textContent=d.gmv.vol.toFixed(2)+'%';
+      body.querySelector('.pd-fl-tr').textContent=d.tan.ret.toFixed(2)+'%';
+      body.querySelector('.pd-fl-tv').textContent=d.tan.vol.toFixed(2)+'%';
+      body.querySelector('.pd-fl-ts').textContent=d.tan.sh.toFixed(4);
+    }
+    body.querySelectorAll('.pd-fl-row input').forEach(function(inp){inp.addEventListener('input',function(){var i=+this.dataset.i;cur[i]=+this.value;body.querySelector('.pd-fl-val[data-v="'+i+'"]').textContent=cur[i].toFixed(1)+'%';draw();});});
+    body.querySelector('.pd-fl-reset').addEventListener('click',function(){cur=base.slice();body.querySelectorAll('.pd-fl-row input').forEach(function(inp){var i=+inp.dataset.i;inp.value=base[i];body.querySelector('.pd-fl-val[data-v="'+i+'"]').textContent=base[i].toFixed(1)+'%';});draw();});
+    draw();
+  }
+
+  // ── live ANFIS training on sinc(x) ──
+  function buildAnfisFit(body,spec){
+    var TWO=2*Math.PI;
+    function sinc(x){return x===0?1:Math.sin(Math.PI*x)/(Math.PI*x);}
+    function gauss(x,c,s){return Math.exp(-((x-c)*(x-c))/(2*s*s));}
+    // P={c,s,p each d×m, q length m, d, m}. sinc is 1-D, so x feeds every antecedent.
+    function fwd(x,P){var d=P.d,m=P.m,wk=new Array(m),yk=new Array(m),sw=0,sy=0,k,l;
+      for(k=0;k<m;k++){var w=1,yy=P.q[k];for(l=0;l<d;l++){w*=gauss(x,P.c[l][k],P.s[l][k]);yy+=P.p[l][k]*x;}wk[k]=w;yk[k]=yy;sw+=w;}
+      for(k=0;k<m;k++)sy+=wk[k]*yk[k];return {yi:sw>1e-12?sy/sw:0,yk:yk,wk:wk,sw:sw};}
+    function clip(v){return v>0.3?0.3:(v<-0.3?-0.3:v);} // gradient clipping for stability
+    function train(m,d,alpha,steps){
+      var c=[],s=[],p=[],q=[],l,k,sd=Math.sqrt(d);
+      for(l=0;l<d;l++){c[l]=[];s[l]=[];p[l]=[];}
+      // share each rule's centre across its antecedents (1-D input), scale width by √d so the product stays a sensible bump
+      for(k=0;k<m;k++){var rc=Math.random()*TWO;for(l=0;l<d;l++){c[l][k]=rc;s[l][k]=(Math.random()*0.9+0.1)*sd;p[l][k]=(Math.random()*2-1)/d;}q[k]=Math.random()*2-1;}
+      var P={c:c,s:s,p:p,q:q,d:d,m:m};
+      for(var t=0;t<steps;t++){
+        var x=Math.random()*TWO,y=sinc(x),r=fwd(x,P);if(r.sw<1e-7)continue;
+        for(k=0;k<m;k++){var dq=-2*(y-r.yi)*r.wk[k]/r.sw;q[k]-=clip(alpha*dq);var bse=dq*(r.yk[k]-r.yi);
+          for(l=0;l<d;l++){c[l][k]-=clip(alpha*bse*(x-c[l][k])/(s[l][k]*s[l][k]));s[l][k]-=clip(alpha*bse*(x-c[l][k])*(x-c[l][k])/(s[l][k]*s[l][k]*s[l][k]));p[l][k]-=clip(alpha*dq*x);if(s[l][k]<0.05)s[l][k]=0.05;}}
+      }
+      var N=240,se=0;for(var i=0;i<=N;i++){var xx=i/N*TWO,e=fwd(xx,P).yi-sinc(xx);se+=e*e;}
+      var rmse=Math.sqrt(se/(N+1));return {P:P,rmse:isFinite(rmse)?rmse:Infinity};}
+    function trainBest(m,d,alpha){var b=null;for(var r=0;r<14;r++){var t=train(m,d,alpha,6000);if(t.P&&(!b||t.rmse<b.rmse))b=t;}return b||{P:{c:[[0]],s:[[1]],p:[[0]],q:[0],d:1,m:1},rmse:Infinity};}
+    // generic line chart
+    function lineChart(xs,series,o){
+      var W=640,H=290,L=54,R=16,T=14,B=40;
+      function X(v){return L+v/o.xmax*(W-L-R);}
+      function Y(v){return H-B-(v-o.ymin)/(o.ymax-o.ymin)*(H-T-B);}
+      var s='<svg viewBox="0 0 '+W+' '+H+'">',gi;
+      for(gi=0;gi<=4;gi++){var gy=T+(H-T-B)*gi/4;s+='<line x1="'+L+'" y1="'+gy+'" x2="'+(W-R)+'" y2="'+gy+'" stroke="'+C.grid+'" stroke-width="1"/><text x="'+(L-8)+'" y="'+(gy+4)+'" text-anchor="end" font-size="10.5" fill="'+C.taupe+'">'+(o.ymax-(o.ymax-o.ymin)*gi/4).toFixed(o.ydec)+'</text>';}
+      o.xticks.forEach(function(t){s+='<line x1="'+X(t[0])+'" y1="'+T+'" x2="'+X(t[0])+'" y2="'+(H-B)+'" stroke="'+C.grid+'" stroke-width="1"/><text x="'+X(t[0])+'" y="'+(H-B+19)+'" text-anchor="middle" font-size="11" fill="'+C.taupe+'">'+t[1]+'</text>';});
+      if(o.zero)s+='<line x1="'+L+'" y1="'+Y(0)+'" x2="'+(W-R)+'" y2="'+Y(0)+'" stroke="'+C.amber+'" stroke-width="1.5" stroke-dasharray="6,5"/>';
+      s+='<text x="'+((L+W-R)/2)+'" y="'+(H-3)+'" text-anchor="middle" font-size="11.5" font-style="italic" fill="'+C.taupe+'">'+o.xlab+'</text>';
+      s+='<text transform="translate(13,'+((T+H-B)/2)+') rotate(-90)" text-anchor="middle" font-size="11.5" font-style="italic" fill="'+C.taupe+'">'+o.ylab+'</text>';
+      series.forEach(function(se){var d='';for(var i=0;i<xs.length;i++){d+=(i?'L':'M')+X(xs[i]).toFixed(1)+','+Y(Math.max(o.ymin,Math.min(o.ymax,se.y[i]))).toFixed(1)+' ';}s+='<path d="'+d+'" fill="none" stroke="'+se.col+'" stroke-width="'+se.w+'"/>';});
+      return s+'</svg>';
+    }
+    var m=5,d=1,alpha=0.05,fit=null,XT=[[0,'0'],[1,'1'],[2,'2'],[3,'3'],[4,'4'],[5,'5'],[6,'6']];
+    body.innerHTML=
+      '<div class="pd-slider-row"><label>Learning rate α</label><input type="range" min="0.01" max="0.2" step="0.005" value="0.05" class="pd-af-a"><span class="pd-slider-val pd-af-av">0.050</span></div>'+
+      '<div class="pd-slider-row"><label>Rules (m)</label><input type="range" min="3" max="8" step="1" value="5" class="pd-af-m"><span class="pd-slider-val pd-af-mv">5</span></div>'+
+      '<div class="pd-slider-row"><label>Antecedents (d)</label><input type="range" min="1" max="4" step="1" value="1" class="pd-af-d"><span class="pd-slider-val pd-af-dv">1</span></div>'+
+      '<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:6px 0 18px"><button class="pd-btn pd-af-go">Re-train</button><span class="pd-viz-note" style="margin:0">sinc is 1-D, so each antecedent reads the same x — extra antecedents only add per-rule parameters.</span></div>'+
+      '<div class="pd-readout" style="margin-bottom:20px"><div class="pd-readout-item"><div class="pd-readout-l">RMSE</div><div class="pd-readout-v pd-af-rmse"></div></div><div class="pd-readout-item"><div class="pd-readout-l">Trained parameters</div><div class="pd-readout-v pd-af-np"></div></div></div>'+
+      '<div class="pd-af-fit"></div><div class="pd-legend" style="margin:10px 0 24px"><div class="pd-legend-item"><span class="pd-legend-sw" style="background:#111"></span>Function — sinc(x)</div><div class="pd-legend-item"><span class="pd-legend-sw" style="background:'+C.blue+'"></span>ANFIS approximation</div></div>'+
+      '<div class="pd-af-err"></div><div class="pd-legend" style="margin-top:10px"><div class="pd-legend-item"><span style="display:inline-block;width:22px;border-top:2px dashed '+C.amber+'"></span>Zero reference</div><div class="pd-legend-item"><span class="pd-legend-sw" style="background:'+C.blue+'"></span>Error (approximation − sinc)</div></div>';
+    var fitEl=body.querySelector('.pd-af-fit'),errEl=body.querySelector('.pd-af-err');
+    var aEl=body.querySelector('.pd-af-a'),mEl=body.querySelector('.pd-af-m'),dEl=body.querySelector('.pd-af-d');
+    function draw(){
+      var N=240,xs=[],ya=[],yt=[],ye=[],i;
+      for(i=0;i<=N;i++){var x=i/N*TWO;xs.push(x);var a=fwd(x,fit.P).yi;ya.push(a);var tv=sinc(x);yt.push(tv);ye.push(a-tv);}
+      fitEl.innerHTML=lineChart(xs,[{y:yt,col:'#111',w:2.5},{y:ya,col:C.blue,w:2.5}],{xmax:TWO,ymin:-0.35,ymax:1.12,ydec:2,xlab:'x',ylab:'f(x)',xticks:XT});
+      var emax=Math.max.apply(null,ye),emin=Math.min.apply(null,ye),pad=(emax-emin)*0.2||0.01;
+      errEl.innerHTML=lineChart(xs,[{y:ye,col:C.blue,w:2.5}],{xmax:TWO,ymin:emin-pad,ymax:emax+pad,ydec:3,xlab:'x',ylab:'error',xticks:XT,zero:true});
+      body.querySelector('.pd-af-rmse').textContent=isFinite(fit.rmse)?fit.rmse.toFixed(4):'diverged';
+      body.querySelector('.pd-af-np').textContent=(3*d*m+m);
+    }
+    function labels(){body.querySelector('.pd-af-av').textContent=(+aEl.value).toFixed(3);body.querySelector('.pd-af-mv').textContent=mEl.value;body.querySelector('.pd-af-dv').textContent=dEl.value;}
+    function run(){alpha=+aEl.value;m=+mEl.value;d=+dEl.value;labels();fit=trainBest(m,d,alpha);draw();}
+    [aEl,mEl,dEl].forEach(function(el){el.addEventListener('input',labels);el.addEventListener('change',run);});
+    body.querySelector('.pd-af-go').addEventListener('click',run);
+    run();
+  }
+
+  // ── PCA factor loadings explorer ──
+  function buildPcaLoadings(body,spec){
+    var pcs=spec.pcs;
+    function barsH(pc){
+      var data=pc.bars.slice().sort(function(a,b){return b.v-a.v;});
+      var n=data.length,rowH=30,top=10,bottom=8,W=640,gut=58,L=gut+10,R=52,H=top+n*rowH+bottom;
+      var maxabs=Math.max.apply(null,data.map(function(d){return Math.abs(d.v);}))*1.18;
+      var xz=(L+(W-R))/2,half=(W-R-L)/2;
+      function X(v){return xz+v/maxabs*half;}
+      var s='<svg viewBox="0 0 '+W+' '+H+'">';
+      s+='<line x1="'+xz+'" y1="'+top+'" x2="'+xz+'" y2="'+(H-bottom)+'" stroke="'+C.grid+'" stroke-width="1.5"/>';
+      data.forEach(function(d,i){
+        var cy=top+i*rowH+rowH/2,x1=Math.min(xz,X(d.v)),w=Math.abs(X(d.v)-xz),col=d.v>=0?C.blue:C.amber;
+        s+='<rect x="'+x1.toFixed(1)+'" y="'+(cy-9)+'" width="'+Math.max(1,w).toFixed(1)+'" height="18" rx="3" fill="'+col+'"/>';
+        s+='<text x="'+gut+'" y="'+(cy+4)+'" text-anchor="end" font-size="12.5" font-weight="700" fill="'+C.ink+'">'+d.t+'</text>';
+        var vx=d.v>=0?X(d.v)+6:X(d.v)-6;
+        s+='<text x="'+vx.toFixed(1)+'" y="'+(cy+4)+'" text-anchor="'+(d.v>=0?'start':'end')+'" font-size="11.5" fill="'+col+'">'+d.v.toFixed(3)+'</text>';
+      });
+      return s+'</svg>';
+    }
+    body.innerHTML='<div class="pd-seg">'+pcs.map(function(p,i){return '<button data-i="'+i+'"'+(i===0?' class="active"':'')+'>'+p.name+'</button>';}).join('')+'</div><div class="pd-pca-head" style="margin-bottom:12px"></div><div class="pd-pca-chart"></div><div class="pd-legend" style="margin-top:8px"><div class="pd-legend-item"><span class="pd-legend-sw" style="background:'+C.blue+'"></span>Positive loading</div><div class="pd-legend-item"><span class="pd-legend-sw" style="background:'+C.amber+'"></span>Negative loading</div></div>';
+    var head=body.querySelector('.pd-pca-head'),chart=body.querySelector('.pd-pca-chart');
+    function show(i){
+      var p=pcs[i],badge=p.view==='Neutral'?C.taupe:C.blue;
+      head.innerHTML='<div style="font-family:\'Playfair Display\',Georgia,serif;font-size:19px;font-weight:600;color:var(--black);margin-bottom:5px">'+p.name+' — '+p.sub+' <span style="font-family:\'Josefin Sans\',sans-serif;font-size:11px;font-weight:600;letter-spacing:.4px;color:#fff;background:'+badge+';border-radius:100px;padding:3px 11px;white-space:nowrap;margin-left:4px">'+p.view+'</span></div><div style="font-family:\'Josefin Sans\',sans-serif;font-size:14.5px;color:#2a2a2a;line-height:1.65">'+p.interp+'</div>';
+      chart.innerHTML=barsH(p);
+    }
+    body.querySelectorAll('.pd-seg button').forEach(function(b){b.addEventListener('click',function(){body.querySelectorAll('.pd-seg button').forEach(function(x){x.classList.remove('active');});this.classList.add('active');show(+this.dataset.i);});});
+    show(0);
+  }
+
+  var builders={bars:buildBars,toggle:buildToggle,scatter:buildScatter,binom:buildBinom,rho:buildRho,sinc:buildSinc,anfis:buildAnfis,fcm:buildFcm,frontierlab:buildFrontierLab,anfisfit:buildAnfisFit,pcaloadings:buildPcaLoadings};
+  function render(container,vizArr){
+    container.innerHTML='';
+    vizArr.forEach(function(spec){
+      var card=elFromHTML('<div class="pd-viz-card"><div class="pd-viz-head"><div class="pd-viz-title">'+(spec.title||'')+'</div>'+(spec.note?'<div class="pd-viz-note">'+spec.note+'</div>':'')+'</div><div class="pd-viz-body"></div></div>');
+      container.appendChild(card);
+      var b=builders[spec.t];if(b)b(card.querySelector('.pd-viz-body'),spec);
+    });
+  }
+  return {render:render};
+})();
+
+// ── FEATURED PROJECTS (work section) ──
+// Indices: 4=Nelson Siegel, 3=Stochastic Processes, 2=Portfolio Optimization, 6=ANFIS
+const featuredProjects = [4, 3, 2, 6];
+const workGrid = document.getElementById('work-grid');
+featuredProjects.forEach((idx, pos) => {
+  const p = projectData[idx];
+  const delay = pos % 2 === 1 ? ' d1' : '';
+  workGrid.innerHTML += `
+    <div class="work-card reveal${delay}" onclick="openProject(${idx})">
+      <div class="work-card-header">
+        <div class="work-type">${p.type}</div>
+        <div class="work-title">${p.title}</div>
+      </div>
+      <div class="work-metrics">
+        ${p.metrics.map(m=>`<div class="work-metric"><div class="wm-label">${m.l}</div><div class="wm-val">${m.v}</div></div>`).join('')}
+      </div>
+      <div class="work-body">
+        <p class="work-desc">${p.desc}</p>
+        <div class="work-tags">${p.tags.map(t=>`<span class="wtag">${t}</span>`).join('')}</div>
+      </div>
+    </div>`;
+});
+workGrid.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── ALL PROJECTS OVERLAY ──
+const grid=document.getElementById('overlay-grid');
+// Display order for the All-Projects overlay (indices into projectData)
+const overlayOrder=[4,3,2,1,0,8,6,5,7];
+overlayOrder.forEach(i=>{
+  const p=projectData[i];
+  grid.innerHTML+=`<div class="overlay-card" onclick="openProject(${i})" style="cursor:pointer"><div class="oc-type">${p.type}</div><div class="oc-title">${p.title}</div><div class="oc-desc">${p.desc}</div></div>`;
+});
+const ocCount=document.getElementById('overlay-count');
+if(ocCount)ocCount.textContent='('+overlayOrder.length+')';
+
+// ── Education project lists: Fuzzy projects → undergrad (UEA), all others → grad (NEU) ──
+(function(){
+  var neuList=document.getElementById('neu-project-list'),ueaList=document.getElementById('uea-project-list');
+  if(!neuList||!ueaList)return;
+  projectData.forEach(function(p,i){
+    var fuzzy=/^Fuzzy/.test(p.type),modal=fuzzy?'uea':'neu';
+    var card='<div class="edu-project-item" data-project-index="'+i+'" onclick="openEduProject(this,\''+modal+'\')"><div class="edu-project-name">'+p.title+'</div><div class="edu-project-desc">'+p.desc+'</div><div class="edu-project-link-hint">View full project →</div></div>';
+    (fuzzy?ueaList:neuList).innerHTML+=card;
+  });
+})();
+
+function openAllProjects(){
+  document.getElementById('all-projects-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeAllProjects(){
+  document.getElementById('all-projects-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// ── PROJECT DETAIL ──
+let pdFromOverlay=false; // did we open this detail from the All-Projects overlay?
+function openProject(i){
+  const p=projectData[i];
+  // Remember whether we came from the All-Projects overlay, then close it
+  const apo=document.getElementById('all-projects-overlay');
+  pdFromOverlay=apo.classList.contains('open');
+  apo.classList.remove('open');
+  // Populate
+  document.getElementById('pd-type').textContent=p.type;
+  document.getElementById('pd-title').textContent=p.title;
+  document.getElementById('pd-topbar-title').textContent=p.title;
+  // Source link
+  var gh=document.getElementById('pd-github');
+  if(projectRepos[i]){gh.href=projectRepos[i];gh.style.display='';}else{gh.style.display='none';}
+  // Research paper link (only some projects)
+  var pp=document.getElementById('pd-paper');
+  if(projectPapers[i]){pp.href=projectPapers[i];pp.style.display='';}else{pp.style.display='none';}
+  // Metrics
+  document.getElementById('pd-metrics').innerHTML=p.metrics.map(m=>
+    `<div class="pd-metric"><div class="pd-metric-label">${m.l}</div><div class="pd-metric-val">${m.v}</div></div>`
+  ).join('');
+  // Tags
+  document.getElementById('pd-tags').innerHTML=p.tags.map(t=>
+    `<span class="pd-hero-tag">${t}</span>`
+  ).join('');
+  // Tools section
+  document.getElementById('pd-tools').innerHTML=p.tags.map(t=>
+    `<span class="pd-tool-tag">${t}</span>`
+  ).join('');
+  // Content sections — rich HTML prose
+  ['overview','motivation','methodology','results'].forEach(k=>{
+    const el=document.getElementById('pd-'+k);
+    el.className='pd-prose';
+    el.innerHTML=p[k];
+  });
+  // Interactive analysis
+  const vizSec=document.getElementById('pd-viz-section');
+  if(p.viz&&p.viz.length){
+    document.getElementById('pd-viz-intro').textContent=p.vizIntro||'';
+    PDViz.render(document.getElementById('pd-viz'),p.viz);
+    vizSec.style.display='';
+  }else{
+    vizSec.style.display='none';
+    document.getElementById('pd-viz').innerHTML='';
+  }
+  // Open
+  const pd=document.getElementById('project-detail');
+  pd.classList.add('open');
+  pd.scrollTop=0;
+  document.body.style.overflow='hidden';
+}
+function closeProjectDetail(){
+  document.getElementById('project-detail').classList.remove('open');
+  // Return to the All-Projects overlay if that's where we came from
+  if(pdFromOverlay){pdFromOverlay=false;openAllProjects();}
+  else{document.body.style.overflow='';}
+}
+
+// ── EDU MODALS ──
+function openEduModal(id){
+  document.getElementById('edu-modal-'+id).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeEduModal(id,e,force){
+  if(force||!e||e.target===document.getElementById('edu-modal-'+id)){
+    document.getElementById('edu-modal-'+id).classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+function switchTab(tab){
+  const modal=tab.dataset.modal;
+  const panel=tab.dataset.panel;
+  document.querySelectorAll(`[data-modal="${modal}"].edu-tab`).forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  document.querySelectorAll(`#edu-modal-${modal} .edu-panel`).forEach(p=>p.classList.remove('active'));
+  document.getElementById(`${modal}-${panel}`).classList.add('active');
+}
+function openEduProject(el,modalId){
+  const idx=parseInt(el.dataset.projectIndex);
+  closeEduModal(modalId,null,true);
+  openProject(idx);
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    ['neu','uea'].forEach(id=>{
+      document.getElementById('edu-modal-'+id).classList.remove('open');
+    });
+    closeAllProjects();
+    document.body.style.overflow='';
+  }
+});
+</script>
+
+<!-- PROJECT DETAIL OVERLAY -->
+<div id="project-detail">
+  <div class="pd-topbar">
+    <button class="pd-back" onclick="closeProjectDetail()">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Projects
+    </button>
+    <span class="pd-topbar-title" id="pd-topbar-title"></span>
+    <div class="pd-actions">
+      <a class="pd-github pd-paper" id="pd-paper" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        <span>Research paper</span>
+      </a>
+      <a class="pd-github" id="pd-github" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        <span>View source</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero / banner -->
+  <div class="pd-hero">
+    <div class="pd-hero-inner">
+      <div class="pd-type" id="pd-type"></div>
+      <h1 class="pd-title" id="pd-title"></h1>
+      <div class="pd-metrics-row" id="pd-metrics"></div>
+      <div class="pd-hero-tags" id="pd-tags"></div>
+    </div>
+  </div>
+
+  <!-- Scrollable content body -->
+  <div class="pd-body">
+
+    <div class="pd-section">
+      <div class="pd-section-dash"></div>
+      <h2 class="pd-section-title">Overview</h2>
+      <div class="pd-placeholder" id="pd-overview">
+        Add a high-level summary of this project — what it is, what problem it addresses, and why it matters in a financial context.
+      </div>
+    </div>
+
+    <div class="pd-section">
+      <div class="pd-section-dash"></div>
+      <h2 class="pd-section-title">Motivation & Context</h2>
+      <div class="pd-placeholder" id="pd-motivation">
+        Explain the financial or research context that motivated this work. What gap, question, or opportunity prompted the analysis?
+      </div>
+    </div>
+
+    <div class="pd-section">
+      <div class="pd-section-dash"></div>
+      <h2 class="pd-section-title">Methodology & Approach</h2>
+      <div class="pd-placeholder" id="pd-methodology">
+        Describe the models, algorithms, or frameworks used. Walk through the analytical pipeline — from data ingestion to final output.
+      </div>
+    </div>
+
+    <div class="pd-section" id="pd-viz-section" style="display:none">
+      <div class="pd-section-dash"></div>
+      <h2 class="pd-section-title">Interactive Analysis</h2>
+      <p class="pd-viz-intro" id="pd-viz-intro"></p>
+      <div class="pd-viz" id="pd-viz"></div>
+    </div>
+
+    <div class="pd-section">
+      <div class="pd-section-dash"></div>
+      <h2 class="pd-section-title">Key Results & Findings</h2>
+      <div class="pd-placeholder" id="pd-results">
+        Present the main findings, quantitative results, or conclusions. Include charts, tables, or performance metrics where available.
+      </div>
+    </div>
+
+    <div class="pd-section">
+      <div class="pd-section-dash"></div>
+      <h2 class="pd-section-title">Tools & Technologies</h2>
+      <div class="pd-tools-grid" id="pd-tools"></div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
