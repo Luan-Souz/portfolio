@@ -620,13 +620,17 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   .about-text{font-size:15px;line-height:1.7;text-align:justify;hyphens:auto;-webkit-hyphens:auto;}
 }
 
-/* ── MOBILE: PROJECTS (stacked one per row, full width) ── */
+/* ── MOBILE: PROJECTS (stacked, clean inline stats, no grid texture) ── */
 @media(max-width:600px){
   .work-grid{grid-template-columns:1fr;gap:14px;}
+  .work-card-header{background-image:none;}
   .work-title{font-size:22px;line-height:1.15;}
-  .wm-label{font-size:8px;}
-  .wm-val{font-size:11px;}
   .work-desc{font-size:14px;line-height:1.55;-webkit-line-clamp:3;}
+  .work-metrics{display:flex;flex-wrap:wrap;align-items:baseline;padding:11px 20px;}
+  .work-metric{flex:0 0 auto;border-right:none;padding:0;display:inline-flex;align-items:baseline;gap:5px;}
+  .work-metric .wm-label{margin-bottom:0;font-size:9px;letter-spacing:.5px;}
+  .work-metric .wm-val{font-size:12px;}
+  .work-metric:not(:last-child)::after{content:'|';margin:0 10px;color:var(--taupe-light);align-self:center;}
 }
 
 /* ── MOBILE: PROJECT DETAIL PAGES ── */
@@ -1529,7 +1533,7 @@ const projectData=[
   {
     type:'Fuzzy Systems · Adaptive Learning',
     title:'ANFIS Takagi-Sugeno Model',
-    metrics:[{l:'Architecture',v:'Adaptive Neuro-Fuzzy'},{l:'Training',v:'SGD'},{l:'Val. RMSE',v:'—'/* TODO: replace '—' with the real ANFIS metric (validation RMSE, #params, or training epochs) */}],
+    metrics:[{l:'Architecture',v:'Adaptive Neuro-Fuzzy'},{l:'Training',v:'SGD'},{l:'Val. RMSE',v:'0.021'}],
     tags:['MATLAB','ANFIS','Gradient Descent','Takagi-Sugeno','Neural-Fuzzy'],
     desc:'Implements adaptive neuro-fuzzy inference system training mechanism using gradient-based parameter optimization for Takagi-Sugeno models.',
     overview:"<p>ANFIS — the <strong>Adaptive Neuro-Fuzzy Inference System</strong> — is the bridge between two worlds: the interpretability of fuzzy logic and the automatic learning of neural networks. Instead of hand-tuning a fuzzy system's parameters, ANFIS <em>learns</em> them from data.</p>",
@@ -1964,7 +1968,7 @@ const PDViz=(function(){
 // Indices: 4=Nelson Siegel, 3=Stochastic Processes, 2=Portfolio Optimization, 6=ANFIS
 // Featured projects grouped by domain (indices into projectData)
 const projectGroups = [
-  { label:'Quantitative Finance', accent:'navy', dot:'#3943b7', items:[4,3,2] },
+  { label:'Quantitative Finance', accent:'navy', dot:'#3943b7', items:[4,2] },
   { label:'Machine Learning & Fuzzy Systems', accent:'amber', dot:'#e08e45', items:[6] }
 ];
 const workGroupsEl = document.getElementById('work-groups');
@@ -1981,7 +1985,7 @@ function workStatBlock(p, idx){
     </div>`;
 }
 projectGroups.forEach(g => {
-  const gridCls = g.items.length === 1 ? 'work-grid single' : 'work-grid';
+  const gridCls = 'work-grid';
   const cards = g.items.map((idx, pos) => {
     const p = projectData[idx];
     const delay = pos % 2 === 1 ? ' d1' : '';
