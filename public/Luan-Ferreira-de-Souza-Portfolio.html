@@ -422,6 +422,17 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
 .pd-fl-name{font-family:var(--data);font-style:italic;font-size:12px;color:var(--taupe);width:42px;flex-shrink:0;}
 .pd-fl-row input[type=range]{flex:1;accent-color:var(--blue);height:4px;min-width:60px;}
 .pd-fl-val{font-family:var(--data);font-weight:700;font-size:12px;color:var(--blue);width:52px;text-align:right;flex-shrink:0;}
+
+/* ── SHORT-VIEWPORT FALLBACK ──
+   Unlock section-per-screen layout on short viewports so content never clips. */
+@media (max-height:900px){
+  #work,#experience,#education,#skills,#contact{min-height:auto;display:block;padding:72px 0;}
+  #work .wrap,#experience .wrap,#education .wrap,#skills .wrap,#contact .wrap{max-height:none;display:block;}
+  .work-grid,.edu-grid{overflow-y:visible;}
+  .skills-scroll{overflow-y:visible;}
+  .contact-inner{max-height:none;overflow-y:visible;}
+  .mm-detail{overflow-y:visible;flex:none;}
+}
 </style>
 </head>
 <body>
