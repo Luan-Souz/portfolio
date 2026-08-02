@@ -522,6 +522,14 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   .contact-inner{max-height:none;overflow-y:visible;}
   .mm-detail{overflow-y:visible;flex:none;}
 }
+
+/* ── GLOBAL DESKTOP SCALE ──
+   Render the desktop layout at 90% (like a browser at 90% zoom) for a
+   more comfortable reading size. Scoped to >900px so phones stay full-size.
+   Tweak the 0.9 value to taste. */
+@media (min-width:901px){
+  body{zoom:0.9;}
+}
 </style>
 </head>
 <body>

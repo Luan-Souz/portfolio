@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"local: HTTP %{http_code}\\\\n\" http://localhost:3000/)",
+      "Bash(git add *)",
+      "Bash(git -c 'user.name=Luan Ferreira de Souza' -c user.email=ferreiradesouza.l@northeastern.edu commit -q -m ' *)",
+      "Bash(git push *)"
+    ]
+  }
+}
