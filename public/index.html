@@ -548,18 +548,24 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
 /* ── UEA coursework two-column grid ── */
 .edu-two-col{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
 
-/* ── MOBILE VERTICAL TIMELINE (Experience) ── */
+/* ── MOBILE VERTICAL TIMELINE (Experience) — newest first, expandable ── */
 .mm-vlist{display:none;}
 @media(max-width:900px){
   .mm-map,#experience .mm-detail,.mm-footer{display:none !important;}
   .mm-vlist{display:block;position:relative;padding-left:24px;}
   .mm-vlist::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:var(--taupe-light);}
-  .mm-v-item{position:relative;margin-bottom:26px;}
+  .mm-v-item{position:relative;margin-bottom:20px;}
   .mm-v-item:last-child{margin-bottom:0;}
-  .mm-v-dot{position:absolute;left:-24px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--white);border:2px solid var(--blue);box-sizing:border-box;}
+  .mm-v-dot{position:absolute;left:-24px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--white);border:2px solid var(--blue);box-sizing:border-box;}
+  .mm-v-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;cursor:pointer;}
+  .mm-v-htext{flex:1;min-width:0;}
+  .mm-v-chev{flex-shrink:0;width:9px;height:9px;margin-top:8px;border-right:2px solid var(--taupe);border-bottom:2px solid var(--taupe);transform:rotate(45deg);transition:transform .2s;}
+  .mm-v-item.open .mm-v-chev{transform:rotate(-135deg);}
   .mm-v-year{font-family:var(--data);font-style:italic;font-size:12px;color:var(--blue);font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px;}
-  .mm-v-role{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--black);line-height:1.25;margin-bottom:2px;}
-  .mm-v-phase{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--blue);margin-bottom:9px;}
+  .mm-v-role{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--black);line-height:1.25;margin-bottom:2px;}
+  .mm-v-phase{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--blue);}
+  .mm-v-body{display:none;}
+  .mm-v-item.open .mm-v-body{display:block;margin-top:11px;}
   .mm-v-desc{font-family:var(--sans);font-size:15px;color:#555;line-height:1.7;margin:0;list-style:none;padding:0;}
   .mm-v-desc li{position:relative;padding-left:18px;margin-bottom:6px;}
   .mm-v-desc li:last-child{margin-bottom:0;}
@@ -567,9 +573,38 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   .mm-v-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px;}
 }
 
+/* ── MOBILE: HERO (kill dead whitespace) ── */
+@media(max-width:600px){
+  #hero{min-height:auto;display:block;padding:104px 0 44px;}
+  .hero-inner{align-items:stretch;}
+  .manifesto{margin-bottom:16px;}
+  .hero-subtitle{margin-bottom:28px;}
+  .hero-btns{margin-bottom:28px;}
+}
+
+/* ── MOBILE: ABOUT (smaller + justified) ── */
+@media(max-width:600px){
+  .about-text{font-size:15px;line-height:1.7;text-align:justify;hyphens:auto;-webkit-hyphens:auto;}
+}
+
+/* ── MOBILE: PROJECTS (compact 2×2 so all four fit) ── */
+@media(max-width:600px){
+  .work-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .work-card-header{padding:11px 12px 9px;}
+  .work-type{font-size:8px;letter-spacing:.8px;margin-bottom:4px;}
+  .work-title{font-size:16px;line-height:1.12;}
+  .work-metric{padding:6px 9px;}
+  .wm-label{font-size:7px;letter-spacing:.5px;margin-bottom:2px;}
+  .wm-val{font-size:10px;}
+  .work-body{padding:10px 12px;}
+  .work-desc{font-size:12px;line-height:1.45;margin-bottom:0;-webkit-line-clamp:2;}
+  .work-tags{display:none;}
+  .work-footer{margin-top:16px;}
+}
+
 /* ── MOBILE: PROJECT DETAIL PAGES ── */
 @media(max-width:768px){
-  .pd-topbar{padding:0 20px;height:60px;}
+  .pd-topbar{padding:0 14px;height:56px;}
   .pd-topbar-title{display:none;}
   .pd-hero{padding:40px 20px 34px;}
   .pd-title{font-size:clamp(30px,9vw,44px);letter-spacing:-.5px;margin-bottom:22px;}
@@ -583,9 +618,21 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   .pd-prose em{font-size:15px;}
   .pd-viz-body,.pd-viz-head{padding-left:16px;padding-right:16px;}
 }
-
-/* ── MOBILE: EDUCATION MODAL ── */
+/* project-detail top buttons ~half size on phones */
 @media(max-width:600px){
+  .pd-topbar{padding:0 10px;height:50px;}
+  .pd-actions{gap:6px;}
+  .pd-back{font-size:11px;gap:4px;}
+  .pd-back svg{width:13px;height:13px;}
+  .pd-github{padding:6px 10px;font-size:11px;gap:5px;border-radius:5px;}
+  .pd-github svg{width:13px;height:13px;}
+  .pd-paper svg{width:13px;height:13px;}
+}
+
+/* ── MOBILE: EDUCATION cards + modal ── */
+@media(max-width:600px){
+  /* stop View-details overlapping the address */
+  .edu-meta-row{flex-direction:column;align-items:flex-start;gap:8px;}
   .edu-two-col{grid-template-columns:1fr;gap:20px;}
   .edu-modal{max-height:88vh;}
   .edu-modal-head{padding:22px 20px;}
@@ -593,6 +640,21 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   .edu-tabs{padding:0 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
   .edu-tab{padding:14px 15px;white-space:nowrap;}
   .edu-modal-body{padding:22px 20px;}
+  /* coursework: stacked list -> wrapping pills */
+  .edu-course-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
+  .edu-course-item{font-size:13px;padding:7px 13px;border-radius:999px;line-height:1.15;}
+}
+
+/* ── MOBILE: SKILLS accordion (only titles shown until tapped) ── */
+@media(max-width:900px){
+  #skills .skill-group{cursor:pointer;position:relative;}
+  #skills .skill-group .sk-tags,#skills .skill-group .sg-langs{display:none;}
+  #skills .skill-group.open .sk-tags{display:flex;}
+  #skills .skill-group.open .sg-langs{display:flex;}
+  #skills .sg-title{margin-bottom:0;}
+  #skills .skill-group.open .sg-title{margin-bottom:14px;}
+  #skills .skill-group::after{content:'';position:absolute;top:24px;right:22px;width:9px;height:9px;border-right:2px solid var(--taupe);border-bottom:2px solid var(--taupe);transform:rotate(45deg);transition:transform .2s;}
+  #skills .skill-group.open::after{transform:rotate(-135deg);top:27px;}
 }
 
 /* ── MOBILE: GENERAL POLISH ── */
@@ -1266,10 +1328,11 @@ const mmGroups=[
 
   mmSel(navSeq[0]);
 
-  // Mobile vertical timeline: same data, stacked top-to-bottom (shown <=900px)
+  // Mobile vertical timeline: same data, most-recent first, each expandable.
   var vlist=document.getElementById('mm-vlist');
   if(vlist){
-    vlist.innerHTML=navSeq.map(function(idx){
+    var order=navSeq.slice().reverse(); // newest at top
+    vlist.innerHTML=order.map(function(idx){
       var m=milestones[idx];
       var body=(m.bullets&&m.bullets.length)
         ? '<ul class="mm-v-desc">'+m.bullets.map(function(b){return '<li>'+b+'</li>';}).join('')+'</ul>'
@@ -1277,12 +1340,17 @@ const mmGroups=[
       var tags=(m.tags&&m.tags.length)
         ? '<div class="mm-v-tags">'+m.tags.map(function(t){return '<span class="mm-detail-tag">'+t+'</span>';}).join('')+'</div>'
         : '';
-      return '<div class="mm-v-item"><span class="mm-v-dot"></span><div class="mm-v-body">'
+      return '<div class="mm-v-item"><span class="mm-v-dot"></span>'
+        +'<div class="mm-v-head"><div class="mm-v-htext">'
         +'<div class="mm-v-year">'+m.year+'</div>'
         +'<div class="mm-v-role">'+m.role+'</div>'
-        +'<div class="mm-v-phase">'+m.phase+'</div>'
-        +body+tags+'</div></div>';
+        +'<div class="mm-v-phase">'+m.phase+'</div></div>'
+        +'<span class="mm-v-chev"></span></div>'
+        +'<div class="mm-v-body">'+body+tags+'</div></div>';
     }).join('');
+    vlist.querySelectorAll('.mm-v-head').forEach(function(h){
+      h.addEventListener('click',function(){h.parentNode.classList.toggle('open');});
+    });
   }
 })();
 
@@ -2059,5 +2127,19 @@ document.addEventListener('keydown',e=>{
   </div>
 </div>
 
+<script>
+// ── MOBILE SKILLS ACCORDION ──
+// On phones/tablets (<=900px) each skill card shows only its title until
+// tapped. No effect on desktop (CSS keeps the pills visible there).
+(function(){
+  document.querySelectorAll('#skills .skill-group').forEach(function(g){
+    g.addEventListener('click',function(e){
+      if(window.innerWidth>900)return;
+      if(e.target.closest('.sk-tags')||e.target.closest('.sg-langs'))return;
+      g.classList.toggle('open');
+    });
+  });
+})();
+</script>
 </body>
 </html>
