@@ -6,7 +6,7 @@
 <title>Luan Ferreira de Souza</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Josefin+Sans:wght@300;400;600&family=Libre+Baskerville:ital,wght@0,400;1,400;1,700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Josefin+Sans:wght@300;400;600&family=Libre+Baskerville:ital,wght@0,400;1,400;1,700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet"/>
 <style>
 :root {
   --blue:#3943b7; --blue-dim:rgba(57,67,183,0.09); --blue-mid:rgba(57,67,183,0.18);
@@ -16,6 +16,7 @@
   --serif:'Playfair Display',Georgia,serif;
   --sans:'Josefin Sans',sans-serif;
   --data:'Libre Baskerville',Georgia,serif;
+  --mono:'JetBrains Mono','SF Mono',ui-monospace,monospace;
   --radius:6px; --radius-lg:12px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -149,10 +150,32 @@ section{padding:clamp(56px,10vw,112px) 0;scroll-margin-top:68px;}
 .photo-placeholder-text{font-family:var(--data);font-style:italic;font-size:11px;color:var(--taupe);letter-spacing:.5px;text-align:center;}
 
 /* ── WORK ── */
-#work{background:var(--white);min-height:calc(100vh - 68px);display:flex;align-items:center;padding:88px 0 40px;}
-#work .wrap{width:100%;max-height:calc(100vh - 196px);display:flex;flex-direction:column;}
-.work-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;flex-wrap:wrap;gap:16px;flex-shrink:0;}
-.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;min-height:0;overflow-y:auto;padding:4px 4px 4px 0;}
+#work{background:var(--white);min-height:calc(100vh - 68px);display:block;padding:88px 0 40px;}
+#work .wrap{width:100%;max-height:none;display:block;}
+.work-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:28px;flex-wrap:wrap;gap:16px;}
+.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:2px 0;}
+/* domain groups */
+.work-group{margin-bottom:34px;}
+.work-group:last-of-type{margin-bottom:0;}
+.work-group-label{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.wg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.wg-text{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--taupe);white-space:nowrap;}
+.wg-rule{flex:1;height:1px;background:var(--taupe-light);}
+.work-grid.single{grid-template-columns:1fr;}
+/* per-card domain accent */
+.work-card.acc-navy{--acc:#3943b7;--acc-bg:rgba(57,67,183,.10);--acc-text:#2b3392;border-left:3px solid #3943b7;}
+.work-card.acc-amber{--acc:#e08e45;--acc-bg:rgba(224,142,69,.16);--acc-text:#9c5a20;border-left:3px solid #e08e45;}
+.work-card .work-type{color:var(--acc,var(--taupe));}
+.work-card .wm-val{font-family:var(--mono);font-weight:700;color:var(--acc,var(--blue));}
+.work-card .wtag{font-family:var(--mono);font-style:normal;font-size:10px;color:var(--acc-text,var(--blue));background:var(--acc-bg,var(--blue-dim));border:1px solid transparent;border-radius:999px;padding:4px 11px;}
+/* hero-stat variant (Portfolio Optimization) */
+.work-herostat{display:flex;align-items:center;gap:16px;padding:15px 22px;border-bottom:1px solid var(--taupe-light);}
+.whs-num{font-family:var(--mono);font-size:26px;font-weight:700;line-height:1;color:var(--acc,var(--blue));}
+.whs-label{font-family:var(--data);font-style:italic;font-size:12px;color:var(--taupe);line-height:1.45;}
+.whs-label b{display:block;font-style:normal;font-family:var(--sans);font-weight:600;font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--acc-text,var(--taupe));}
+/* single CTA link */
+.view-all-link{font-family:var(--sans);font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--blue);text-decoration:underline;text-underline-offset:4px;cursor:pointer;background:none;border:none;padding:0;}
+.view-all-link:hover{color:var(--black);}
 @media(max-width:760px){.work-grid{grid-template-columns:1fr;}}
 @media(max-width:900px){
   #work{min-height:auto;display:block;padding:56px 0;}
@@ -692,6 +715,17 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   #nav:not(.scrolled) .nav-cta{color:#fff;border-color:rgba(255,255,255,.5);}
   #nav:not(.scrolled) .nav-cta:hover{background:var(--amber);border-color:var(--amber);color:#fff;}
 }
+
+/* ── SMALLER OVERSIZED BUTTONS (desktop) ── */
+@media(min-width:901px){
+  #hero .btn{padding:9px 22px;font-size:12px;}
+  .nav-cta{padding:5px 13px;font-size:13px;}
+  .pd-back{font-size:11px;}
+  .pd-back svg{width:14px;height:14px;}
+  .pd-github{padding:5px 12px;font-size:11px;}
+  .pd-github svg{width:14px;height:14px;}
+  .pd-paper svg{width:14px;height:14px;}
+}
 </style>
 </head>
 <body>
@@ -804,11 +838,10 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
         <div class="sec-dash reveal"></div>
         <h2 class="sec-h reveal">Projects</h2>
       </div>
-      <button class="see-all-btn reveal" onclick="openAllProjects()">See all projects ↗&#xFE0E;</button>
     </div>
-    <div class="work-grid" id="work-grid"></div>
+    <div id="work-groups"></div>
     <div class="work-footer reveal">
-      <button class="see-all-btn" onclick="openAllProjects()">View all projects →</button>
+      <button class="view-all-link" onclick="openAllProjects()">View all projects →</button>
     </div>
   </div>
 </section>
@@ -1496,7 +1529,7 @@ const projectData=[
   {
     type:'Fuzzy Systems · Adaptive Learning',
     title:'ANFIS Takagi-Sugeno Model',
-    metrics:[{l:'Architecture',v:'Adaptive Neuro-Fuzzy'},{l:'Training',v:'SGD'},{l:'Parameters',v:'Fully tuned'}],
+    metrics:[{l:'Architecture',v:'Adaptive Neuro-Fuzzy'},{l:'Training',v:'SGD'},{l:'Val. RMSE',v:'—'/* TODO: replace '—' with the real ANFIS metric (validation RMSE, #params, or training epochs) */}],
     tags:['MATLAB','ANFIS','Gradient Descent','Takagi-Sugeno','Neural-Fuzzy'],
     desc:'Implements adaptive neuro-fuzzy inference system training mechanism using gradient-based parameter optimization for Takagi-Sugeno models.',
     overview:"<p>ANFIS — the <strong>Adaptive Neuro-Fuzzy Inference System</strong> — is the bridge between two worlds: the interpretability of fuzzy logic and the automatic learning of neural networks. Instead of hand-tuning a fuzzy system's parameters, ANFIS <em>learns</em> them from data.</p>",
@@ -1929,27 +1962,47 @@ const PDViz=(function(){
 
 // ── FEATURED PROJECTS (work section) ──
 // Indices: 4=Nelson Siegel, 3=Stochastic Processes, 2=Portfolio Optimization, 6=ANFIS
-const featuredProjects = [4, 3, 2, 6];
-const workGrid = document.getElementById('work-grid');
-featuredProjects.forEach((idx, pos) => {
-  const p = projectData[idx];
-  const delay = pos % 2 === 1 ? ' d1' : '';
-  workGrid.innerHTML += `
-    <div class="work-card reveal${delay}" onclick="openProject(${idx})">
-      <div class="work-card-header">
-        <div class="work-type">${p.type}</div>
-        <div class="work-title">${p.title}</div>
-      </div>
-      <div class="work-metrics">
-        ${p.metrics.map(m=>`<div class="work-metric"><div class="wm-label">${m.l}</div><div class="wm-val">${m.v}</div></div>`).join('')}
-      </div>
-      <div class="work-body">
-        <p class="work-desc">${p.desc}</p>
-        <div class="work-tags">${p.tags.map(t=>`<span class="wtag">${t}</span>`).join('')}</div>
-      </div>
+// Featured projects grouped by domain (indices into projectData)
+const projectGroups = [
+  { label:'Quantitative Finance', accent:'navy', dot:'#3943b7', items:[4,3,2] },
+  { label:'Machine Learning & Fuzzy Systems', accent:'amber', dot:'#e08e45', items:[6] }
+];
+const workGroupsEl = document.getElementById('work-groups');
+function workStatBlock(p, idx){
+  // Quantitative Portfolio Optimization (idx 2): one big hero stat instead of a 3-metric strip
+  if(idx === 2){
+    return `<div class="work-herostat">
+        <div class="whs-num">${p.metrics[0].v}</div>
+        <div class="whs-label"><b>Best Sharpe</b>across ${p.metrics[2].v}</div>
+      </div>`;
+  }
+  return `<div class="work-metrics">
+      ${p.metrics.map(m=>`<div class="work-metric"><div class="wm-label">${m.l}</div><div class="wm-val">${m.v}</div></div>`).join('')}
+    </div>`;
+}
+projectGroups.forEach(g => {
+  const gridCls = g.items.length === 1 ? 'work-grid single' : 'work-grid';
+  const cards = g.items.map((idx, pos) => {
+    const p = projectData[idx];
+    const delay = pos % 2 === 1 ? ' d1' : '';
+    return `<div class="work-card acc-${g.accent} reveal${delay}" onclick="openProject(${idx})">
+        <div class="work-card-header">
+          <div class="work-type">${p.type}</div>
+          <div class="work-title">${p.title}</div>
+        </div>
+        ${workStatBlock(p, idx)}
+        <div class="work-body">
+          <p class="work-desc">${p.desc}</p>
+          <div class="work-tags">${p.tags.map(t=>`<span class="wtag">${t}</span>`).join('')}</div>
+        </div>
+      </div>`;
+  }).join('');
+  workGroupsEl.innerHTML += `<div class="work-group">
+      <div class="work-group-label"><span class="wg-dot" style="background:${g.dot}"></span><span class="wg-text">${g.label}</span><span class="wg-rule"></span></div>
+      <div class="${gridCls}">${cards}</div>
     </div>`;
 });
-workGrid.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+workGroupsEl.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 // ── ALL PROJECTS OVERLAY ──
 const grid=document.getElementById('overlay-grid');
