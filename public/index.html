@@ -74,7 +74,7 @@ section{padding:clamp(56px,10vw,112px) 0;scroll-margin-top:68px;}
 }
 
 /* ── HERO ── */
-#hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;background:var(--white);overflow-x:hidden;}
+#hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;background:linear-gradient(120deg,rgba(8,15,40,.92) 0%,rgba(8,15,40,.74) 52%,rgba(10,20,54,.55) 100%),url('hero-bg.jpg') center/cover no-repeat #0b1330;overflow-x:hidden;position:relative;}
 #hero .wrap{max-width:none;}
 .hero-inner{display:flex;gap:64px;align-items:center;}
 .hero-left{flex:1;min-width:0;}
@@ -584,10 +584,9 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   .mm-v-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
 }
 
-/* ── MOBILE: HERO (kill dead whitespace) ── */
+/* ── MOBILE: HERO fills the whole landing screen with the backdrop ── */
 @media(max-width:600px){
-  #hero{min-height:auto;display:block;padding:104px 0 44px;}
-  .hero-inner{align-items:stretch;}
+  #hero{min-height:100vh;min-height:100dvh;display:flex;align-items:center;padding:100px 0 48px;}
   .manifesto{margin-bottom:16px;}
   .hero-subtitle{margin-bottom:28px;}
   .hero-btns{margin-bottom:28px;}
@@ -668,6 +667,30 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
   .edu-school{font-size:22px;flex-wrap:wrap;}
   .overlay-body{padding:32px 20px;}
   .contact-h{font-size:clamp(30px,9vw,44px);}
+}
+
+/* ── DARK HERO (image backdrop, light text) ── */
+.hero-name-rule{background:rgba(255,255,255,.28);}
+.hero-available{color:rgba(255,255,255,.82);}
+.manifesto-line{color:#fff;}
+.manifesto-line.hl{color:var(--amber);}
+.hero-subtitle p{color:rgba(255,255,255,.8) !important;}
+.hero-socials{border-top-color:rgba(255,255,255,.2);}
+.hero-soc{color:rgba(255,255,255,.72);}
+.hero-soc:hover{color:var(--amber);}
+#hero .btn-solid{background:#fff;color:var(--black);border-color:#fff;}
+#hero .btn-solid:hover{background:var(--amber);border-color:var(--amber);color:#fff;}
+#hero .btn-outline{color:#fff;border-color:rgba(255,255,255,.55);}
+#hero .btn-outline:hover{background:#fff;color:var(--black);}
+/* nav sits over the dark hero until it gets a white bg on scroll */
+#nav:not(.scrolled) .nav-logo{color:#fff;}
+#nav:not(.scrolled) .nav-burger span{background:#fff;}
+@media(min-width:901px){
+  #nav:not(.scrolled) .nav-lk{color:rgba(255,255,255,.72);}
+  #nav:not(.scrolled) .nav-lk:hover,#nav:not(.scrolled) .nav-lk.active{color:#fff;}
+  #nav:not(.scrolled) .nav-lk::after{background:var(--amber);}
+  #nav:not(.scrolled) .nav-cta{color:#fff;border-color:rgba(255,255,255,.5);}
+  #nav:not(.scrolled) .nav-cta:hover{background:var(--amber);border-color:var(--amber);color:#fff;}
 }
 </style>
 </head>
