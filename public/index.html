@@ -195,8 +195,8 @@ section{padding:clamp(56px,10vw,112px) 0;scroll-margin-top:68px;}
 .oc-desc{font-family:var(--sans);font-size:16px;color:#555;line-height:1.75;font-weight:400;}
 
 /* ── EXPERIENCE (MILESTONE MAP – TWO-TRACK) ── */
-#experience{background:var(--white);min-height:calc(100vh - 68px);display:flex;align-items:center;padding:88px 0 40px;}
-#experience .wrap{width:100%;max-height:calc(100vh - 196px);display:flex;flex-direction:column;}
+#experience{background:var(--white);min-height:calc(100vh - 68px);display:block;padding:88px 0 40px;}
+#experience .wrap{width:100%;max-height:none;display:block;}
 #experience .sec-dash,#experience .sec-h{flex-shrink:0;}
 .mm-map{position:relative;background:var(--off);border:1px solid var(--taupe-light);border-radius:var(--radius-lg);padding:2rem 1.75rem 1.75rem;overflow:hidden;flex-shrink:0;}
 .mm-map-grid-bg{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--taupe-xlight) 1px,transparent 1px),linear-gradient(90deg,var(--taupe-xlight) 1px,transparent 1px);background-size:40px 40px;}
@@ -230,7 +230,7 @@ section{padding:clamp(56px,10vw,112px) 0;scroll-margin-top:68px;}
 .mm-pin.active .mm-pin-inner{background:var(--white);}
 .mm-pin-tail{width:2px;height:10px;background:var(--blue);border-radius:0 0 2px 2px;opacity:.5;}
 /* detail card */
-.mm-detail{margin-top:1.5rem;background:var(--white);border:1px solid var(--taupe-light);border-radius:var(--radius-lg);display:none;overflow-y:auto;flex:1;min-height:0;}
+.mm-detail{margin-top:1.5rem;background:var(--white);border:1px solid var(--taupe-light);border-radius:var(--radius-lg);display:none;overflow:visible;}
 .mm-detail.on{display:grid;grid-template-columns:5px 1fr;align-content:start;}
 .mm-detail-accent{background:var(--blue);}
 .mm-detail-body{padding:1.75rem 2rem;}
@@ -331,12 +331,25 @@ section{padding:clamp(56px,10vw,112px) 0;scroll-margin-top:68px;}
   .skills-fit{transform:none !important;}
 }
 .skill-group{background:var(--white);border:1px solid var(--taupe-light);border-radius:var(--radius-lg);padding:22px 24px;}
-.sg-title{font-family:var(--data);font-style:italic;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--taupe);margin-bottom:14px;}
-.sk-tags{display:flex;flex-direction:column;gap:8px;}
-.lang-group .sk-tags{flex-direction:row;flex-wrap:wrap;}
-.sk-tag{font-family:var(--sans);font-size:14px;font-weight:400;color:var(--black);background:transparent;border:none;border-radius:0;padding:2px 0;transition:color .15s;}
-.sk-tag:hover{color:var(--blue);}
-.lang-group .sk-tags{gap:8px 20px;}
+.sg-title{font-family:var(--data);font-style:italic;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:var(--taupe);margin-bottom:12px;}
+.sg-title::after{content:'';display:block;width:32px;height:2px;border-radius:2px;background:var(--acc,var(--blue));margin-top:8px;}
+.sk-tags{display:flex;flex-wrap:wrap;gap:8px;}
+.sk-tag{font-family:var(--sans);font-size:13px;font-weight:400;line-height:1;color:var(--acc-text,var(--black));background:var(--acc-bg,var(--off));border:1px solid transparent;border-radius:999px;padding:7px 14px;transition:background .18s ease,color .18s ease,transform .18s ease;cursor:default;}
+.sk-tag:hover{background:var(--acc,var(--blue));color:#fff;transform:translateY(-1px);}
+/* per-card accent colors (2 palette anchors + a harmonizing green & purple) */
+.skill-group{transition:transform .25s ease,box-shadow .25s ease;}
+.skill-group:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.08);}
+.skill-group.acc-navy{--acc:#3943b7;--acc-bg:rgba(57,67,183,.10);--acc-text:#2b3392;border-top:3px solid #3943b7;}
+.skill-group.acc-green{--acc:#2f9e6b;--acc-bg:rgba(47,158,107,.12);--acc-text:#1f7d52;border-top:3px solid #2f9e6b;}
+.skill-group.acc-amber{--acc:#e08e45;--acc-bg:rgba(224,142,69,.16);--acc-text:#9c5a20;border-top:3px solid #e08e45;}
+.skill-group.acc-purple{--acc:#7d4fc0;--acc-bg:rgba(125,79,192,.12);--acc-text:#5a3792;border-top:3px solid #7d4fc0;}
+/* language row folded into the Technical Tools card */
+.sg-langs{margin-top:20px;padding-top:18px;border-top:1px solid var(--taupe-light);display:flex;flex-direction:column;gap:11px;}
+.sg-lang{display:flex;align-items:center;gap:9px;font-family:var(--sans);font-size:14px;font-weight:400;color:var(--black);}
+.sg-flag{font-size:17px;line-height:1;}
+.sg-dots{display:inline-flex;gap:4px;margin-left:auto;}
+.sg-dots i{width:7px;height:7px;border-radius:50%;background:var(--taupe-light);}
+.sg-dots i.on{background:var(--acc,var(--blue));}
 .certs-section{border-top:1px solid var(--taupe-light);padding-top:28px;}
 .certs-title{font-family:var(--data);font-style:italic;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--taupe);margin-bottom:18px;}
 .certs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
@@ -838,11 +851,15 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
     <div class="skills-scroll">
       <div class="skills-fit" id="skills-fit">
       <div class="skills-grid">
-        <div class="skill-group reveal"><div class="sg-title">Quantitative Finance</div><div class="sk-tags"><span class="sk-tag">Portfolio Optimization</span><span class="sk-tag">Black-Litterman</span><span class="sk-tag">Risk Parity & Max-Sharpe</span><span class="sk-tag">Efficient Frontier Analysis</span><span class="sk-tag">Factor Models (CAPM / Fama-French)</span><span class="sk-tag">Options Pricing & Greeks</span><span class="sk-tag">Derivatives & Hedging</span><span class="sk-tag">Stochastic Volatility (GARCH / Heston)</span><span class="sk-tag">Monte Carlo Simulation</span><span class="sk-tag">Yield Curve Modeling (Nelson-Siegel)</span><span class="sk-tag">Fixed Income & Duration</span><span class="sk-tag">Equity Research & DCF Valuation</span></div></div>
-        <div class="skill-group reveal d1"><div class="sg-title">ML / Data Science</div><div class="sk-tags"><span class="sk-tag">Machine Learning</span><span class="sk-tag">Neural Networks</span><span class="sk-tag">Deep Learning (LSTM / RNN)</span><span class="sk-tag">Fuzzy Logic Systems</span><span class="sk-tag">ANFIS / Takagi-Sugeno</span><span class="sk-tag">Supervised Learning (SVM, Random Forest)</span><span class="sk-tag">Unsupervised Learning (K-Means, PCA)</span><span class="sk-tag">Time-Series Forecasting</span><span class="sk-tag">Regression Analysis</span><span class="sk-tag">System Identification</span><span class="sk-tag">Feature Engineering</span></div></div>
-        <div class="skill-group reveal"><div class="sg-title">Procurement/Operations</div><div class="sk-tags"><span class="sk-tag">Supplier Management</span><span class="sk-tag">Vendor Negotiation</span><span class="sk-tag">Contract Renegotiation</span><span class="sk-tag">Cost Savings</span><span class="sk-tag">Budget Control & Reporting</span><span class="sk-tag">SAP</span><span class="sk-tag">Coupa</span><span class="sk-tag">Power Automate (RPA)</span><span class="sk-tag">Process Automation</span><span class="sk-tag">Supplier Onboarding & Compliance</span></div></div>
-        <div class="skill-group reveal"><div class="sg-title">Technical Tools</div><div class="sk-tags"><span class="sk-tag">Python</span><span class="sk-tag">R</span><span class="sk-tag">Excel / VBA</span><span class="sk-tag">Bloomberg Terminal</span><span class="sk-tag">NumPy</span><span class="sk-tag">Pandas</span><span class="sk-tag">Scikit-learn</span><span class="sk-tag">LaTeX</span><span class="sk-tag">SQL</span></div></div>
-        <div class="skill-group lang-group reveal"><div class="sg-title">Languages</div><div class="sk-tags"><span class="sk-tag">Portuguese (Native)</span><span class="sk-tag">English (Fluent)</span></div></div>
+        <div class="skill-group acc-navy reveal"><div class="sg-title">Quantitative Finance</div><div class="sk-tags"><span class="sk-tag">Portfolio Optimization</span><span class="sk-tag">Black-Litterman</span><span class="sk-tag">Risk Parity & Max-Sharpe</span><span class="sk-tag">Efficient Frontier Analysis</span><span class="sk-tag">Factor Models (CAPM / Fama-French)</span><span class="sk-tag">Options Pricing & Greeks</span><span class="sk-tag">Derivatives & Hedging</span><span class="sk-tag">Stochastic Volatility (GARCH / Heston)</span><span class="sk-tag">Monte Carlo Simulation</span><span class="sk-tag">Yield Curve Modeling (Nelson-Siegel)</span><span class="sk-tag">Fixed Income & Duration</span><span class="sk-tag">Equity Research & DCF Valuation</span></div></div>
+        <div class="skill-group acc-green reveal d1"><div class="sg-title">ML / Data Science</div><div class="sk-tags"><span class="sk-tag">Machine Learning</span><span class="sk-tag">Neural Networks</span><span class="sk-tag">Deep Learning (LSTM / RNN)</span><span class="sk-tag">Fuzzy Logic Systems</span><span class="sk-tag">ANFIS / Takagi-Sugeno</span><span class="sk-tag">Supervised Learning (SVM, Random Forest)</span><span class="sk-tag">Unsupervised Learning (K-Means, PCA)</span><span class="sk-tag">Time-Series Forecasting</span><span class="sk-tag">Regression Analysis</span><span class="sk-tag">System Identification</span><span class="sk-tag">Feature Engineering</span></div></div>
+        <div class="skill-group acc-amber reveal"><div class="sg-title">Procurement/Operations</div><div class="sk-tags"><span class="sk-tag">Supplier Management</span><span class="sk-tag">Vendor Negotiation</span><span class="sk-tag">Contract Renegotiation</span><span class="sk-tag">Cost Savings</span><span class="sk-tag">Budget Control & Reporting</span><span class="sk-tag">SAP</span><span class="sk-tag">Coupa</span><span class="sk-tag">Power Automate (RPA)</span><span class="sk-tag">Process Automation</span><span class="sk-tag">Supplier Onboarding & Compliance</span></div></div>
+        <div class="skill-group acc-purple reveal"><div class="sg-title">Technical Tools</div><div class="sk-tags"><span class="sk-tag">Python</span><span class="sk-tag">R</span><span class="sk-tag">Excel / VBA</span><span class="sk-tag">Bloomberg Terminal</span><span class="sk-tag">NumPy</span><span class="sk-tag">Pandas</span><span class="sk-tag">Scikit-learn</span><span class="sk-tag">LaTeX</span><span class="sk-tag">SQL</span></div>
+          <div class="sg-langs">
+            <span class="sg-lang"><span class="sg-flag">🇧🇷</span>Portuguese (Native)<span class="sg-dots"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></span>
+            <span class="sg-lang"><span class="sg-flag">🇺🇸</span>English (Fluent)<span class="sg-dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></span>
+          </div>
+        </div>
       </div>
       <div class="certs-section reveal">
         <div class="certs-title">Certifications</div>
@@ -908,16 +925,22 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
 // ── NAV ──
 const nav = document.getElementById('nav');
 const navLinks = document.querySelectorAll('.nav-lk');
-window.addEventListener('scroll',()=>{
+function navSpy(){
   nav.classList.toggle('scrolled',window.scrollY>50);
-  const y=window.scrollY+80;
+  // getBoundingClientRect().top is in real (post-zoom) viewport px, so this
+  // stays correct under body{zoom} — a section is "current" once its top
+  // scrolls above a line just under the fixed nav.
+  const line=110;
   let cur='';
   ['about','work','experience','education','skills','contact'].forEach(id=>{
     const el=document.getElementById(id);
-    if(el&&el.offsetTop<=y)cur=id;
+    if(el&&el.getBoundingClientRect().top<=line)cur=id;
   });
   navLinks.forEach(l=>l.classList.toggle('active',l.dataset.s===cur));
-},{passive:true});
+}
+window.addEventListener('scroll',navSpy,{passive:true});
+window.addEventListener('resize',navSpy,{passive:true});
+navSpy();
 
 function toggleMobileNav(){document.getElementById('nav-links').classList.toggle('open');}
 document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>document.getElementById('nav-links').classList.remove('open')));
