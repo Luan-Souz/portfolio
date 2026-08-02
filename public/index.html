@@ -552,25 +552,36 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,.06);paddin
 .mm-vlist{display:none;}
 @media(max-width:900px){
   .mm-map,#experience .mm-detail,.mm-footer{display:none !important;}
-  .mm-vlist{display:block;position:relative;padding-left:24px;}
-  .mm-vlist::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:var(--taupe-light);}
-  .mm-v-item{position:relative;margin-bottom:20px;}
+  .mm-vlist{display:block;position:relative;padding-left:26px;}
+  /* visible 2px line: amber next to current roles (top) fading to gray below */
+  .mm-vlist::before{content:'';position:absolute;left:5px;top:8px;bottom:8px;width:2px;border-radius:2px;background:linear-gradient(to bottom,#e08e45 0%,#e08e45 6%,#d7d4cd 34%,#d7d4cd 100%);}
+  .mm-v-item{position:relative;margin-bottom:34px;}
   .mm-v-item:last-child{margin-bottom:0;}
-  .mm-v-dot{position:absolute;left:-24px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--white);border:2px solid var(--blue);box-sizing:border-box;}
+  /* past marker: hollow gray circle */
+  .mm-v-dot{position:absolute;left:-26px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--white);border:2px solid #c7c3ba;box-sizing:border-box;}
+  /* current marker: solid amber with soft glow ring */
+  .mm-v-item.current .mm-v-dot{background:#e08e45;border-color:#e08e45;box-shadow:0 0 0 4px rgba(224,142,69,.22);}
   .mm-v-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;cursor:pointer;}
   .mm-v-htext{flex:1;min-width:0;}
-  .mm-v-chev{flex-shrink:0;width:9px;height:9px;margin-top:8px;border-right:2px solid var(--taupe);border-bottom:2px solid var(--taupe);transform:rotate(45deg);transition:transform .2s;}
-  .mm-v-item.open .mm-v-chev{transform:rotate(-135deg);}
-  .mm-v-year{font-family:var(--data);font-style:italic;font-size:12px;color:var(--blue);font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px;}
-  .mm-v-role{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--black);line-height:1.25;margin-bottom:2px;}
+  /* chevron in a tappable circle, tints on hover */
+  .mm-v-chev{flex-shrink:0;width:30px;height:30px;margin-top:-3px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+  .mm-v-chev::after{content:'';width:8px;height:8px;border-right:2px solid var(--taupe);border-bottom:2px solid var(--taupe);transform:rotate(45deg);position:relative;top:-2px;transition:transform .25s ease;}
+  .mm-v-chev:hover{background:rgba(224,142,69,.12);}
+  .mm-v-item.open .mm-v-chev::after{transform:rotate(-135deg);top:1px;}
+  /* dates: muted for past; navy + CURRENT badge for ongoing */
+  .mm-v-year{font-family:var(--data);font-style:italic;font-size:12px;color:var(--taupe);font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+  .mm-v-item.current .mm-v-year{color:var(--blue);}
+  .mm-v-badge{font-family:var(--sans);font-style:normal;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#e08e45;border-radius:100px;padding:2px 9px;line-height:1.45;}
+  .mm-v-role{font-family:var(--serif);font-size:19px;font-weight:600;color:var(--black);line-height:1.28;margin-bottom:3px;}
   .mm-v-phase{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--blue);}
-  .mm-v-body{display:none;}
-  .mm-v-item.open .mm-v-body{display:block;margin-top:11px;}
-  .mm-v-desc{font-family:var(--sans);font-size:15px;color:#555;line-height:1.7;margin:0;list-style:none;padding:0;}
-  .mm-v-desc li{position:relative;padding-left:18px;margin-bottom:6px;}
+  /* expandable details (max-height transition) */
+  .mm-v-body{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+  .mm-v-item.open .mm-v-body{max-height:900px;margin-top:12px;}
+  .mm-v-desc{font-family:var(--sans);font-size:13.5px;color:#555;line-height:1.65;margin:0;list-style:none;padding:0;}
+  .mm-v-desc li{position:relative;padding-left:18px;margin-bottom:7px;}
   .mm-v-desc li:last-child{margin-bottom:0;}
-  .mm-v-desc li::before{content:'';position:absolute;left:2px;top:9px;width:5px;height:5px;background:var(--blue);border-radius:1px;transform:rotate(45deg);}
-  .mm-v-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px;}
+  .mm-v-desc li::before{content:'';position:absolute;left:2px;top:8px;width:5px;height:5px;background:var(--blue);border-radius:1px;transform:rotate(45deg);}
+  .mm-v-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
 }
 
 /* ── MOBILE: HERO (kill dead whitespace) ── */
@@ -1334,9 +1345,11 @@ const mmGroups=[
       var tags=(m.tags&&m.tags.length)
         ? '<div class="mm-v-tags">'+m.tags.map(function(t){return '<span class="mm-detail-tag">'+t+'</span>';}).join('')+'</div>'
         : '';
-      return '<div class="mm-v-item"><span class="mm-v-dot"></span>'
+      var isCurrent=/present/i.test(m.year);
+      var badge=isCurrent?'<span class="mm-v-badge">Current</span>':'';
+      return '<div class="mm-v-item'+(isCurrent?' current':'')+'"><span class="mm-v-dot"></span>'
         +'<div class="mm-v-head"><div class="mm-v-htext">'
-        +'<div class="mm-v-year">'+m.year+'</div>'
+        +'<div class="mm-v-year">'+m.year+badge+'</div>'
         +'<div class="mm-v-role">'+m.role+'</div>'
         +'<div class="mm-v-phase">'+m.phase+'</div></div>'
         +'<span class="mm-v-chev"></span></div>'
